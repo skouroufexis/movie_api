@@ -1,0 +1,62 @@
+{"I":
+    {"title":"Our Wall",
+     "director":"Panikos Chrissanthou",
+     "year":"1993",
+     "language":["Greek","Turkish"]
+    },
+"II":
+    {"title":"The Story of the Green Line",
+    "director":"Panikos Chrissanthou",
+    "year":"2017",
+    "language":["Greek","Turkish"]
+    },
+"III":
+    {"title":"Novecento",
+    "director":"Bernardo Bertolucci",
+    "year":"1976",
+    "language":["English", "Italian"]
+    },
+"IV":
+    {"title":"La vita è bella",
+    "director":"Roberto Benigni",
+    "year":"1997",
+    "language":"Italian"
+    },
+"V":
+    {"title":"Parasite",
+    "director":"Bong Joon Ho",
+    "year":"2019",
+    "language":"Korean"
+    },
+"VI":
+    {"title":"A touch of spice",
+    "director":"Tassos Boulmetis",
+    "year":"2003",
+    "language":["Greek", "Turkish", "English"]
+    },
+"VII":
+    {"title":"Das Leben der Anderen",
+    "director":" Florian Henckel von Donnersmarck",
+    "year":"2006",
+    "language":"German"
+    },
+"VIII":
+    {"title":"The Good, the Bad and the Ugly",
+    "director":"Sergio Leone",
+    "year":"1966",
+    "language":"English"
+    },
+"IX":
+    {"title":"Der Untergang",
+    "director":"Oliver Hirschbiegel",
+    "year":"2004",
+    "language":"German"
+    },
+"X":
+    {"title":"Admiral",
+    "director":"Andrey Kravchuk",
+    "year":"2008",
+    "language":"Russian"
+    }
+
+}
