@@ -18,7 +18,10 @@ app.get('/',function(request,response){
 
 app.use(express.static('public'));
 
-
+app.use(function(err,request,response,next){
+    console.error(err.stack);
+    response.status(500).send('oops, an error occured');
+})
 
 app.listen(8080,function(){
     console.log('running from port 8080');
