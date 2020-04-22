@@ -5,22 +5,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
+        
+
+        <!-- style -->
+            <!-- bootstrap -->
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+            <!-- css -->
+            <link rel="stylesheet" href="../css/documentation.css"> 
         <title>myFlix</title>
         
-        <!--        FAVICON-->
-<!--        <link rel="icon" href="../images/header/favicon.ico">-->
-        
-        <!--        CSS-->
-        
-            
-        
-        <!--            FONTS-->
-        
-        
-        <!--            FONTAWSOME-->
-        
-        
-         <!--        JAVASCRIPT-->
+       
         
         
         
@@ -36,11 +30,269 @@
         </header>
         
         <main>
-        
-            <h1>About <b>myFlix</b></h1>
             
-            <p><b>myFlix</b> is an API designed to interact with the ... movie database. The end-user will be able to search and retrieve information from the database (e.g. movie titles, actors,directors, genres) as well as to create a personal account and perform a series of other operations (such as updating personal information, creating a list with favourite movies or provide ratings)</p>
         
+
+             <div class="container">
+                 <div class="container">
+                     <div class="row">
+                         <h1 class="col title">myFlix documentation</h1>
+                    </div>
+                 </div>
+                 <div class="row">
+                     <h2 class="col-12">
+                        About <b>myFlix</b>
+                     </h2>
+                 
+                     <p class="col-12"><b>myFlix</b> is an API designed to interact with the ... movie database. The end-user will be able to search and retrieve information from the database (e.g. movie titles, actors,directors, genres) as well as to create a personal account and perform a series of other operations (such as updating personal information and creating a list with favourite movies)</p>
+                 </div>
+                  
+                 <div class="row">
+                    <h2 class="col-12"><b>myFlix</b> API</h2>
+                 </div>
+
+                 <div class="row">
+
+                    <table class="table">
+                        <tr>
+                          <th>Request</th>  
+                          <th>Method</th> 
+                          <th>Url endpoint</th>
+                          <th>Request body data format</th>
+                          <th>Response body data format</th>         
+                        </tr>
+
+                        <tr>
+                            <td><h6>retrieve all movies</h6></td>
+                            <td><h6>GET</h6></td>
+                            <td><h6>/movies</h6></td>
+                            <td><h6>-</h6></td>
+                            <td>
+                                <h6>JSON object with information for all the movies</h6>
+                                <p class="example">see example for single movie below</p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><h6>retrieve information for a single movie</h6></td>
+                            <td><h6>GET</h6></td>
+                            <td><h6>/movies/[title]</h6></td>
+                            <td><h6>-</h6></td>
+                            <td>
+                                <h6>JSON object with information for a single movie</h6>
+                                <p class=" row example">
+                                    <span class="col-12">{</span>
+                                    
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "id":"1",</span>
+
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "title":"Our Wall",</span>
+
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "director":"Panikos Chrysanthou",</span>
+
+                                    <span class="col-1">
+                                    </span><span class="col-11">"year":"1993",</span>
+
+                                    <span class="col-1">
+                                    </span><span class="col-11">"language":["Greek","Turkish"],</span>
+
+                                    <span class="col-1">
+                                    </span><span class="col-11">"genre":["documentary"],</span>
+
+                                    <span class="col-1">
+                                    </span><span class="col-11">"feature":"yes"</span>
+
+                                    </span><span class="col-12">}</span>
+
+                                </p>
+                                
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><h6>retrieve information for a single genre</h6></td>
+                            <td><h6>GET</h6></td>
+                            <td><h6>/genres/[name]</h6></td>
+                            <td><h6>-</h6></td>
+                            <td>
+                                <h6>JSON object with information for a single genre</h6>
+
+                                <p class=" row example">
+                                    <span class="col-12">{</span>
+                                    
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "id":"1",</span>
+
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "name":"documentary",</span>
+
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "description":"A documentary film is a non-fictional, motion picture intended to document reality, primarily for the purposes of instruction, education, or maintaining a historical record. Documentary has been described as a filmmaking practice, a cinematic tradition, and mode of audience reception that is continually evolving and is without clear boundaries."</span>
+                                    </span><span class="col-12">}</span>
+                                </p>
+                            
+                            
+                            
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><h6>retrieve information for a single director</h6></td>
+                            <td><h6>GET</h6></td>
+                            <td><h6>/directors/[name]</h6></td>
+                            <td><h6>-</h6></td>
+                            <td>
+                                <h6>JSON object with information a single director</h6>
+
+                                <p class=" row example">
+                                    <span class="col-12">{</span>
+                                    
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "id":"1",</span>
+
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "name":"Panikos Chrysanthou",</span>
+
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "biogrphy":"Panicos Chrysanthou graduated from the University of Athens with a joint degree in literature and philosophy. He worked as an assistant director and executive producer in Greek and Cypriot films before beginning to make his own films. He received the prestigious Abdi İpekçi Peace Award in 1997 for his film, Our Wall."</span>
+
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "birth":"August 15 1951"</span>
+
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "death":""</span>
+                                    
+                                    </span><span class="col-12">}</span>
+                                </p>
+                            
+                            
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><h6>add new user</h6></td>
+                            <td><h6>POST</h6></td>
+                            <td><h6>/users</h6></td>
+                            <td>
+                                <h6>JSON object with information for the new user</h6>
+                                
+                                <p class=" row example">
+                                    <span class="col-12">{</span>
+                                    
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "username":"mario rossi",</span>
+
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "password":"123",</span>
+
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "email":"example@example.com"</span>
+
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "birth":"May 12 1984"</span>
+                                    
+                                    </span><span class="col-12">}</span>
+                                </p>
+
+
+                            </td>
+                            <td>
+                                <h6>JSON object with information for the new user</h6>
+                                
+                                <p class="row example">
+                                    <span class="col-12">{</span>
+                                    
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "id":"1",</span>
+                                        
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "username":"mario rossi",</span>
+
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "password":"123",</span>
+
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "email":"example@example.com"</span>
+
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "birth":"May 12 1984"</span>
+                                    
+                                    </span><span class="col-12">}</span>
+                                </p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><h6>update user information</h6></td>
+                            <td><h6>PUT</h6></td>
+                            <td><h6>/users/[id]</h6></td>
+                            <td>
+                                <h6>JSON object with the new user information</h6>
+                                
+                                <p class="row example">
+                                    <span class="col-12">{</span>
+                                    
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "id":"1",</span>
+                                        
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "username":"mario rossi",</span>
+
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "password":"125",</span>
+
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "email":"example@example.com"</span>
+
+                                    <span class="col-1">
+                                    </span><span class="col-11"> "birth":"May 12 1984"</span>
+                                    
+                                    </span><span class="col-12">}</span>
+                                </p>
+                            </td>
+                            <td>
+                                <h6>success message</h6>
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><h6>add a movie to user's favourites</h6></td>
+                            <td><h6>POST</h6></td>
+                            <td><h6>/users/[id]/favourites/[movieID]</h6></td>
+                            <td><h6>-</h6></td>
+                            <td><h6>success message</h6></td>
+                        </tr>
+
+                        <tr>
+                            <td><h6>remove a movie from user's favourites</h6></td>
+                            <td><h6>DELETE</h6></td>
+                            <td><h6>/users/[id]/favourites/[movieID]</h6></td>
+                            <td><h6>-</h6></td>
+                            <td><h6>success message</h6></td>
+                        </tr>
+
+                        <tr>
+                            <td><h6>delete user</h6></td>
+                            <td><h6>DELETE</h6></td>
+                            <td><h6>/users/[id]</h6></td>
+                            <td><h6>-</h6></td>
+                            <td><h6>success message</h6></td>
+                        </tr>
+
+
+                    </table>
+
+
+                 </div>
+
+             </div>   
+
+
+
+
         </main>
 
     </body>
