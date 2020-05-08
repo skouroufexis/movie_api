@@ -2,18 +2,28 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyparser = require('body-parser');
 const app=express();
-const movies = require('./movies.js');
-const genres = require('./genres.js');
-const directors=require('./directors.js');
 
 
+
+const mongoose = require('mongoose');
+const models = require('./models.js');
+
+const movies = models.movieModel;
+const users = models.userModel;
+
+mongoose.connect('mongodb://localhost:27017/myFlix', { useNewUrlParser: true, useUnifiedTopology: true });
 app.use(morgan('common'));
 app.use(bodyparser.json());
+app.use(express.static('public'));
+
+
 
 //routes
 app.get('/',function(request,response){
+
     
-    response.send('Welcome to my top-10 movies');
+    response.sendFile(__dirname+'/index.html');
+    response.redirect('/index');
 })
 
 
@@ -25,98 +35,183 @@ app.get('/index',function(request,response){
 
 //retrieve all movies
 app.get('/movies',function(request,response){
-    response.json(movies);
+    movies.find({},{title:true,"director.name":true,"genre.name":true,
+                    description:true,language:true,featured:true,
+                    year:true})
+    .then(function(data){
+        response.send(data);
+    }).catch(function(data){
+        response.send(data);
+    })
 });
 
 //retrieve single movie
 app.get('/movies/:title',function(request,response){
-    let movie = movies.find(function(data){
-        return data.title.toLowerCase()===request.params.title.toLowerCase();
+    var title=request.params.title;
+    movies.findOne({title:title},{title:true,"director.name":true,"genre.name":true,
+    description:true,language:true,featured:true,
+    year:true})
+    .then(function(data){
+        if(data)
+            {
+                response.send(data);
+            }
+        else
+            {
+                response.send('movie not found');
+            }
+    }).catch(function(data){
+        response.send(data);
     })
-    if(movie)
-        {
-            response.json(movie);
-            
-        }
-    else
-        {
-            response.send('movie not found!');
-        }
-    
     
 });
 
 //retrieve single genre
-app.get('/genres/:name',function(request,response){
+app.get('/movies/genres/:name',function(request,response){
 
-    let genre = genres.find(function(data){
-        return data.name.toLowerCase()===request.params.name.toLowerCase();
-    })
-    if(genre)
-        {
-           response.json(genre);
-        }
-    else
-        {
-            response('genre not found!');
-        }
+   var genre = request.params.name;
+   movies.findOne({'genre.name':genre},{_id:false,"genre.name":true,"genre.description":true})
+   .then(function(data){
+       if(data)
+            {
+                response.send(data);
+            }
+        else
+            {
+                response.send('genre not found');
+            }
+   }).catch(function(data){
+        response.send(data);
+   })
 
 });
 
 //retrieve single director
-app.get('/directors/:name/',function(request,response){
+app.get('/movies/directors/:name/',function(request,response){
 
-    let director = directors.find(function(data){
-        return data.name.toLowerCase()===request.params.name.toLowerCase();
-    })
-    if(director)
-        {
-           response.json(director);
-        }
-    else
-        {
-            response('director not found!');
-        }
+   var director = request.params.name;
+   movies.findOne({'director.name':director},{_id:false,director:true,})
+   .then(function(data){
+       if(data)
+            {
+                response.send(data);
+            }
+        else
+            {
+                response.send('director not found');
+            }
+   }).catch(function(data){
+        response.send(data);
+   });
 
 });
 
 //add new user
 app.post('/users',function(request,response){    
-    //control if all required data are present
-    //add the new user
-    response.send('successfully added new user')
+    let username=request.body.username;
+    let password=request.body.password;
+    let email=request.body.email;    
+    let birthday=request.body.birthday;
+    let favourites=request.body.favourites;
+
+    users.create({username:username,password:password,email:email,birthday:birthday,favourites:favourites})
+    .then(function(data){
+        response.send('new account successfully created');
+    }).catch(function(error){
+        response.send(error);
+    })
+    
 })
 
 //modify user information
 app.put('/users/:id',function(request,response){
-    //control if the user id is present in the users table/object
-    //update that user's information
-    response.send('User information successfully updated');
-})
+    var id = request.params.id;
 
+    let username=request.body.username;
+    let password=request.body.password;
+    let email=request.body.email;    
+    let birthday=request.body.birthday;
+
+    users.findOneAndUpdate({_id:id},{$set:{
+        username:username,
+        password:password,
+        email:email,
+        birthday:birthday,
+    }},{new:true}).then(function(data){
+        response.send("user information successfully updated ");
+    }).catch(function(data){
+       response.send(data);
+    })
+})
 //add movie to user's favourites
 app.post('/users/:id/favourites/:movieID',function(request,response){
-    //code to add new movie
-    response.send('movie successfully added to favourites');
+    var id = request.params.id;
+    var movie = request.params.movieID;
+
+    //check whether movie already exists in favourites    
+    users.findOne({_id:id,favourites:movie})
+    .then(function(data){
+        if(data)
+            {
+                response.send('movie already included in favourites')
+            }
+        else
+            {
+                    //add the movie to the favourites
+                    users.findOneAndUpdate({_id:id},{$push:{favourites:movie}})
+                    .then(function(data){
+                    response.send('movie successfully added to favourites' + data);
+                    }).catch(function(){
+                    response.send('oops! an error occured.');
+                })      
+                
+            }
+         
+    }).catch(function(){
+        response.send('oops! An error occured.')
+    });
 })
 
 //delete movie from user's favourites
-app.delete('/users/:id/favourites/:movieID',function(request,response){
-    //find and delete movie from favourites
-    response.send('movie successfully removed from favourites');
+app.put('/users/:id/favourites/:movieID',function(request,response){
+    var id = request.params.id;
+    var movie = request.params.movieID;
+
+    users.findOneAndUpdate({_id:id,favourites:movie},{$pull:{favourites:movie}},{new:true})
+    .then(function(data){
+        if(data)
+            {
+                response.send('movie successfully deleted '+data);
+            }
+        else
+            {
+                response.send('movie not found');
+            }    
+        
+        
+    }).catch(function(data){
+        response.send('oops an error occured '+data);
+    });
+
+
+    
 })
 
 //delete user
 app.delete('/users/:id',function(request,response){
-    //code to delete user
-    response.send('account successfully deleted');
-})
-
-app.use(express.static('public'));
-
-app.use(function(err,request,response,next){
-    console.error(err.stack);
-    response.status(500).send('oops, an error occured');
+    var id = request.params.id;
+    users.findOneAndDelete({_id:id})
+    .then(function(data){
+        if(!data)
+            {
+                response.send('user not found');
+            }
+        else
+            {
+                response.send('account successfully deleted');
+            }    
+    })
+    
 })
 
 
