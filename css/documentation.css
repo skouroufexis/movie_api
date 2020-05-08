@@ -2,4 +2,7 @@ h1,h2,h5,h6,p {font-weight: normal;}
 .title {text-align: center;}
 p{text-align: justify;}
 
-.example {font-size: 0.8em;color: cadetblue;}
+.example {font-size: 0.8em;color: cadetblue;text-align: left;}
+
+.datatype {color: orange;}
+.linebreak{visibility: hidden;}
