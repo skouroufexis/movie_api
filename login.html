@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login</title>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col"><h1>Login</h1></div>
+            <div class="col">
+
+                <form method="POST" id="form">
+        
+                    <label for="username">Username
+                        <input type="text" id="username" name="username">
+                    </label><br>
+
+                    <label for="password">password
+                        <input type="text" id="password" name="password">
+                    </label><br>
+
+                    <label for="submit">
+                        <button type="submit">submit</button>
+                    </label>
+
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+    
+
+<script>
+    // function login(){
+    //     var username=document.getElementById('username').value;
+    //     var password=document.getElementById('password').value;
+    //     var data= {username:username,password:password};
+
+    //     var request = new XMLHttpRequest();
+        
+    //     request.onreadystatechange = function() {
+    //         if (this.readyState == 4 && this.status == 200)
+    //             {
+    //                 var response = JSON.parse(this.response);
+    //                 if(response.error)
+    //                     {
+    //                         alert(response.error);
+    //                     }
+    //                 else
+    //                     {
+    //                         if(!response.user)
+    //                             {
+    //                                 alert(response.message);
+    //                             }
+    //                 else
+    //                     {
+                            
+    //                         window.location.replace('/movies');
+    //                         // alert(response.token);
+    //                     }    
+    //                     }
+                     
+                    
+    //             }
+    //     };
+
+    //     request.open("POST", "/login"); 
+    //     request.setRequestHeader('Content-Type','application/json');
+    //     request.send(JSON.stringify(data)); 
+
+        
+
+      
+    // }
+</script>
+
+</body>
+</html>
