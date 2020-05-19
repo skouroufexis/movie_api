@@ -1,40 +1,53 @@
 const express = require('express');
-const morgan = require('morgan');
+    const app=express();
+    app.use(express.static('public'));
+
+//body-parser
 const bodyparser = require('body-parser');
-const app=express();
+    app.use(bodyparser.json());
+    app.use(bodyparser.urlencoded());
 
+//passport
+const passport = require('passport');
 
-
+//mongoose & models
 const mongoose = require('mongoose');
 const models = require('./models.js');
+    const movies = models.movieModel;
+    const users = models.userModel;
 
-const movies = models.movieModel;
-const users = models.userModel;
 
+
+
+//database connection
 mongoose.connect('mongodb://localhost:27017/myFlix', { useNewUrlParser: true, useUnifiedTopology: true });
-app.use(morgan('common'));
-app.use(bodyparser.json());
-app.use(express.static('public'));
+
+
+//authentication
+
+require('./auth.js')(app);
 
 
 
 //routes
-app.get('/',function(request,response){
+app.get('/', function(request,response){
+    response.redirect('/login');
+})
 
-    
-    response.sendFile(__dirname+'/index.html');
-    response.redirect('/index');
+app.get('/login',function(request,response){
+    response.sendFile(__dirname+'/login.html');
 })
 
 
-app.get('/index',function(request,response){
-    
-    response.sendFile('index.html',{root:__dirname});
-    
+
+app.get('/index',passport.authenticate('jwt', {session: false}), function(request,response){
+    response.sendFile(__dirname+'/index.html');
+
 })
 
 //retrieve all movies
-app.get('/movies',function(request,response){
+app.get('/movies',passport.authenticate('jwt', {session: false}), function(request,response){
+    
     movies.find({},{title:true,"director.name":true,"genre.name":true,
                     description:true,language:true,featured:true,
                     year:true})
@@ -46,7 +59,7 @@ app.get('/movies',function(request,response){
 });
 
 //retrieve single movie
-app.get('/movies/:title',function(request,response){
+app.get('/movies/:title',passport.authenticate('jwt', {session: false}), function(request,response){
     var title=request.params.title;
     movies.findOne({title:title},{title:true,"director.name":true,"genre.name":true,
     description:true,language:true,featured:true,
@@ -67,7 +80,7 @@ app.get('/movies/:title',function(request,response){
 });
 
 //retrieve single genre
-app.get('/movies/genres/:name',function(request,response){
+app.get('/movies/genres/:name',passport.authenticate('jwt', {session: false}), function(request,response){
 
    var genre = request.params.name;
    movies.findOne({'genre.name':genre},{_id:false,"genre.name":true,"genre.description":true})
@@ -87,7 +100,7 @@ app.get('/movies/genres/:name',function(request,response){
 });
 
 //retrieve single director
-app.get('/movies/directors/:name/',function(request,response){
+app.get('/movies/directors/:name/',passport.authenticate('jwt', {session: false}), function(request,response){
 
    var director = request.params.name;
    movies.findOne({'director.name':director},{_id:false,director:true,})
@@ -107,7 +120,7 @@ app.get('/movies/directors/:name/',function(request,response){
 });
 
 //add new user
-app.post('/users',function(request,response){    
+app.post('/users', function(request,response){    
     let username=request.body.username;
     let password=request.body.password;
     let email=request.body.email;    
@@ -124,7 +137,7 @@ app.post('/users',function(request,response){
 })
 
 //modify user information
-app.put('/users/:id',function(request,response){
+app.put('/users/:id',passport.authenticate('jwt', {session: false}), function(request,response){
     var id = request.params.id;
 
     let username=request.body.username;
@@ -144,7 +157,7 @@ app.put('/users/:id',function(request,response){
     })
 })
 //add movie to user's favourites
-app.post('/users/:id/favourites/:movieID',function(request,response){
+app.post('/users/:id/favourites/:movieID',passport.authenticate('jwt', {session: false}), function(request,response){
     var id = request.params.id;
     var movie = request.params.movieID;
 
@@ -173,7 +186,7 @@ app.post('/users/:id/favourites/:movieID',function(request,response){
 })
 
 //delete movie from user's favourites
-app.put('/users/:id/favourites/:movieID',function(request,response){
+app.put('/users/:id/favourites/:movieID',passport.authenticate('jwt', {session: false}), function(request,response){
     var id = request.params.id;
     var movie = request.params.movieID;
 
@@ -198,7 +211,7 @@ app.put('/users/:id/favourites/:movieID',function(request,response){
 })
 
 //delete user
-app.delete('/users/:id',function(request,response){
+app.delete('/users/:id',passport.authenticate('jwt', {session: false}), function(request,response){
     var id = request.params.id;
     users.findOneAndDelete({_id:id})
     .then(function(data){
@@ -212,6 +225,31 @@ app.delete('/users/:id',function(request,response){
             }    
     })
     
+})
+
+app.get('/users/:username/',passport.authenticate('jwt', {session: false}), function(request,response){
+    var username=request.params.username;
+    var password=request.params.password;
+    users.findOne({username:username})
+    .then(function(data){
+        
+        if(!data)
+            {
+                response.send('username not found')
+            }
+        else
+            {
+                if(password!=data.password)
+                    {
+                        response.send('incorrect password');
+                    }
+                else
+                    {
+                        response.send(data);           
+                    }    
+                
+            }    
+        });
 })
 
 
