@@ -1,0 +1,17 @@
+h1{border: solid grey thin;
+   text-align: center;;  
+    }
+
+.row {
+        margin-top: 1%;;}
+label{background-color: lightblue; padding: 1%; width: 10px;}
+input {width: 100px; }
+
+.col {border: solid black thin; margin-top: 1%;}
+
+button {background-color: black;
+        color: whitesmoke; 
+        border:none;
+        box-shadow: 0px 0px 3px white;
+        }
+
