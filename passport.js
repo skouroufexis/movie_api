@@ -1,54 +1,8 @@
-// const models = require('./models.js');
-//     const movies = models.movieModel;
-//     const users = models.userModel;
 
+//hashing
+const bcrypt = require('bcrypt');
 
-// const passport = require('passport');
-// const local = require('passport-local').Strategy;
-// const jwtStrategy = require('passport-jwt').Strategy;
-// ExtractJWT=require('passport-jwt').ExtractJwt;
-
-// passport.use(new local(function(username,password,done){
-//     users.findOne({username:username},function(err,user,info){
-//       if(err)
-//         {
-//           return done(err);
-//         }
-//       if(!user)
-//         {
-//           return done(null,false,{message:'username not found'});
-//         }  
-//       else
-//         {
-//           if(user.password!=password)
-//             {
-//               console.log('incorrect password');
-              
-//               return done(null,false,{message:'incorrect password'});
-              
-//             }
-//           else
-//             {
-//               return done(null,user);
-//             }  
-//         }  
-//     });  
-//   }));
-
-
-//   passport.use(new jwtStrategy ({
-//     jwtFromRequest:ExtractJWT.fromAuthHeaderAsBearerToken() ,
-//     secretOrKey: 'your_jwt_secret'
-//   }, function (jwtPayload, callback) {
-//     return users.findById(jwt_payload._doc.id)
-//       .then(function (user)  {
-//         return callback(null, user);
-//       })
-//       .catch(function(error) {
-//         return callback(error)
-//       });
-//   }));
-
+//passport
 const passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy,
   Models = require('./models.js'),
@@ -61,9 +15,9 @@ let Users = Models.userModel,
 passport.use(new LocalStrategy({
   usernameField: 'username',
   passwordField: 'password'
-}, (username, password, callback) => {
+}, function(username, password, callback){
   console.log(username + '  ' + password);
-  Users.findOne({ username: username }, (error, user) => {
+  Users.findOne({ username: username }, function (error, user){
     if (error) {
       console.log(error);
       return callback(error);
@@ -73,6 +27,18 @@ passport.use(new LocalStrategy({
       console.log('incorrect username');
       return callback(null, false, {message: 'Incorrect username or password.'});
     }
+    else
+    {
+      
+      
+      if(!bcrypt.compareSync(password,user.password))
+        {
+          return callback(null, false, {message: 'Incorrect password.'});
+        }
+      
+      
+    }
+
 
     console.log('finished');
     return callback(null, user);
@@ -82,12 +48,12 @@ passport.use(new LocalStrategy({
 passport.use(new JWTStrategy({
   jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
   secretOrKey: 'your_jwt_secret'
-}, (jwtPayload, callback) => {
+}, function(jwtPayload, callback) {
   return Users.findById(jwtPayload._id)
-    .then((user) => {
+    .then(function(user) {
       return callback(null, user);
     })
-    .catch((error) => {
+    .catch(function(error){
       return callback(error)
     });
 }));
