@@ -331,7 +331,8 @@ app.get('/users/:username/',passport.authenticate('jwt', {session: false}), func
         });
 })
 
+const port = process.env.PORT || 8080;
 
-app.listen(8080,function(){
-    console.log('running from port 8080');
-})
+app.listen(port, '0.0.0.0',function()  {
+    console.log('Listening on Port ' + port);
+   });
