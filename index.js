@@ -16,8 +16,30 @@ const models = require('./models.js');
     const movies = models.movieModel;
     const users = models.userModel;
 
+//CORS
+const cors = require('cors');
+
+// let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+
+app.use(cors());
+
+// app.use(cors({
+//   origin: (origin, callback) => {
+//     if(!origin) return callback(null, true);
+//     if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
+//       let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
+//       return callback(new Error(message ), false);
+//     }
+//     return callback(null, true);
+//   }
+// }));
 
 
+//hashing
+const bcrypt = require('bcrypt');
+
+//validation
+const { check, validationResult } = require('express-validator');
 
 //database connection
 mongoose.connect('mongodb://localhost:27017/myFlix', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -30,9 +52,10 @@ require('./auth.js')(app);
 
 
 //routes
-app.get('/', function(request,response){
-    response.redirect('/login');
-})
+app.get('/' , function(request,response){
+response.redirect('/index');
+}
+)
 
 app.get('/login',function(request,response){
     response.sendFile(__dirname+'/login.html');
@@ -40,10 +63,15 @@ app.get('/login',function(request,response){
 
 
 
-app.get('/index',passport.authenticate('jwt', {session: false}), function(request,response){
+app.get('/index', function(request,response){
     response.sendFile(__dirname+'/index.html');
 
-})
+});
+
+
+
+
+
 
 //retrieve all movies
 app.get('/movies',passport.authenticate('jwt', {session: false}), function(request,response){
@@ -120,41 +148,92 @@ app.get('/movies/directors/:name/',passport.authenticate('jwt', {session: false}
 });
 
 //add new user
-app.post('/users', function(request,response){    
-    let username=request.body.username;
-    let password=request.body.password;
-    let email=request.body.email;    
-    let birthday=request.body.birthday;
-    let favourites=request.body.favourites;
+app.post('/users', 
 
-    users.create({username:username,password:password,email:email,birthday:birthday,favourites:favourites})
-    .then(function(data){
-        response.send('new account successfully created');
-    }).catch(function(error){
-        response.send(error);
-    })
-    
+    [
+    // username must be an email
+    check('username','username must not be blank').not().isEmpty() ,
+    check('password','password must not be blank').not().isEmpty(),
+    check('email','invalid email format').isEmail()
+    ],
+
+    function(request,response){    
+        
+        const errors = validationResult(request);
+        if (!errors.isEmpty()) {
+          return response.status(422).json({ errors: errors.array() });
+        }
+        else
+        {
+
+            let username=request.body.username;
+            
+            let userpass=request.body.password;
+            let password= bcrypt.hashSync(userpass,10);
+
+            let email=request.body.email;    
+            let birthday=request.body.birthday;
+            let favourites=request.body.favourites;
+
+            users.create({username:username,password:password,email:email,birthday:birthday,favourites:favourites})
+            .then(function(data){
+                response.send('new account successfully created' + data);
+            }).catch(function(error){
+                response.send(error);
+            })
+
+        } 
 })
 
 //modify user information
-app.put('/users/:id',passport.authenticate('jwt', {session: false}), function(request,response){
-    var id = request.params.id;
+app.put('/users/:id',passport.authenticate('jwt', {session: false}),
 
-    let username=request.body.username;
-    let password=request.body.password;
-    let email=request.body.email;    
-    let birthday=request.body.birthday;
+    [
+    // username must be an email
+    check('username','username must not be blank').not().isEmpty() ,
+    check('password','password must not be blank').not().isEmpty(),
+    check('email','invalid email format').isEmail()
+    ],
 
-    users.findOneAndUpdate({_id:id},{$set:{
-        username:username,
-        password:password,
-        email:email,
-        birthday:birthday,
-    }},{new:true}).then(function(data){
-        response.send("user information successfully updated ");
-    }).catch(function(data){
-       response.send(data);
-    })
+
+    function(request,response){
+
+        const errors = validationResult(request);
+        if (!errors.isEmpty()) {
+          return response.status(422).json({ errors: errors.array() });
+        }
+        else
+        {
+
+            var id = request.params.id;
+            let username=request.body.username;
+            let password=request.body.password;
+    
+            bcrypt.hash(password,10).then(function(pass){
+                password=pass;
+                response.end();
+            }).catch(function(error){
+                response.send('Error:'+error );
+            })
+    
+            let email=request.body.email;    
+            let birthday=request.body.birthday;
+        
+            users.findOneAndUpdate({_id:id},{$set:{
+                username:username,
+                password:password,
+                email:email,
+                birthday:birthday,
+            }},{new:true}).then(function(data){
+                response.send("user information successfully updated ");
+            }).catch(function(data){
+            response.send(data);
+            })
+
+        }
+
+
+       
 })
 //add movie to user's favourites
 app.post('/users/:id/favourites/:movieID',passport.authenticate('jwt', {session: false}), function(request,response){
