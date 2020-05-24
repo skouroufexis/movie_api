@@ -63,10 +63,11 @@ app.get('/login',function(request,response){
 
 
 
-// app.get('/index', function(request,response){
-//     response.sendFile(__dirname+'/index.html');
+app.get('/index', function(request,response){
+    response.redirect('/index');
+    response.sendFile(__dirname+'/index.html');
 
-// });
+});
 
 
 
