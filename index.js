@@ -53,7 +53,7 @@ require('./auth.js')(app);
 
 //routes
 app.get('/' , function(request,response){
-response.redirect('/index');
+response.redirect('/login');
 }
 )
 
@@ -66,7 +66,7 @@ app.get('/login',function(request,response){
 app.get('/index', function(request,response){
     
     response.sendFile(__dirname+'/index.html');
-
+    
 });
 
 
