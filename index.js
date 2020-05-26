@@ -112,25 +112,22 @@ app.get('/movies/:title',passport.authenticate('jwt', {session: false}), functio
 });
 
 //retrieve single genre
-app.get('/movies/genres/:name', function(request,response){
+app.get('/movies/genres/:name',passport.authenticate('jwt', {session: false}), function(request,response){
 
    var genre = request.params.name;
-    movies.findOne().then(function(data){
+   movies.findOne({'genre.name':genre},{_id:false,"genre.name":true,"genre.description":true})
+   .then(function(data){
+       if(data)
+            {
+                response.send(data);
+            }
+        else
+            {
+                response.send('genre not found');
+            }
+   }).catch(function(data){
         response.send(data);
-    })
-   //    movies.findOne({'genre.name':genre},{_id:false,"genre.name":true,"genre.description":true})
-//    .then(function(data){
-//        if(data)
-//             {
-//                 response.send(data);
-//             }
-//         else
-//             {
-//                 response.send('genre not found');
-//             }
-//    }).catch(function(data){
-//         response.send(data);
-//    });
+   })
 
 });
 
