@@ -115,7 +115,9 @@ app.get('/movies/:title',passport.authenticate('jwt', {session: false}), functio
 app.get('/movies/genres/:name', function(request,response){
 
    var genre = request.params.name;
-    movies.findOne();
+    movies.findOne().then(function(data){
+        response.send(data);
+    })
    //    movies.findOne({'genre.name':genre},{_id:false,"genre.name":true,"genre.description":true})
 //    .then(function(data){
 //        if(data)
