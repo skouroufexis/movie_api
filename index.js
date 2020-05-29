@@ -43,7 +43,17 @@ const { check, validationResult } = require('express-validator');
 
 //database connection
 // mongoose.connect('mongodb://localhost:27017/myFlix', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect(process.env.connectURI,{ useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connect(process.env.connectURI,{ useNewUrlParser: true, useUnifiedTopology: true });
+
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://stavros:GiraskoErgazomeno5@cluster0-zjj6t.mongodb.net/test?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
 
 
 
