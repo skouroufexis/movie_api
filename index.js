@@ -57,7 +57,7 @@ require('./auth.js')(app);
 //routes
 app.get('/' , function(request,response){
     response.sendFile('public/documentation.html');
-}
+    }
 )
 
 app.get('/login',function(request,response){
