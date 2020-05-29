@@ -84,7 +84,8 @@ app.get('/movies',passport.authenticate('jwt', {session: false}), function(reque
                     description:true,language:true,featured:true,
                     year:true})
     .then(function(data){
-        response.send('data');
+        console.log(data);
+        response.send(data);
     }).catch(function(data){
         response.send(data);
     })
