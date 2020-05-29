@@ -47,7 +47,7 @@ const { check, validationResult } = require('express-validator');
 
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://stavros:GiraskoErgazomenos@cluster0-zjj6t.mongodb.net/test?retryWrites=true&w=majority";
+const uri = "mongodb+srv://stavros:GiraskoDidaskomenos@cluster0-zjj6t.mongodb.net/test?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true });
 client.connect(err => {
   const collection = client.db("test").collection("devices");
