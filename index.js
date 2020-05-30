@@ -56,7 +56,7 @@ require('./auth.js')(app);
 
 //routes
 app.get('/' , function(request,response){
-    response.sendFile('public/documentation.html');
+    response.sendFile('documentation.html');
     }
 )
 
