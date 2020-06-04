@@ -16,7 +16,7 @@ class MainView extends React.Component {
     // No need to call super() though, as it does nothing by default
     render() {
       return (
-       <div className="main-view"></div>
+       <div className="main-view">aa</div>
       );
     }
   }
