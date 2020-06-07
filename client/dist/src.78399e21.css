@@ -2,4 +2,10 @@
   color: steelblue;
 }
 
+.movie-card {
+  border: solid red thin;
+  cursor: pointer;
+  margin-top: 1%;
+}
+
 /*# sourceMappingURL=/src.78399e21.css.map */
