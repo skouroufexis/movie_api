@@ -30104,7 +30104,7 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
           return _onClick(movie);
         },
         className: "movie-card"
-      }, movie.Title);
+      }, movie.title);
     }
   }]);
 
