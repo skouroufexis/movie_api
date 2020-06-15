@@ -20,15 +20,17 @@ class MainView extends React.Component{
     
     var movies = this.state.content;
     
+    
     if(movies)
     {
-
+      
       return(
             <div className='container'>
               {movies.map(movie=>
-                 <div className='row'> 
+                 <div className='row button'> 
                   
                   {movie.title}
+                  
                   
                   
                 </div>

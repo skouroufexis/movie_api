@@ -30337,7 +30337,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           className: "container"
         }, movies.map(function (movie) {
           return _react.default.createElement("div", {
-            className: "row"
+            className: "row button"
           }, movie.title);
         }));
       } else {

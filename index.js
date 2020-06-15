@@ -72,7 +72,7 @@ app.get('/movies', function(request,response){
     
     movies.find({},{title:true,"director.name":true,"genre.name":true,
                     description:true,language:true,featured:true,
-                    year:true})
+                    year:true}).sort({name:'ascending'})
     .then(function(data){
         console.log(data);
         response.send(data);
