@@ -1,8 +1,7 @@
-$color: steelblue;
+.row {border: solid whitesmoke thin;
+      margin-top: 1%;
+      justify-content: center;
+      }
 
-.my-flix {
-  color: $color;
-}
 
-
-.movie-card {border: solid red thin; cursor: pointer; margin-top: 1%;}
+.button {cursor: pointer;}

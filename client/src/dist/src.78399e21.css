@@ -1,5 +1,11 @@
-.my-flix {
-  color: steelblue;
+.row {
+  border: solid whitesmoke thin;
+  margin-top: 1%;
+  justify-content: center;
+}
+
+.button {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=/src.78399e21.css.map */
