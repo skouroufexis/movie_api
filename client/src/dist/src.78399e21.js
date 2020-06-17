@@ -30120,7 +30120,27 @@ module.exports.default = axios;
 
 },{"./utils":"../node_modules/axios/lib/utils.js","./helpers/bind":"../node_modules/axios/lib/helpers/bind.js","./core/Axios":"../node_modules/axios/lib/core/Axios.js","./core/mergeConfig":"../node_modules/axios/lib/core/mergeConfig.js","./defaults":"../node_modules/axios/lib/defaults.js","./cancel/Cancel":"../node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"../node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"../node_modules/axios/lib/helpers/spread.js"}],"../node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
-},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"components/movie-card/movie-card.jsx":[function(require,module,exports) {
+},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"../../public/images/5ea9f0f2d5fcc5119a040af1.jpg":[function(require,module,exports) {
+module.exports = "/5ea9f0f2d5fcc5119a040af1.ba0e7a60.jpg";
+},{}],"../../public/images/5ea9f19cd5fcc5119a040af2.jpg":[function(require,module,exports) {
+module.exports = "/5ea9f19cd5fcc5119a040af2.83ee37bb.jpg";
+},{}],"../../public/images/5ea9f19cd5fcc5119a040af3.jpg":[function(require,module,exports) {
+module.exports = "/5ea9f19cd5fcc5119a040af3.65f1ff65.jpg";
+},{}],"../../public/images/5ea9f19cd5fcc5119a040af4.jpg":[function(require,module,exports) {
+module.exports = "/5ea9f19cd5fcc5119a040af4.718ff281.jpg";
+},{}],"../../public/images/5ea9f19cd5fcc5119a040af5.jpg":[function(require,module,exports) {
+module.exports = "/5ea9f19cd5fcc5119a040af5.1cd0f171.jpg";
+},{}],"../../public/images/5ea9f19cd5fcc5119a040af6.jpg":[function(require,module,exports) {
+module.exports = "/5ea9f19cd5fcc5119a040af6.1e159adc.jpg";
+},{}],"../../public/images/5ea9f19cd5fcc5119a040af7.jpg":[function(require,module,exports) {
+module.exports = "/5ea9f19cd5fcc5119a040af7.f48004fe.jpg";
+},{}],"../../public/images/5ea9f19cd5fcc5119a040af8.jpg":[function(require,module,exports) {
+module.exports = "/5ea9f19cd5fcc5119a040af8.fce9b3c6.jpg";
+},{}],"../../public/images/5ea9f19cd5fcc5119a040af9.jpeg":[function(require,module,exports) {
+module.exports = "/5ea9f19cd5fcc5119a040af9.02913c23.jpeg";
+},{}],"../../public/images/5ea9f19cd5fcc5119a040afa.jpg":[function(require,module,exports) {
+module.exports = "/5ea9f19cd5fcc5119a040afa.65fcb110.jpg";
+},{}],"components/movie-card/movie-card.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30129,6 +30149,26 @@ Object.defineProperty(exports, "__esModule", {
 exports.MovieCard = void 0;
 
 var _react = _interopRequireDefault(require("react"));
+
+var _ea9f0f2d5fcc5119a040af = _interopRequireDefault(require("../../../../public/images/5ea9f0f2d5fcc5119a040af1.jpg"));
+
+var _ea9f19cd5fcc5119a040af = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040af2.jpg"));
+
+var _ea9f19cd5fcc5119a040af2 = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040af3.jpg"));
+
+var _ea9f19cd5fcc5119a040af3 = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040af4.jpg"));
+
+var _ea9f19cd5fcc5119a040af4 = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040af5.jpg"));
+
+var _ea9f19cd5fcc5119a040af5 = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040af6.jpg"));
+
+var _ea9f19cd5fcc5119a040af6 = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040af7.jpg"));
+
+var _ea9f19cd5fcc5119a040af7 = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040af8.jpg"));
+
+var _ea9f19cd5fcc5119a040af8 = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040af9.jpeg"));
+
+var _ea9f19cd5fcc5119a040afa = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040afa.jpg"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30154,6 +30194,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+var posters = [_ea9f0f2d5fcc5119a040af.default, _ea9f19cd5fcc5119a040af.default, _ea9f19cd5fcc5119a040af2.default, _ea9f19cd5fcc5119a040af3.default, _ea9f19cd5fcc5119a040af4.default, _ea9f19cd5fcc5119a040af5.default, _ea9f19cd5fcc5119a040af6.default, _ea9f19cd5fcc5119a040af7.default, _ea9f19cd5fcc5119a040af8.default, _ea9f19cd5fcc5119a040afa.default];
+
 var MovieCard = /*#__PURE__*/function (_React$Component) {
   _inherits(MovieCard, _React$Component);
 
@@ -30168,15 +30210,26 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
   _createClass(MovieCard, [{
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          movie = _this$props.movie,
-          _onClick = _this$props.onClick;
+      var id = this.props.id;
+
+      function findPoster(poster) {
+        return poster.includes(id);
+      }
+
+      var poster = posters.find(findPoster);
       return _react.default.createElement("div", {
-        onClick: function onClick() {
-          return _onClick(movie);
-        },
-        className: "movie-card"
-      }, movie.title);
+        className: "col-lg-4 col-sm-12 col-md-6 card"
+      }, _react.default.createElement("img", {
+        src: poster
+      }), _react.default.createElement("br", null), _react.default.createElement("h5", null, this.props.title), _react.default.createElement("br", null), _react.default.createElement("button", {
+        className: "button_card",
+        onClick: this.test
+      }, "open"));
+    }
+  }, {
+    key: "test",
+    value: function test() {
+      document.write('a');
     }
   }]);
 
@@ -30184,7 +30237,7 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.MovieCard = MovieCard;
-},{"react":"../node_modules/react/index.js"}],"components/movie-view/movie-view.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../../../public/images/5ea9f0f2d5fcc5119a040af1.jpg":"../../public/images/5ea9f0f2d5fcc5119a040af1.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af2.jpg":"../../public/images/5ea9f19cd5fcc5119a040af2.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af3.jpg":"../../public/images/5ea9f19cd5fcc5119a040af3.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af4.jpg":"../../public/images/5ea9f19cd5fcc5119a040af4.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af5.jpg":"../../public/images/5ea9f19cd5fcc5119a040af5.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af6.jpg":"../../public/images/5ea9f19cd5fcc5119a040af6.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af7.jpg":"../../public/images/5ea9f19cd5fcc5119a040af7.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af8.jpg":"../../public/images/5ea9f19cd5fcc5119a040af8.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af9.jpeg":"../../public/images/5ea9f19cd5fcc5119a040af9.jpeg","../../../../public/images/5ea9f19cd5fcc5119a040afa.jpg":"../../public/images/5ea9f19cd5fcc5119a040afa.jpg"}],"components/movie-view/movie-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30335,11 +30388,14 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       if (movies) {
         return _react.default.createElement("div", {
           className: "container"
+        }, _react.default.createElement("div", {
+          className: "row"
         }, movies.map(function (movie) {
-          return _react.default.createElement("div", {
-            className: "row button"
-          }, movie.title);
-        }));
+          return _react.default.createElement(_movieCard.MovieCard, {
+            title: movie.title,
+            id: movie._id
+          });
+        })));
       } else {
         return '';
       }
@@ -34084,6 +34140,8 @@ var _reactDom = _interopRequireDefault(require("react-dom"));
 
 var _mainView = require("./components/main-view/main-view");
 
+var _movieCard = require("./components/movie-card/movie-card");
+
 var _morgan = require("morgan");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -34091,7 +34149,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var container = document.getElementById('root');
 
 _reactDom.default.render(_react.default.createElement(_mainView.MainView, null), container);
-},{"./index.scss":"index.scss","react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./components/main-view/main-view":"components/main-view/main-view.jsx","morgan":"../../node_modules/morgan/index.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./index.scss":"index.scss","react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./components/main-view/main-view":"components/main-view/main-view.jsx","./components/movie-card/movie-card":"components/movie-card/movie-card.jsx","morgan":"../../node_modules/morgan/index.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -34119,7 +34177,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50555" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50438" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

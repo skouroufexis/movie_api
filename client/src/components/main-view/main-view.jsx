@@ -20,25 +20,24 @@ class MainView extends React.Component{
     
     var movies = this.state.content;
     
-    
     if(movies)
     {
-      
+
       return(
             <div className='container'>
+            <div className='row'>
+             
               {movies.map(movie=>
-                 <div className='row button'> 
-                  
-                  {movie.title}
-                  
-                  
-                  
-                </div>
+                
+                <MovieCard title={movie.title}
+                           id={movie._id}  
+                />
+                
                 
               )} 
+             </div> 
             </div>  
       )
-      
     }
     else
     {
@@ -48,9 +47,6 @@ class MainView extends React.Component{
     
 
   }
-
-
-  
 
   componentDidMount(){
     axios.get('https://stavflix.herokuapp.com/movies').then(response=>{
@@ -63,9 +59,5 @@ class MainView extends React.Component{
   }
 
 }
-
-
-
-
 
 export {MainView};

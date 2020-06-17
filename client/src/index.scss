@@ -1,7 +1,21 @@
-.row {border: solid whitesmoke thin;
+
+.row {text-align: center;justify-content: center; }
+.col-4 {border: solid whitesmoke thin;
       margin-top: 1%;
       justify-content: center;
+      
       }
 
+.card {display: flex; 
+      flex-direction: column; 
+      justify-content: center;
+       align-items: center;}      
 
+.col-12, col {text-align: center;;}
 .button {cursor: pointer;}
+img {width: 80%; height: 60%;}
+.button_card{width: 50%;
+            background-color: blue; color: whitesmoke;
+            border: none;
+                  }
+
