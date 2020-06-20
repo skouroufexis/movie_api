@@ -1,6 +1,7 @@
 .row {
   text-align: center;
   justify-content: center;
+  margin-top: 1%;
 }
 
 .col-4 {
@@ -16,15 +17,33 @@
   align-items: center;
 }
 
+.movieViewContainer {
+  border: solid whitesmoke thin;
+  margin-top: 1%;
+}
+
 .col-12, col {
   text-align: center;
+}
+
+.bigPoster {
+  text-align: center;
+}
+
+.bigPoster img {
+  width: 250px;
+  height: 350px;
+}
+
+.movieInfo {
+  text-align: right;
 }
 
 .button {
   cursor: pointer;
 }
 
-img {
+.previewImg {
   width: 80%;
   height: 60%;
 }
@@ -34,6 +53,35 @@ img {
   background-color: blue;
   color: whitesmoke;
   border: none;
+}
+
+.movieViewContainer button {
+  width: 100px;
+  height: 45px;
+  background-color: blue;
+  color: whitesmoke;
+  border: solid white thin;
+  box-shadow: 0px 0px 3px blue;
+}
+
+.synopsis {
+  text-align: justify;
+}
+
+.otherInfo {
+  text-align: left;
+}
+
+.buttonCol {
+  text-align: right;
+}
+
+.wrapper {
+  border: solid orange thin;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /*# sourceMappingURL=/src.78399e21.css.map */

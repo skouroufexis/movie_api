@@ -1,5 +1,5 @@
 
-.row {text-align: center;justify-content: center; }
+.row {text-align: center;justify-content: center;margin-top: 1%; }
 .col-4 {border: solid whitesmoke thin;
       margin-top: 1%;
       justify-content: center;
@@ -11,11 +11,46 @@
       justify-content: center;
        align-items: center;}      
 
-.col-12, col {text-align: center;;}
+
+.movieViewContainer {border: solid whitesmoke thin;
+                     margin-top: 1%;
+                     
+                        }
+
+
+.col-12, col {text-align: center;}
+
+.bigPoster {text-align: center;}
+.bigPoster img { width: 250px; height: 350px;}
+
+.movieInfo {text-align: right;}
+
 .button {cursor: pointer;}
-img {width: 80%; height: 60%;}
+.previewImg {width: 80%; height: 60%;}
 .button_card{width: 50%;
             background-color: blue; color: whitesmoke;
             border: none;
                   }
+
+.movieViewContainer button{
+      
+      width: 100px;
+      height: 45px;
+      background-color: blue; color: whitesmoke;
+      border: solid white thin;
+      box-shadow: 0px 0px 3px blue;
+}
+
+.synopsis {text-align: justify;}
+.otherInfo {text-align: left;}
+
+.buttonCol {text-align: right; }
+
+.wrapper {border: solid orange thin;
+          height: 100vh; 
+          display: flex;              
+          flex-direction: column;
+          justify-content: center;
+            }
+
 
