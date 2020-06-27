@@ -1,5 +1,8 @@
 import React from 'react';
+import './movie-card.scss';
 
+
+import {Container, Row, Col} from 'react-bootstrap';
 import {MovieView} from '../movie-view/movie-view';
 
 import poster1 from '../../../../public/images/5ea9f0f2d5fcc5119a040af1.jpg';
@@ -39,16 +42,16 @@ class MovieCard extends React.Component{
         return poster.includes(id);
       }
   
-      var poster= posters.find(findPoster);
+      let poster= posters.find(findPoster);
 
         return (
 
-          <div className='col-lg-4 col-sm-12 col-md-6 card'>
+          <Col lg='4' md='6' sm='12' className='card'>
             
             {<img className='previewImg' src={poster} />}<br></br>
             <h5>{this.props.title}</h5><br></br>
             <button className="button_card" onClick={()=>selected(movie)} >open</button>
-          </div>
+          </Col>
         );
   }
 

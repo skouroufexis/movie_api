@@ -1,5 +1,10 @@
 import React from 'react';
 
+import './movie-view.scss';
+
+import {Container, Row, Col} from 'react-bootstrap';
+
+
 import poster1 from '../../../../public/images/5ea9f0f2d5fcc5119a040af1.jpg';
 import poster2 from '../../../../public/images/5ea9f19cd5fcc5119a040af2.jpg';
 import poster3 from '../../../../public/images/5ea9f19cd5fcc5119a040af3.jpg';
@@ -25,7 +30,7 @@ class MovieView extends React.Component{
 
     const movie= this.props;
     let goback=this.props.back;
-
+      console.log(goback);
       let id=movie.movie._id;
       function findPoster(poster){
         return poster.includes(id);
@@ -40,44 +45,50 @@ class MovieView extends React.Component{
       <div className='wrapper'>
 
       
-        <div className='container movieViewContainer'>
+        <Container className='movieViewContainer'>
 
 
 
-          <div className='row'>
-              <div className="col-6 bigPoster">
+          <Row>
+              <Col md="6" className="bigPoster">
                 <img src={poster}></img>
-              </div>
+              </Col>
 
-              <div className='col-6'>
-                <div className='row'>
-                  <div className='col-12'><h1>{movie.movie.title}</h1></div>
-                  <div className='col-12'><p className='synopsis'>{movie.movie.description}</p></div>
+              <Col md='6'>
+                <Row>
+                  <Col md='12'><h1>{movie.movie.title}</h1></Col>
+                  <Col md='12'><p className='synopsis'>{movie.movie.description}</p></Col>
 
                   {/* other info */}
-                  <div className='col-6 otherInfo'><h5>Director</h5></div>
-                  <div className='col-6 otherInfo'><p>{movie.movie.director.name}</p></div>
+                  <Col md='6' className='otherInfo'><h5>Director</h5></Col>
+                  <Col md='6' className='otherInfo'><p>{movie.movie.director.name}</p></Col>
 
-                  <div className='col-6 otherInfo'><h5>Genre</h5></div>
-                  <div className='col-6 otherInfo'><p>{movie.movie.genre.name}</p></div>
+                  <Col md='6' className='otherInfo'><h5>Genre</h5></Col>
+                  <Col md='6' className='otherInfo'><p>{movie.movie.genre.name}</p></Col>
 
-                  <div className='col-6 otherInfo'><h5>Featured</h5></div>
-                  <div className='col-6 otherInfo'><p>{String(movie.movie.featured)}</p></div>
-                </div>
+                  <Col md='6' className='otherInfo'><h5>Featured</h5></Col>
+                  <Col md='6' className='otherInfo'><p>{String(movie.movie.featured)}</p></Col>
+                </Row>
                     
-              </div>
+              </Col>
               
-          </div>
+          </Row>
 
-          <div className='row'>
-            <div className='col-12 buttonCol'><button onClick={()=>goback()}>Back</button></div></div>
-         </div>
+          <Row>
+            <div className='col-12 buttonCol'>
+              <button onClick={()=>goback()}>Back</button>
+            </div>
+          </Row>
 
+         </Container>
+        
+         
       </div>
-    )
 
+      
 
     
+    )
 
   }
 
