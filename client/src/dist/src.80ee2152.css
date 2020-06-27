@@ -1,0 +1,21 @@
+.row {
+  text-align: center;
+  justify-content: center;
+  margin-top: 1%;
+}
+
+.col-4 {
+  border: solid whitesmoke thin;
+  margin-top: 1%;
+  justify-content: center;
+}
+
+.col-12, col {
+  text-align: center;
+}
+
+button, .button {
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=/src.80ee2152.css.map */
