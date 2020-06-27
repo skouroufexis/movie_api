@@ -1,0 +1,30 @@
+.wrapper {border: solid orange thin;
+    height: 100vh; 
+    display: flex;              
+    flex-direction: column;
+    justify-content: center;
+      }
+
+.movieViewContainer {border: solid whitesmoke thin;
+        margin-top: 1%;
+        
+           }
+
+.movieViewContainer button{
+      
+    width: 100px;
+    height: 45px;
+    background-color: blue; color: whitesmoke;
+    border: solid white thin;
+    box-shadow: 0px 0px 3px blue;
+    }
+      
+
+.bigPoster {text-align: center;}
+.bigPoster img { width: 250px; height: 350px;}
+
+.synopsis {text-align: justify;}
+.otherInfo {text-align: left;}
+
+.buttonCol {text-align: right; }
+           
