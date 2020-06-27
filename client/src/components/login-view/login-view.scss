@@ -1,0 +1,31 @@
+#form{    height: 100vh;
+        display: flex; flex-direction: column; justify-content: center;
+}
+#container {border: solid whitesmoke thin; 
+                
+            padding-top: 2%;padding-bottom: 2%;
+            }
+
+.header {margin-bottom: 5%;}
+
+#login {background-color: blue;
+              color: whitesmoke;
+              margin-top: 2%;
+        }
+
+
+
+input, button {width: 100%;}
+button {border:none;
+        height: 40px;}
+
+
+#signup {   background-color: lightseagreen;
+            
+            color: whitesmoke;
+            margin-top: 2%;}
+
+
+.show {border: solid red thin;}
+
+.show1 {border: solid green thin;}
