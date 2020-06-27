@@ -97,14 +97,6 @@ button {
   justify-content: center;
   align-items: center;
 }
-.wrapper {
-  border: solid orange thin;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .movieViewContainer {
   border: solid whitesmoke thin;
   margin-top: 1%;
@@ -124,8 +116,8 @@ button {
 }
 
 .bigPoster img {
-  width: 250px;
-  height: 350px;
+  width: 350px;
+  height: 400px;
 }
 
 .synopsis {
@@ -139,5 +131,7 @@ button {
 .buttonCol {
   text-align: right;
 }
+
+/*Mobile version*/
 
 /*# sourceMappingURL=/src.78399e21.css.map */

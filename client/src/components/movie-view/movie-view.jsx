@@ -44,7 +44,7 @@ class MovieView extends React.Component{
     return(
       <div className='wrapper'>
 
-      
+        
         <Container className='movieViewContainer'>
 
 
@@ -54,20 +54,20 @@ class MovieView extends React.Component{
                 <img src={poster}></img>
               </Col>
 
-              <Col md='6'>
+              <Col md='6' sm='12'>
                 <Row>
                   <Col md='12'><h1>{movie.movie.title}</h1></Col>
                   <Col md='12'><p className='synopsis'>{movie.movie.description}</p></Col>
 
                   {/* other info */}
-                  <Col md='6' className='otherInfo'><h5>Director</h5></Col>
-                  <Col md='6' className='otherInfo'><p>{movie.movie.director.name}</p></Col>
+                  <Col md='3' className='otherInfo'><h5>Director</h5></Col>
+                  <Col md='9' className='otherInfo'><p>{movie.movie.director.name}</p></Col>
 
-                  <Col md='6' className='otherInfo'><h5>Genre</h5></Col>
-                  <Col md='6' className='otherInfo'><p>{movie.movie.genre.name}</p></Col>
+                  <Col md='3' className='otherInfo'><h5>Genre</h5></Col>
+                  <Col md='9' className='otherInfo'><p>{movie.movie.genre.name}</p></Col>
 
-                  <Col md='6' className='otherInfo'><h5>Featured</h5></Col>
-                  <Col md='6' className='otherInfo'><p>{String(movie.movie.featured)}</p></Col>
+                  <Col md='3' className='otherInfo'><h5>Featured</h5></Col>
+                  <Col md='9' className='otherInfo'><p>{String(movie.movie.featured)}</p></Col>
                 </Row>
                     
               </Col>
@@ -81,6 +81,7 @@ class MovieView extends React.Component{
           </Row>
 
          </Container>
+         
         
          
       </div>

@@ -1,9 +1,9 @@
-.wrapper {border: solid orange thin;
-    height: 100vh; 
-    display: flex;              
-    flex-direction: column;
-    justify-content: center;
+.wrapper {
+    
+    
       }
+
+ 
 
 .movieViewContainer {border: solid whitesmoke thin;
         margin-top: 1%;
@@ -21,10 +21,19 @@
       
 
 .bigPoster {text-align: center;}
-.bigPoster img { width: 250px; height: 350px;}
+.bigPoster img { width: 350px; height: 400px;}
 
 .synopsis {text-align: justify;}
-.otherInfo {text-align: left;}
+.otherInfo {text-align: left; }
+
 
 .buttonCol {text-align: right; }
-           
+          
+/*Mobile version*/
+@media screen and (max-width: 1500px){
+         
+    
+    
+    
+                    
+}

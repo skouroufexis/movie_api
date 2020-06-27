@@ -46092,7 +46092,8 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       }, _react.default.createElement("img", {
         src: poster
       })), _react.default.createElement(_reactBootstrap.Col, {
-        md: "6"
+        md: "6",
+        sm: "12"
       }, _react.default.createElement(_reactBootstrap.Row, null, _react.default.createElement(_reactBootstrap.Col, {
         md: "12"
       }, _react.default.createElement("h1", null, movie.movie.title)), _react.default.createElement(_reactBootstrap.Col, {
@@ -46100,22 +46101,22 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       }, _react.default.createElement("p", {
         className: "synopsis"
       }, movie.movie.description)), _react.default.createElement(_reactBootstrap.Col, {
-        md: "6",
+        md: "3",
         className: "otherInfo"
       }, _react.default.createElement("h5", null, "Director")), _react.default.createElement(_reactBootstrap.Col, {
-        md: "6",
+        md: "9",
         className: "otherInfo"
       }, _react.default.createElement("p", null, movie.movie.director.name)), _react.default.createElement(_reactBootstrap.Col, {
-        md: "6",
+        md: "3",
         className: "otherInfo"
       }, _react.default.createElement("h5", null, "Genre")), _react.default.createElement(_reactBootstrap.Col, {
-        md: "6",
+        md: "9",
         className: "otherInfo"
       }, _react.default.createElement("p", null, movie.movie.genre.name)), _react.default.createElement(_reactBootstrap.Col, {
-        md: "6",
+        md: "3",
         className: "otherInfo"
       }, _react.default.createElement("h5", null, "Featured")), _react.default.createElement(_reactBootstrap.Col, {
-        md: "6",
+        md: "9",
         className: "otherInfo"
       }, _react.default.createElement("p", null, String(movie.movie.featured)))))), _react.default.createElement(_reactBootstrap.Row, null, _react.default.createElement("div", {
         className: "col-12 buttonCol"
