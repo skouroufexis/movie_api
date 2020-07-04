@@ -97,9 +97,27 @@ button {
   justify-content: center;
   align-items: center;
 }
+.wrapper {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .movieViewContainer {
   border: solid whitesmoke thin;
-  margin-top: 1%;
+  height: 90%;
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .movieViewContainer button {
@@ -111,13 +129,9 @@ button {
   box-shadow: 0px 0px 3px blue;
 }
 
-.bigPoster {
-  text-align: center;
-}
-
 .bigPoster img {
-  width: 350px;
-  height: 400px;
+  width: 80%;
+  height: 60%;
 }
 
 .synopsis {
@@ -128,10 +142,14 @@ button {
   text-align: left;
 }
 
-.buttonCol {
-  text-align: right;
+.otherInfo p {
+  font-size: 1em;
 }
 
-/*Mobile version*/
+.buttonCol {
+  text-align: right;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
 
 /*# sourceMappingURL=/src.78399e21.css.map */

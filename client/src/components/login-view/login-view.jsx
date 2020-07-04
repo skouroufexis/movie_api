@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import React,{useState} from 'react';
 import {Container, Row, Col,Form} from 'react-bootstrap';
 
@@ -12,8 +14,18 @@ function LoginView(props) {
     const [ password, setPassword ] = useState('');
 
     function login(){
-        console.log(username + ' ' +password);
-        
+        //sent post request with credentials
+        axios.post('YOUR_API_URL/login', {
+            Username: username,
+            Password: password
+          })
+          .then(response => {
+            const data = response.data;
+            props.onLoggedIn(data);
+          })
+          .catch(e => {
+            console.log('no such user')
+          });
 
         openmovies();
     }

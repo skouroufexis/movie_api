@@ -46088,12 +46088,13 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         className: "movieViewContainer"
       }, _react.default.createElement(_reactBootstrap.Row, null, _react.default.createElement(_reactBootstrap.Col, {
         md: "6",
-        className: "bigPoster"
+        className: "bigPoster section"
       }, _react.default.createElement("img", {
         src: poster
       })), _react.default.createElement(_reactBootstrap.Col, {
         md: "6",
-        sm: "12"
+        sm: "12",
+        className: "section"
       }, _react.default.createElement(_reactBootstrap.Row, null, _react.default.createElement(_reactBootstrap.Col, {
         md: "12"
       }, _react.default.createElement("h1", null, movie.movie.title)), _react.default.createElement(_reactBootstrap.Col, {
@@ -46103,28 +46104,28 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       }, movie.movie.description)), _react.default.createElement(_reactBootstrap.Col, {
         md: "3",
         className: "otherInfo"
-      }, _react.default.createElement("h5", null, "Director")), _react.default.createElement(_reactBootstrap.Col, {
+      }, _react.default.createElement("h6", null, "Director")), _react.default.createElement(_reactBootstrap.Col, {
         md: "9",
         className: "otherInfo"
       }, _react.default.createElement("p", null, movie.movie.director.name)), _react.default.createElement(_reactBootstrap.Col, {
         md: "3",
         className: "otherInfo"
-      }, _react.default.createElement("h5", null, "Genre")), _react.default.createElement(_reactBootstrap.Col, {
+      }, _react.default.createElement("h6", null, "Genre")), _react.default.createElement(_reactBootstrap.Col, {
         md: "9",
         className: "otherInfo"
       }, _react.default.createElement("p", null, movie.movie.genre.name)), _react.default.createElement(_reactBootstrap.Col, {
         md: "3",
         className: "otherInfo"
-      }, _react.default.createElement("h5", null, "Featured")), _react.default.createElement(_reactBootstrap.Col, {
+      }, _react.default.createElement("h6", null, "Featured")), _react.default.createElement(_reactBootstrap.Col, {
         md: "9",
         className: "otherInfo"
-      }, _react.default.createElement("p", null, String(movie.movie.featured)))))), _react.default.createElement(_reactBootstrap.Row, null, _react.default.createElement("div", {
+      }, _react.default.createElement("p", null, String(movie.movie.featured))))), _react.default.createElement(_reactBootstrap.Col, null, _react.default.createElement("div", {
         className: "col-12 buttonCol"
       }, _react.default.createElement("button", {
         onClick: function onClick() {
           return goback();
         }
-      }, "Back")))));
+      }, "Back"))))));
     }
   }]);
 
@@ -67388,7 +67389,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49463" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51263" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

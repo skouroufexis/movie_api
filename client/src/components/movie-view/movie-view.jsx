@@ -43,6 +43,7 @@ class MovieView extends React.Component{
 
     return(
       <div className='wrapper'>
+        
 
         
         <Container className='movieViewContainer'>
@@ -50,35 +51,39 @@ class MovieView extends React.Component{
 
 
           <Row>
-              <Col md="6" className="bigPoster">
+              <Col md="6" className="bigPoster section">
                 <img src={poster}></img>
               </Col>
 
-              <Col md='6' sm='12'>
+              <Col md='6' sm='12'className='section'>
                 <Row>
                   <Col md='12'><h1>{movie.movie.title}</h1></Col>
                   <Col md='12'><p className='synopsis'>{movie.movie.description}</p></Col>
 
                   {/* other info */}
-                  <Col md='3' className='otherInfo'><h5>Director</h5></Col>
+                  <Col md='3' className='otherInfo'><h6>Director</h6></Col>
                   <Col md='9' className='otherInfo'><p>{movie.movie.director.name}</p></Col>
 
-                  <Col md='3' className='otherInfo'><h5>Genre</h5></Col>
+                  <Col md='3' className='otherInfo'><h6>Genre</h6></Col>
                   <Col md='9' className='otherInfo'><p>{movie.movie.genre.name}</p></Col>
 
-                  <Col md='3' className='otherInfo'><h5>Featured</h5></Col>
+                  <Col md='3' className='otherInfo'><h6>Featured</h6></Col>
                   <Col md='9' className='otherInfo'><p>{String(movie.movie.featured)}</p></Col>
+                  
                 </Row>
                     
               </Col>
+
+
+              <Col>
+              <div className='col-12 buttonCol'>
+              <button onClick={()=>goback()}>Back</button>
+              </div>
+            </Col>
               
           </Row>
 
-          <Row>
-            <div className='col-12 buttonCol'>
-              <button onClick={()=>goback()}>Back</button>
-            </div>
-          </Row>
+          
 
          </Container>
          
