@@ -51,7 +51,7 @@ app.get('/' , function(request,response){
 )
 
 app.get('/login',function(request,response){
-    
+    response.end();
 })
 
 
