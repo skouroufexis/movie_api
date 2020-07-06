@@ -45692,6 +45692,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.LoginView = LoginView;
 
+var _axios = _interopRequireDefault(require("axios"));
+
 var _react = _interopRequireWildcard(require("react"));
 
 var _reactBootstrap = require("react-bootstrap");
@@ -45701,6 +45703,8 @@ require("./login-view.scss");
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -45716,7 +45720,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function LoginView(props) {
   var openregister = props.openregister;
-  var openmovies = props.openmovies;
+  var onlogin = props.onlogin;
 
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
@@ -45729,8 +45733,28 @@ function LoginView(props) {
       setPassword = _useState4[1];
 
   function login() {
-    console.log(username + ' ' + password);
-    openmovies();
+    // var signin = new XMLHttpRequest();
+    // var data = JSON.stringify({"username":username,"password":password});
+    // signin.onreadystatechange = function() {
+    // if (this.readyState == 4 && this.status == 200) {
+    //       var ans = this.responseText;  
+    //      ans=JSON.parse(ans);
+    //      document.write(ans.user.username);
+    //      }
+    //    };
+    //    signin.open('POST', `https://stavflix.herokuapp.com/login`,true)
+    //    signin.setRequestHeader("Content-type", "application/json");
+    //    signin.send(data);
+    //sent post request with credentials
+    _axios.default.post('https://stavflix.herokuapp.com/login', {
+      username: username,
+      password: password
+    }).then(function (response) {
+      var data = response.data;
+      onlogin(data); //response as paramenter of the 'onlogin' prop which will trigger the 'onlogin' function in MainView  
+    }).catch(function (e) {
+      console.log('no such user');
+    });
   }
 
   function captureCredentials() {
@@ -45821,7 +45845,7 @@ function LoginView(props) {
     sm: "auto"
   }))));
 }
-},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./login-view.scss":"components/login-view/login-view.scss"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
+},{"axios":"../node_modules/axios/index.js","react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./login-view.scss":"components/login-view/login-view.scss"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -65544,6 +65568,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       content: null,
       selected: null,
+      user: null,
       isLogged: null,
       openRegister: null
     };
@@ -65567,8 +65592,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           openregister: function openregister() {
             self.openRegister();
           },
-          openmovies: function openmovies() {
-            self.openMovies();
+          onlogin: function onlogin(data) {
+            self.login(data);
           }
         });
       }
@@ -65648,10 +65673,24 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     } //open movies screen after successful login
 
   }, {
-    key: "openMovies",
-    value: function openMovies() {
-      this.setState({
-        isLogged: true
+    key: "login",
+    value: function login(data) {
+      // document.write(data.user.username);
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', data.user.username);
+      this.getMovies(data.token);
+    }
+  }, {
+    key: "getMovies",
+    value: function getMovies(token) {
+      _axios.default.get('https://stavflix.herokuapp.com/movies', {// headers: { Authorization: `Bearer ${token}`}
+      }).then(function (response) {
+        document.write(response).data;
+        this.setState({
+          content: response.data
+        });
+      }).catch(function (error) {
+        console.log(error);
       });
     } //go back to login page
 
@@ -67389,7 +67428,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51263" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50943" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

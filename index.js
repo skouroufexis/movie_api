@@ -68,7 +68,7 @@ app.get('/index', function(request,response){
 
 
 //retrieve all movies
-app.get('/movies', function(request,response){
+app.get('/movies',passport.authenticate('jwt', {session: false}), function(request,response){
     
     movies.find({},{title:true,"director.name":true,"genre.name":true,
                     description:true,language:true,featured:true,

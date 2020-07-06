@@ -13,7 +13,11 @@ import {MovieView} from '../movie-view/movie-view';
 class MainView extends React.Component{
   constructor(){
     super();
-    this.state ={content:null,selected:null,isLogged:null,openRegister:null};
+    this.state ={content:null,
+                 selected:null,
+                 user:null,
+                 isLogged:null,
+                 openRegister:null};
     
     
   }
@@ -31,13 +35,13 @@ class MainView extends React.Component{
       {
         return(
           <LoginView 
-          
+            
             openregister={function(){
                 self.openRegister();
             }}
 
-            openmovies={function(){
-              self.openMovies();
+            onlogin={function(data){
+              self.login(data);
           }}
 
           />
@@ -116,11 +120,29 @@ class MainView extends React.Component{
   }
 
  //open movies screen after successful login
-  openMovies(){
-    this.setState({isLogged:true})
+  login(data){
+    // document.write(data.user.username);
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('user', data.user.username);
     
     
+    this.getMovies(data.token);
   }
+
+getMovies(token){
+  axios.get('https://stavflix.herokuapp.com/movies', {
+    // headers: { Authorization: `Bearer ${token}`}
+  })
+  .then(function(response){
+   document.write(response).data;
+   this.setState({content:response.data});
+   
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
   //go back to login page
   baktoLogin(){
     this.setState({isLogged:null, openRegister:null})

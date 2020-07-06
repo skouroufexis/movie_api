@@ -8,26 +8,47 @@ import './login-view.scss';
 function LoginView(props) {
 
     let openregister = props.openregister;   
-    let openmovies = props.openmovies;
+    let onlogin = props.onlogin;
 
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
 
     function login(){
-        //sent post request with credentials
-        axios.post('YOUR_API_URL/login', {
-            Username: username,
-            Password: password
-          })
-          .then(response => {
-            const data = response.data;
-            props.onLoggedIn(data);
-          })
-          .catch(e => {
-            console.log('no such user')
-          });
+        
+        // var signin = new XMLHttpRequest();
+        
+        // var data = JSON.stringify({"username":username,"password":password});
+        
+        // signin.onreadystatechange = function() {
+        // if (this.readyState == 4 && this.status == 200) {
+        //       var ans = this.responseText;  
 
-        openmovies();
+        //      ans=JSON.parse(ans);
+        //      document.write(ans.user.username);
+
+        //      }
+        //    };
+
+        //    signin.open('POST', `https://stavflix.herokuapp.com/login`,true)
+        //    signin.setRequestHeader("Content-type", "application/json");
+        //    signin.send(data);
+
+
+
+        //sent post request with credentials
+        axios.post('https://stavflix.herokuapp.com/login', 
+             {username:username,password:password})
+           .then(function(response){
+                 const data = response.data;
+                 
+            onlogin(data);//response as paramenter of the 'onlogin' prop which will trigger the 'onlogin' function in MainView  
+                }
+              )
+           .catch(e => {
+            console.log('no such user')
+           });
+
+        
     }
 
     function captureCredentials(){
