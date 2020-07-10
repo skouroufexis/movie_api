@@ -1,13 +1,14 @@
+import React,{useState} from 'react';
 import axios from 'axios';
 
-import React,{useState} from 'react';
+
 import {Container, Row, Col,Form} from 'react-bootstrap';
 
 import './login-view.scss';
 
 function LoginView(props) {
 
-    let openregister = props.openregister;   
+     
     let onlogin = props.onlogin;
 
     const [ username, setUsername ] = useState('');
@@ -21,7 +22,11 @@ function LoginView(props) {
            .then(function(response){
                  const data = response.data;
                  console.log('user found');
-            onlogin(data);//response as paramenter of the 'onlogin' prop which will trigger the 'onlogin' function in MainView  
+            // onlogin(data);//response as paramenter of the 'onlogin' prop which will trigger the 'onlogin' function in MainView  
+
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('user', data.user.username);
+            
             })
            .catch(e => {
             console.log(e)
@@ -36,7 +41,10 @@ function LoginView(props) {
         setPassword(passwordInput);
 
     }
-
+    
+    function openregister(){
+        window.location.replace("http://localhost:1234/register ");
+    }
 
     return(
             <Form id='form' >
@@ -72,15 +80,14 @@ function LoginView(props) {
 
                 <Row>
                     <Col md='2' sm='auto'></Col>
-                    <Col md='8' sm='12'><button id='signup' onClick={function(){
-                        openregister();
-                    }}  type='button'>signup</button></Col>
+                    <Col md='8' sm='12'><button id='signup' type='button' onClick={openregister}>signup</button></Col>
                     <Col md='2' sm='auto'></Col>
                 </Row>
             </Container>
             </Form>
 
     )
+    
 } 
 
 export {LoginView};

@@ -17,42 +17,6 @@
 button, .button {
   cursor: pointer;
 }
-.row {
-  width: 100%;
-  border: solid black thin;
-}
-
-.col, .col-12 {
-  border: solid red thin;
-  text-align: left;
-}
-
-.img_container {
-  border: solid blue thin;
-  height: 150px;
-  white-space: nowrap;
-  overflow-x: scroll;
-}
-
-.div_img {
-  border: solid blue thick;
-}
-
-img {
-  width: 90%;
-  height: 150px;
-}
-
-.title {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-button {
-  background-color: rebeccapurple;
-}
 #form {
   height: 100vh;
   display: flex;
@@ -188,20 +152,24 @@ button {
   margin-bottom: 1%;
 }
 .container {
-            margin-top: 1%; 
-                }
-.col {border: solid whitesmoke thin;}
+  margin-top: 1%;
+}
 
-#menu {transform: translateY(-10px);
-       opacity: 0;
-       display: none;
-        transition: opacity 0.3s,transform 0.3s;}
-.menu_item {text-align: center;margin-top: 0.5%;}
+.col {
+  border: solid whitesmoke thin;
+}
 
+#menu {
+  transform: translateY(-10px);
+  opacity: 0;
+  display: none;
+  transition: opacity 0.3s, transform 0.3s;
+}
 
-
-
-
+.menu_item {
+  margin-top: 0.5%;
+  text-align: center !important;
+}
 .main {
   height: 80vh;
   position: relative;
@@ -213,7 +181,6 @@ button {
 .menu_option {
   margin-top: 1%;
   position: relative;
-  border: none;
   height: auto;
   border: solid whitesmoke thin;
 }

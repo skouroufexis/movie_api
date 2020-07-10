@@ -1,5 +1,5 @@
 import React from 'react';
-import './header.css';
+import './header.scss';
 
 var Header = function(props){
 
@@ -26,8 +26,8 @@ var Header = function(props){
             </div>
             
             <div className='row' id='menu'>
-                <div className='col col-11 menu_item button'>My account</div>
-                <div className='col col-11 menu_item button'>Main</div>
+                <div className='col col-11 menu_item button' onClick={openProfile}>My account</div>
+                <div className='col col-11 menu_item button' onClick={mainMenu}  >Main</div>
                 <div className='col col-11 menu_item button' onClick={logout}>logout
                 </div>
                 
@@ -37,7 +37,13 @@ var Header = function(props){
     
     )
 
+    function mainMenu(){
+        window.location.replace("http://localhost:1234/");
+    }    
 
+    function openProfile(){
+        window.location.replace("http://localhost:1234/profile");
+    }
     function toggleMenu(){
         var state = document.getElementById('menu');
         if(state.classList.contains('visible'))

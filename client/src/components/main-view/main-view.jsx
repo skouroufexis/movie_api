@@ -27,86 +27,118 @@ class MainView extends React.Component{
   render(){
     
     let user = this.state.user;
-    let openregister=this.state.openRegister;
+    // let openregister=this.state.openRegister;
     let movies = this.state.content;
     let selected=this.state.selected;
     let back = this.state.back;
     let self=this;
 
+
     if(user==null) //user not logged in
-      {    
-
-          if(openregister==true) //user clicks 'Register' button
-            {
-              return(
-                <RegistrationView backtologin={function(){
-                  self.baktoLogin();
-                }} />
-              );
-            }
-          else 
-            {
-              
-              return(
-                <LoginView      
-                  openregister={function(){
-                      self.openRegister();
-                  }}
-
-                  onlogin={function(data){
-                    self.login(data);
-                  }}
-                />
-                );
-            }
+      {
+        return(
+          <Router>
+                <div>
+                  <Route exact path='/' component={LoginView }/>
+                  <Route exact path='/register' component={RegistrationView} />
+                </div>
+          </Router>
+        )
       }
 
-    else //user is logged in
-      { 
-          if(movies==null) //movies not yet loaded
-          {
-            return(<div>loading</div>);
-          }
+    else //user logged in
+      {
+
+
+        let token= localStorage.getItem('token');
+        let user=localStorage.getItem('user') 
+        this.getMovies(token);
+        console.log(this.state.content);
+        return('a');
+        // return(
+        //   <Router>
+        //         <div>
+        //           <Route exact path='/' component={this.state.content[0].title}/>
+        //           <Route exact path='/register' component={RegistrationView} />
+        //         </div>
+        //   </Router>
+        // )
+      }
+
+    // if(user==null) //user not logged in
+    //   {    
+
+    //       if(openregister==true) //user clicks 'Register' button
+    //         {
+    //           return(
+    //             <RegistrationView backtologin={function(){
+    //               self.baktoLogin();
+    //             }} />
+    //           );
+    //         }
+    //       else 
+    //         {
+              
+    //           return(
+    //             <LoginView      
+    //               openregister={function(){
+    //                   self.openRegister();
+    //               }}
+
+    //               onlogin={function(data){
+    //                 self.login(data);
+    //               }}
+    //             />
+    //             );
+    //         }
+    //   }
+
+    // else //user is logged in
+    //   { 
+    //       if(movies==null) //movies not yet loaded
+    //       {
+    //         return(<div>loading</div>);
+    //       }
           
 
-          else if(movies!=null && selected==null) //movies loaded but user hasn't selected an individual movie
-            {
-              console.log(movies);
-                return(
-                 <div> 
-                        {<Header
-                          logout={function(){
-                            self.logout();
-                          }}
+    //       else if(movies!=null && selected==null) //movies loaded but user hasn't selected an individual movie
+    //         {
+    //           console.log(movies);
+    //             return(
+    //              <div> 
+    //                     {<Header
+    //                       logout={function(){
+    //                         self.logout();
+    //                       }}
                           
                         
-                        />}
-                        <div className='container'>
+    //                     />}
+    //                     <div className='container'>
                         
-                        <div className='row'>
+    //                     <div className='row'>
                         
-                          {movies.map(movie=>
-                            <MovieCard key={movie._id}
-                                      title={movie.title}
-                                      id={movie._id}  
-                                      movie={movie}
-                                      selected={movie=>this.selectedMovie(movie)}
-                            />
-                          )} 
-                        </div> 
-                        </div>  
-                  </div>    
-             )
-            }
-          else //user selected an individual movie
-            {
-              return (<MovieView
-              movie={this.state.selected}
-              back={goBack=>this.goBack()}
-            />);
-            }
+    //                       {movies.map(movie=>
+    //                         <MovieCard key={movie._id}
+    //                                   title={movie.title}
+    //                                   id={movie._id}  
+    //                                   movie={movie}
+    //                                   selected={movie=>this.selectedMovie(movie)}
+    //                         />
+    //                       )} 
+    //                     </div> 
+    //                     </div>  
+    //               </div>    
+    //          )
+    //         }
+    //       else //user selected an individual movie
+    //         {
+    //           return (<MovieView
+    //           movie={this.state.selected}
+    //           back={goBack=>this.goBack()}
+    //         />);
+    //         }
 
-      }
+    //   }
 
   } 
   
@@ -114,11 +146,11 @@ class MainView extends React.Component{
   componentDidMount(){
     
     let token = localStorage.getItem('token');
-    let username=localStorage.getItem('user');
+    let user=localStorage.getItem('user');
     
     if(token!=null)
       {
-        this.setState({user:username});
+        this.setState({user:user});
         this.getMovies(token);
       }
     
@@ -131,38 +163,41 @@ class MainView extends React.Component{
   }
 
   //go back to movies screen
-  goBack(){
-    this.setState({selected:null});
+  // goBack(){
+  //   this.setState({selected:null});
     
-  }
+  // }
 
   //open user register screen
-  openRegister(){
+  // openRegister(){
     
-    this.setState({openRegister:true})
-  }
+  //   this.setState({openRegister:true})
+  // }
 
  //open movies screen after successful login
-  login(data){
+  // login(data){
 
-    // this.setState({user:data.user}); //user logged in
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('user', data.user.username);
+  //   this.setState({user:data.user}); //user logged in
+  //   localStorage.setItem('token', data.token);
+  //   localStorage.setItem('user', data.user.username);
     
-    this.setState({user:data.user.username});
-    console.log(data.user.username);
-    this.getMovies(data.token);
+  //   this.setState({user:data.user.username});
+  //   console.log(data.user.username);
+  //   this.getMovies(data.token);
     
-  }
+  // }
+
+// this.getMovies(data.token);
 
 getMovies(token){
+  
   let self = this;
   axios.get('https://stavflix.herokuapp.com/movies', {
     headers: { Authorization: `Bearer ${token}`}
   })
   .then(function(response){
     self.setState({content:response.data});
-    
+    console.log(response.data + 'aaaa');
 
   })
   .catch(function (error) {
@@ -173,9 +208,9 @@ getMovies(token){
 }
 
   //go back to login page
-  baktoLogin=()=>{
-    this.setState({isLogged:null, openRegister:null})
-  }
+  // baktoLogin=()=>{
+  //   this.setState({isLogged:null, openRegister:null})
+  // }
 
   
 
@@ -184,8 +219,7 @@ getMovies(token){
     this.setState({user:null});
     
   }
-  
-  
+
 }
 
 

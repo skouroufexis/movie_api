@@ -4,12 +4,16 @@ import {Container, Row, Col, Form} from 'react-bootstrap';
 import './registration-view.scss';
 
 function RegistrationView(props) {
-    let backtologin=props.backtologin;
+    
 
     function register(){
         //capture credentials and add new user
 
-        backtologin();//redirect to login page
+        
+    }
+
+    function openlogin(){
+        window.location.replace("http://localhost:1234/ ");
     }
 
 
@@ -67,9 +71,7 @@ function RegistrationView(props) {
 
                 <Row>
                     
-                    <Col id='col_back'><button id='back' type='button' onClick={function(){
-                        backtologin();
-                    }}>back</button></Col>
+                    <Col id='col_back'><button id='back' type='button' onClick={openlogin}>back</button></Col>
                     
                 </Row>
 

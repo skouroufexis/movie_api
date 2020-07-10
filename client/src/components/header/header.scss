@@ -1,0 +1,12 @@
+.container {
+    margin-top: 1%; 
+        }
+.col {border: solid whitesmoke thin;}
+
+#menu {transform: translateY(-10px);
+opacity: 0;
+display: none;
+transition: opacity 0.3s,transform 0.3s;}
+.menu_item {margin-top: 0.5%; 
+            text-align: center!important;
+    }

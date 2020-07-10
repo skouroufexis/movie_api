@@ -28357,57 +28357,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/genre-view/genre-view.scss":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/genre-view/genre-view.jsx":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Genre = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-require("./genre-view.scss");
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-var Genre = function Genre() {
-  return _react.default.createElement("div", null, _react.default.createElement("div", {
-    className: "row header"
-  }, _react.default.createElement("div", {
-    className: "col col-12"
-  }, _react.default.createElement("h1", null, "Genre Name"))), _react.default.createElement("div", {
-    className: "row header"
-  }, _react.default.createElement("div", {
-    className: "col col-12"
-  }, _react.default.createElement("p", null, "Genre details"))), _react.default.createElement("div", {
-    className: "row header"
-  }, _react.default.createElement("div", {
-    className: "col col-12"
-  }, _react.default.createElement("h5", null, "Movies marked as Genretype"))), _react.default.createElement("div", {
-    className: "row header"
-  }, _react.default.createElement("div", {
-    className: "col col-6"
-  }, _react.default.createElement("img", null)), _react.default.createElement("div", {
-    className: "col col-6 title"
-  }, _react.default.createElement("h6", null, "Movie Title"))), _react.default.createElement("div", {
-    className: "row"
-  }, _react.default.createElement("div", {
-    className: "col-10 md-col-4"
-  }, _react.default.createElement("button", {
-    className: "col-md-4  col-10 "
-  }, "Back"))));
-};
-
-exports.Genre = Genre;
-},{"react":"../node_modules/react/index.js","./genre-view.scss":"components/genre-view/genre-view.scss"}],"../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -51804,19 +51754,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.LoginView = LoginView;
 
-var _axios = _interopRequireDefault(require("axios"));
-
 var _react = _interopRequireWildcard(require("react"));
+
+var _axios = _interopRequireDefault(require("axios"));
 
 var _reactBootstrap = require("react-bootstrap");
 
 require("./login-view.scss");
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -51831,7 +51781,6 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function LoginView(props) {
-  var openregister = props.openregister;
   var onlogin = props.onlogin;
 
   var _useState = (0, _react.useState)(''),
@@ -51851,8 +51800,10 @@ function LoginView(props) {
       password: password
     }).then(function (response) {
       var data = response.data;
-      console.log('user found');
-      onlogin(data); //response as paramenter of the 'onlogin' prop which will trigger the 'onlogin' function in MainView  
+      console.log('user found'); // onlogin(data);//response as paramenter of the 'onlogin' prop which will trigger the 'onlogin' function in MainView  
+
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', data.user.username);
     }).catch(function (e) {
       console.log(e);
     });
@@ -51863,6 +51814,10 @@ function LoginView(props) {
     var passwordInput = document.getElementById('password').value;
     setUsername(usernameInput);
     setPassword(passwordInput);
+  }
+
+  function openregister() {
+    window.location.replace("http://localhost:1234/register ");
   }
 
   return _react.default.createElement(_reactBootstrap.Form, {
@@ -51937,16 +51892,14 @@ function LoginView(props) {
     sm: "12"
   }, _react.default.createElement("button", {
     id: "signup",
-    onClick: function onClick() {
-      openregister();
-    },
-    type: "button"
+    type: "button",
+    onClick: openregister
   }, "signup")), _react.default.createElement(_reactBootstrap.Col, {
     md: "2",
     sm: "auto"
   }))));
 }
-},{"axios":"../node_modules/axios/index.js","react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./login-view.scss":"components/login-view/login-view.scss"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./login-view.scss":"components/login-view/login-view.scss"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -51970,11 +51923,11 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function RegistrationView(props) {
-  var backtologin = props.backtologin;
+  function register() {//capture credentials and add new user
+  }
 
-  function register() {
-    //capture credentials and add new user
-    backtologin(); //redirect to login page
+  function openlogin() {
+    window.location.replace("http://localhost:1234/ ");
   }
 
   return _react.default.createElement(_reactBootstrap.Form, null, _react.default.createElement(_reactBootstrap.Container, {
@@ -52084,9 +52037,7 @@ function RegistrationView(props) {
   }, _react.default.createElement("button", {
     id: "back",
     type: "button",
-    onClick: function onClick() {
-      backtologin();
-    }
+    onClick: openlogin
   }, "back")))));
 }
 },{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./registration-view.scss":"components/registration-view/registration-view.scss"}],"components/movie-card/movie-card.scss":[function(require,module,exports) {
@@ -71607,7 +71558,7 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.MovieCard = MovieCard;
-},{"react":"../node_modules/react/index.js","./movie-card.scss":"components/movie-card/movie-card.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../../../../public/images/5ea9f0f2d5fcc5119a040af1.jpg":"../../public/images/5ea9f0f2d5fcc5119a040af1.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af2.jpg":"../../public/images/5ea9f19cd5fcc5119a040af2.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af3.jpg":"../../public/images/5ea9f19cd5fcc5119a040af3.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af4.jpg":"../../public/images/5ea9f19cd5fcc5119a040af4.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af5.jpg":"../../public/images/5ea9f19cd5fcc5119a040af5.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af6.jpg":"../../public/images/5ea9f19cd5fcc5119a040af6.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af7.jpg":"../../public/images/5ea9f19cd5fcc5119a040af7.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af8.jpg":"../../public/images/5ea9f19cd5fcc5119a040af8.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af9.jpeg":"../../public/images/5ea9f19cd5fcc5119a040af9.jpeg","../../../../public/images/5ea9f19cd5fcc5119a040afa.jpg":"../../public/images/5ea9f19cd5fcc5119a040afa.jpg","express-validator/src/select-fields":"../../node_modules/express-validator/src/select-fields.js"}],"components/header/header.css":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./movie-card.scss":"components/movie-card/movie-card.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../../../../public/images/5ea9f0f2d5fcc5119a040af1.jpg":"../../public/images/5ea9f0f2d5fcc5119a040af1.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af2.jpg":"../../public/images/5ea9f19cd5fcc5119a040af2.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af3.jpg":"../../public/images/5ea9f19cd5fcc5119a040af3.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af4.jpg":"../../public/images/5ea9f19cd5fcc5119a040af4.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af5.jpg":"../../public/images/5ea9f19cd5fcc5119a040af5.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af6.jpg":"../../public/images/5ea9f19cd5fcc5119a040af6.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af7.jpg":"../../public/images/5ea9f19cd5fcc5119a040af7.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af8.jpg":"../../public/images/5ea9f19cd5fcc5119a040af8.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af9.jpeg":"../../public/images/5ea9f19cd5fcc5119a040af9.jpeg","../../../../public/images/5ea9f19cd5fcc5119a040afa.jpg":"../../public/images/5ea9f19cd5fcc5119a040afa.jpg","express-validator/src/select-fields":"../../node_modules/express-validator/src/select-fields.js"}],"components/header/header.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -71622,7 +71573,7 @@ exports.Header = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-require("./header.css");
+require("./header.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -71646,13 +71597,23 @@ var Header = function Header(props) {
     className: "row",
     id: "menu"
   }, _react.default.createElement("div", {
-    className: "col col-11 menu_item button"
+    className: "col col-11 menu_item button",
+    onClick: openProfile
   }, "My account"), _react.default.createElement("div", {
-    className: "col col-11 menu_item button"
+    className: "col col-11 menu_item button",
+    onClick: mainMenu
   }, "Main"), _react.default.createElement("div", {
     className: "col col-11 menu_item button",
     onClick: logout
   }, "logout")));
+
+  function mainMenu() {
+    window.location.replace("http://localhost:1234/");
+  }
+
+  function openProfile() {
+    window.location.replace("http://localhost:1234/profile");
+  }
 
   function toggleMenu() {
     var state = document.getElementById('menu');
@@ -71676,7 +71637,7 @@ var Header = function Header(props) {
 };
 
 exports.Header = Header;
-},{"react":"../node_modules/react/index.js","./header.css":"components/header/header.css"}],"components/profile-vew/profile-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./header.scss":"components/header/header.scss"}],"components/profile-vew/profile-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -71691,16 +71652,15 @@ exports.Profile = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _header = require("../header/header");
-
 require("./profile-view.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import {Header} from '../header/header';
 var Profile = function Profile(props) {
   // const [ username, setUsername ] = useState('');
   // const [ password, setPassword ] = useState('');
-  return _react.default.createElement("div", null, (0, _header.Header)(), _react.default.createElement("div", {
+  return _react.default.createElement("div", null, Header(), _react.default.createElement("div", {
     className: "row main"
   }, _react.default.createElement("div", {
     className: "col-10 menu_option   button"
@@ -71722,7 +71682,7 @@ var Profile = function Profile(props) {
 };
 
 exports.Profile = Profile;
-},{"react":"../node_modules/react/index.js","../header/header":"components/header/header.jsx","./profile-view.scss":"components/profile-vew/profile-view.scss"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./profile-view.scss":"components/profile-vew/profile-view.scss"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -71788,13 +71748,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this);
 
-    _this.baktoLogin = function () {
-      _this.setState({
-        isLogged: null,
-        openRegister: null
-      });
-    };
-
     _this.logout = function () {
       localStorage.clear();
 
@@ -71815,10 +71768,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
   _createClass(MainView, [{
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var user = this.state.user; // let openregister=this.state.openRegister;
 
-      var user = this.state.user;
-      var openregister = this.state.openRegister;
       var movies = this.state.content;
       var selected = this.state.selected;
       var back = this.state.back;
@@ -71826,70 +71777,105 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 
       if (user == null) //user not logged in
         {
-          if (openregister == true) //user clicks 'Register' button
-            {
-              return _react.default.createElement(_registration.RegistrationView, {
-                backtologin: function backtologin() {
-                  self.baktoLogin();
-                }
-              });
-            } else {
-            return _react.default.createElement(_loginView.LoginView, {
-              openregister: function openregister() {
-                self.openRegister();
-              },
-              onlogin: function onlogin(data) {
-                self.login(data);
-              }
-            });
-          }
-        } else //user is logged in
+          return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", null, _react.default.createElement(_reactRouterDom.Route, {
+            exact: true,
+            path: "/",
+            component: _loginView.LoginView
+          }), _react.default.createElement(_reactRouterDom.Route, {
+            exact: true,
+            path: "/register",
+            component: _registration.RegistrationView
+          })));
+        } else //user logged in
         {
-          if (movies == null) //movies not yet loaded
-            {
-              return _react.default.createElement("div", null, "loading");
-            } else if (movies != null && selected == null) //movies loaded but user hasn't selected an individual movie
-            {
-              console.log(movies);
-              return _react.default.createElement("div", null, _react.default.createElement(_header.Header, {
-                logout: function logout() {
-                  self.logout();
-                }
-              }), _react.default.createElement("div", {
-                className: "container"
-              }, _react.default.createElement("div", {
-                className: "row"
-              }, movies.map(function (movie) {
-                return _react.default.createElement(_movieCard.MovieCard, {
-                  key: movie._id,
-                  title: movie.title,
-                  id: movie._id,
-                  movie: movie,
-                  selected: function selected(movie) {
-                    return _this2.selectedMovie(movie);
-                  }
-                });
-              }))));
-            } else //user selected an individual movie
-            {
-              return _react.default.createElement(_movieView.MovieView, {
-                movie: this.state.selected,
-                back: function back(goBack) {
-                  return _this2.goBack();
-                }
-              });
-            }
-        }
+          var token = localStorage.getItem('token');
+
+          var _user = localStorage.getItem('user');
+
+          this.getMovies(token);
+          console.log(this.state.content);
+          return 'a'; // return(
+          //   <Router>
+          //         <div>
+          //           <Route exact path='/' component={this.state.content[0].title}/>
+          //           <Route exact path='/register' component={RegistrationView} />
+          //         </div>
+          //   </Router>
+          // )
+        } // if(user==null) //user not logged in
+      //   {    
+      //       if(openregister==true) //user clicks 'Register' button
+      //         {
+      //           return(
+      //             <RegistrationView backtologin={function(){
+      //               self.baktoLogin();
+      //             }} />
+      //           );
+      //         }
+      //       else 
+      //         {
+      //           return(
+      //             <LoginView      
+      //               openregister={function(){
+      //                   self.openRegister();
+      //               }}
+      //               onlogin={function(data){
+      //                 self.login(data);
+      //               }}
+      //             />
+      //             );
+      //         }
+      //   }
+      // else //user is logged in
+      //   { 
+      //       if(movies==null) //movies not yet loaded
+      //       {
+      //         return(<div>loading</div>);
+      //       }
+      //       else if(movies!=null && selected==null) //movies loaded but user hasn't selected an individual movie
+      //         {
+      //           console.log(movies);
+      //             return(
+      //              <div> 
+      //                     {<Header
+      //                       logout={function(){
+      //                         self.logout();
+      //                       }}
+      //                     />}
+      //                     <div className='container'>
+      //                     <div className='row'>
+      //                       {movies.map(movie=>
+      //                         <MovieCard key={movie._id}
+      //                                   title={movie.title}
+      //                                   id={movie._id}  
+      //                                   movie={movie}
+      //                                   selected={movie=>this.selectedMovie(movie)}
+      //                         />
+      //                       )} 
+      //                     </div> 
+      //                     </div>  
+      //               </div>    
+      //          )
+      //         }
+      //       else //user selected an individual movie
+      //         {
+      //           return (<MovieView
+      //           movie={this.state.selected}
+      //           back={goBack=>this.goBack()}
+      //         />);
+      //         }
+      //   }
+
     }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var token = localStorage.getItem('token');
-      var username = localStorage.getItem('user');
+      var user = localStorage.getItem('user');
 
       if (token != null) {
         this.setState({
-          user: username
+          user: user
         });
         this.getMovies(token);
       }
@@ -71901,35 +71887,24 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         selected: movie
       });
     } //go back to movies screen
+    // goBack(){
+    //   this.setState({selected:null});
+    // }
+    //open user register screen
+    // openRegister(){
+    //   this.setState({openRegister:true})
+    // }
+    //open movies screen after successful login
+    // login(data){
+    //   this.setState({user:data.user}); //user logged in
+    //   localStorage.setItem('token', data.token);
+    //   localStorage.setItem('user', data.user.username);
+    //   this.setState({user:data.user.username});
+    //   console.log(data.user.username);
+    //   this.getMovies(data.token);
+    // }
+    // this.getMovies(data.token);
 
-  }, {
-    key: "goBack",
-    value: function goBack() {
-      this.setState({
-        selected: null
-      });
-    } //open user register screen
-
-  }, {
-    key: "openRegister",
-    value: function openRegister() {
-      this.setState({
-        openRegister: true
-      });
-    } //open movies screen after successful login
-
-  }, {
-    key: "login",
-    value: function login(data) {
-      // this.setState({user:data.user}); //user logged in
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', data.user.username);
-      this.setState({
-        user: data.user.username
-      });
-      console.log(data.user.username);
-      this.getMovies(data.token);
-    }
   }, {
     key: "getMovies",
     value: function getMovies(token) {
@@ -71943,10 +71918,14 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         self.setState({
           content: response.data
         });
+        console.log(response.data + 'aaaa');
       }).catch(function (error) {
         console.log(error);
       });
     } //go back to login page
+    // baktoLogin=()=>{
+    //   this.setState({isLogged:null, openRegister:null})
+    // }
 
   }]);
 
@@ -73633,13 +73612,7 @@ var _reactDom = _interopRequireDefault(require("react-dom"));
 
 require("./index.scss");
 
-var _genreView = require("./components/genre-view/genre-view.jsx");
-
 var _mainView = require("./components/main-view/main-view");
-
-var _movieCard = require("./components/movie-card/movie-card");
-
-var _movieView = require("./components/movie-view/movie-view");
 
 var _morgan = require("morgan");
 
@@ -73647,8 +73620,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var container = document.getElementById('root');
 
-_reactDom.default.render(_react.default.createElement(_mainView.MainView, null), container);
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./index.scss":"index.scss","./components/genre-view/genre-view.jsx":"components/genre-view/genre-view.jsx","./components/main-view/main-view":"components/main-view/main-view.jsx","./components/movie-card/movie-card":"components/movie-card/movie-card.jsx","./components/movie-view/movie-view":"components/movie-view/movie-view.jsx","morgan":"../../node_modules/morgan/index.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+_reactDom.default.render(_react.default.createElement(_mainView.MainView, null), container); // localStorage.clear();
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./index.scss":"index.scss","./components/main-view/main-view":"components/main-view/main-view.jsx","morgan":"../../node_modules/morgan/index.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -73676,7 +73649,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49302" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52485" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

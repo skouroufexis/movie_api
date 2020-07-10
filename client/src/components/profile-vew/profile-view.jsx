@@ -1,5 +1,5 @@
 import React from 'react';
-import {Header} from '../header/header';
+// import {Header} from '../header/header';
 import './profile-view.scss';
 
 var Profile = function(props){
@@ -20,19 +20,9 @@ var Profile = function(props){
                     <i class="fas fa-info col-12 icon"></i> 
                     <div className='col-12 icon_text'>Account information</div>
                 </div>
-
                 <div className='col-10 div_button'> <button className='col-md-4  col-10 '>Back</button> </div>
-
-
             </div>
-            
-        
-
-
         </div>
-         
-    
-
     )
 
 }
