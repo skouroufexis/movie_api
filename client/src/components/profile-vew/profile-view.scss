@@ -1,0 +1,31 @@
+
+.main { height: 80vh; 
+        position: relative;
+        width: 90%; margin-left: 5%;
+        
+        margin-top: 2%;
+        }
+
+.menu_option {
+              margin-top: 1%;
+              position: relative;  
+              border: none;
+              height: auto;
+              border: solid whitesmoke thin;        
+                }
+                
+.icon {font-size: 4em;color:lightseagreen;}
+.icon_text {font-size: 1.5em; text-align: center; color: rgba(0,0,0,0.8);}
+.icon, .icon_text {height: 100px;
+                    display: flex; flex-direction: column; justify-content: center;}
+
+.div_button {   
+                margin-top: 3%;
+                }
+button {border:none;
+        background-color: blue;
+        color: whitesmoke;   
+        
+        }
+
+

@@ -15,40 +15,17 @@ function LoginView(props) {
 
     function login(){
         
-        // var signin = new XMLHttpRequest();
-        
-        // var data = JSON.stringify({"username":username,"password":password});
-        
-        // signin.onreadystatechange = function() {
-        // if (this.readyState == 4 && this.status == 200) {
-        //       var ans = this.responseText;  
-
-        //      ans=JSON.parse(ans);
-        //      document.write(ans.user.username);
-
-        //      }
-        //    };
-
-        //    signin.open('POST', `https://stavflix.herokuapp.com/login`,true)
-        //    signin.setRequestHeader("Content-type", "application/json");
-        //    signin.send(data);
-
-
-
         //sent post request with credentials
         axios.post('https://stavflix.herokuapp.com/login', 
              {username:username,password:password})
            .then(function(response){
                  const data = response.data;
-                 
+                 console.log('user found');
             onlogin(data);//response as paramenter of the 'onlogin' prop which will trigger the 'onlogin' function in MainView  
-                }
-              )
+            })
            .catch(e => {
-            console.log('no such user')
-           });
-
-        
+            console.log(e)
+           });        
     }
 
     function captureCredentials(){

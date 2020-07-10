@@ -48,7 +48,7 @@ class MovieView extends React.Component{
         
         <Container className='movieViewContainer'>
 
-
+          
 
           <Row>
               <Col md="6" className="bigPoster section">
