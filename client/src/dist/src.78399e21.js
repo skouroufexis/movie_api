@@ -71793,15 +71793,15 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           var _user = localStorage.getItem('user');
 
           this.getMovies(token);
-          console.log(this.state.content);
-          return 'a'; // return(
-          //   <Router>
-          //         <div>
-          //           <Route exact path='/' component={this.state.content[0].title}/>
-          //           <Route exact path='/register' component={RegistrationView} />
-          //         </div>
-          //   </Router>
-          // )
+
+          if (movies == null) {
+            return 'loading';
+          } else {
+            return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", null, _react.default.createElement(_reactRouterDom.Route, {
+              exact: true,
+              path: "/"
+            }, "aaaaa")));
+          }
         } // if(user==null) //user not logged in
       //   {    
       //       if(openregister==true) //user clicks 'Register' button
@@ -71918,7 +71918,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         self.setState({
           content: response.data
         });
-        console.log(response.data + 'aaaa');
       }).catch(function (error) {
         console.log(error);
       });

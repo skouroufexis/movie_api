@@ -53,16 +53,25 @@ class MainView extends React.Component{
         let token= localStorage.getItem('token');
         let user=localStorage.getItem('user') 
         this.getMovies(token);
-        console.log(this.state.content);
-        return('a');
-        // return(
-        //   <Router>
-        //         <div>
-        //           <Route exact path='/' component={this.state.content[0].title}/>
-        //           <Route exact path='/register' component={RegistrationView} />
-        //         </div>
-        //   </Router>
-        // )
+
+        if(movies==null)
+          {
+            return('loading')
+          }
+        else
+          {
+            return(
+              <Router>
+                    <div>
+                      <Route exact path='/'>aaaaa</Route>
+                      
+                    </div>
+              </Router>
+            )
+          }
+        
+        
+        
       }
 
     // if(user==null) //user not logged in
@@ -197,7 +206,7 @@ getMovies(token){
   })
   .then(function(response){
     self.setState({content:response.data});
-    console.log(response.data + 'aaaa');
+    
 
   })
   .catch(function (error) {
