@@ -3,7 +3,7 @@ import './header.scss';
 
 var Header = function(props){
 
-    let logout=props.logout;
+    
 
     let user=localStorage.getItem('user');
     user = user.charAt(0);
@@ -20,7 +20,7 @@ var Header = function(props){
                 </div>
 
                 <div className='col col-1'>
-                    <i class="fas fa-user button" onClick={toggleMenu}></i> {user}
+                    <i className="fas fa-user button" onClick={toggleMenu}></i> {user}
                 </div>
 
             </div>
@@ -42,7 +42,12 @@ var Header = function(props){
     }    
 
     function openProfile(){
-        window.location.replace("http://localhost:1234/profile");
+        window.location.replace("http://localhost:1234/user/profile");
+    }
+
+    function logout(){
+        localStorage.clear();
+        window.location.replace("http://localhost:1234/");
     }
     function toggleMenu(){
         var state = document.getElementById('menu');

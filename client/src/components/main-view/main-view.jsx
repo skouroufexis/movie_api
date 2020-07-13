@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import { BrowserRouter as Router, Route} from "react-router-dom";
-
+import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {Header} from '../header/header';
 
 
 import './main-view.scss';
@@ -12,159 +12,139 @@ import {LoginView} from '../login-view/login-view';
 import {RegistrationView} from '../registration-view/registration.view';
 import {MovieCard, BtnMovieCard} from '../movie-card/movie-card';
 import {MovieView} from '../movie-view/movie-view';
-import {Header} from '../header/header';
+
 import {Profile} from '../profile-vew/profile-view';
+import {Account} from '../profile-vew/account_info';
+import {Mymovies} from '../profile-vew/mymovies';
+import {Notfound} from '../errors/notfound';
+
+let test=[1,2,3,4]
 
 class MainView extends React.Component{
+  
   constructor(){
     super();
     this.state ={content:null,
                  selected:null,
                  user:null,
-                 openRegister:null};
+                 openRegister:null
+                }
   }
 
-  render(){
     
-    let user = this.state.user;
-    // let openregister=this.state.openRegister;
+
+  render(){
+    let token = localStorage.getItem('token');
+    let user=localStorage.getItem('user');
     let movies = this.state.content;
-    let selected=this.state.selected;
-    let back = this.state.back;
+
     let self=this;
 
-
-    if(user==null) //user not logged in
-      {
-        return(
+    if(!token) //user not logged in
+    {
+       return(
           <Router>
-                <div>
-                  <Route exact path='/' component={LoginView }/>
-                  <Route exact path='/register' component={RegistrationView} />
-                </div>
+            
+            <div>
+              <Switch>
+              <Route exact path='/' component={LoginView} />
+              <Route exact path='/register' component={RegistrationView} />
+              <Route path='/' component={Notfound} /> 
+              </Switch>
+            </div>
           </Router>
-        )
-      }
+       ) 
+    }
 
     else //user logged in
+    
+    {
+      if(this.state.content==null)
+      {
+        this.getMovies(token);
+        
+        return(
+            <div>
+            
+            <Header />
+            
+            <Router>
+              <div>
+              <Route exact path='/' render={function(){
+                
+                return <div>loading</div>;
+              }} />
+                
+              </div>
+            </Router>
+            </div>
+        )
+      }
+      else
       {
 
-
-        let token= localStorage.getItem('token');
-        let user=localStorage.getItem('user') 
-        this.getMovies(token);
-
-        if(movies==null)
-          {
-            return('loading')
-          }
-        else
-          {
-            return(
-              <Router>
-                    <div>
-                      <Route exact path='/'>aaaaa</Route>
-                      
-                    </div>
-              </Router>
-            )
-          }
-        
-        
-        
-      }
-
-    // if(user==null) //user not logged in
-    //   {    
-
-    //       if(openregister==true) //user clicks 'Register' button
-    //         {
-    //           return(
-    //             <RegistrationView backtologin={function(){
-    //               self.baktoLogin();
-    //             }} />
-    //           );
-    //         }
-    //       else 
-    //         {
-              
-    //           return(
-    //             <LoginView      
-    //               openregister={function(){
-    //                   self.openRegister();
-    //               }}
-
-    //               onlogin={function(data){
-    //                 self.login(data);
-    //               }}
-    //             />
-    //             );
-    //         }
-    //   }
-
-    // else //user is logged in
-    //   { 
-    //       if(movies==null) //movies not yet loaded
-    //       {
-    //         return(<div>loading</div>);
-    //       }
+        return (
+          <div>
           
-
-    //       else if(movies!=null && selected==null) //movies loaded but user hasn't selected an individual movie
-    //         {
-    //           console.log(movies);
-    //             return(
-    //              <div> 
-    //                     {<Header
-    //                       logout={function(){
-    //                         self.logout();
-    //                       }}
-                          
-                        
-    //                     />}
-    //                     <div className='container'>
-                        
-    //                     <div className='row'>
-                        
-    //                       {movies.map(movie=>
-    //                         <MovieCard key={movie._id}
-    //                                   title={movie.title}
-    //                                   id={movie._id}  
-    //                                   movie={movie}
-    //                                   selected={movie=>this.selectedMovie(movie)}
-    //                         />
-    //                       )} 
-    //                     </div> 
-    //                     </div>  
-    //               </div>    
-    //          )
-    //         }
-    //       else //user selected an individual movie
-    //         {
-    //           return (<MovieView
-    //           movie={this.state.selected}
-    //           back={goBack=>this.goBack()}
-    //         />);
-    //         }
-
-    //   }
+          <Header />
+          
+          <Router>
+            <div>
+            <Route exact path='/' render={function(){
+              
+              let x = movies.map(function(movie){
+                return (
+                  
+                  <MovieCard key={movie._id}
+                  title={movie.title}
+                  id={movie._id}  
+                  movie={movie}
+                  
+                />
+                );
+              })
+              return (
+                  <div className='container'>
+                  <div className='row'>
+                  {x}
+                  </div>
+                  </div>
+              ) 
+              
+            }} />
+              <Route exact path='/movies/:id' component={MovieView} />
+              <Route exact path='/user/profile' component={Profile} />
+              <Route exact path='/user/account' component={Account} />
+              <Route exact path='/user/movies' component={Mymovies} />
+              
+            </div>
+          </Router>
+          </div>
+        )
+      }
+      
+    }
 
   } 
   
   
-  componentDidMount(){
+  // componentDidMount(){
     
-    let token = localStorage.getItem('token');
-    let user=localStorage.getItem('user');
+
     
-    if(token!=null)
-      {
-        this.setState({user:user});
-        this.getMovies(token);
-      }
+  //   let token = localStorage.getItem('token');
+  //   let user=localStorage.getItem('user');
+    
+
+  //   if(token!=null)
+  //     {
+  //       this.getMovies(token);
+  //       console.log(movies + 'didmount');
+
+  //     }
     
     
-  }
+  // }
 
 
   selectedMovie(movie){
@@ -196,23 +176,34 @@ class MainView extends React.Component{
     
   // }
 
-// this.getMovies(data.token);
+
+
+
 
 getMovies(token){
+
   
   let self = this;
   axios.get('https://stavflix.herokuapp.com/movies', {
     headers: { Authorization: `Bearer ${token}`}
   })
   .then(function(response){
+    console.log(response.data + ' getMovies');
     self.setState({content:response.data});
     
-
+    
   })
   .catch(function (error) {
     console.log(error);
     
+  
   });
+
+  
+  
+}
+
+mountMovies(movies){
   
 }
 
@@ -222,7 +213,11 @@ getMovies(token){
   // }
 
   
+  loggedIn=(user)=>{
+    this.setState({user:user});
+  }
 
+  
   logout=()=>{
     localStorage.clear();
     this.setState({user:null});

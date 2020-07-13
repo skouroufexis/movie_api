@@ -230,6 +230,25 @@ app.put('/users/:id',passport.authenticate('jwt', {session: false}),
 
        
 })
+
+
+
+//retrieve user information
+app.get('/users/:id',passport.authenticate('jwt', {session: false}),
+
+    function(request,response){
+            var id = request.params.id;
+            users.find({_id:id}).then(function(data){
+                response.send(data);
+            }).catch(function(data){
+            response.send(data);
+            })
+
+})
+
+
+
+
 //add movie to user's favourites
 app.post('/users/:id/favourites/:movieID',passport.authenticate('jwt', {session: false}), function(request,response){
     var id = request.params.id;

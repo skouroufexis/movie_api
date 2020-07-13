@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import axios from 'axios';
-
+import {Header} from '../header/header';
 
 import {Container, Row, Col,Form} from 'react-bootstrap';
 
@@ -9,7 +9,7 @@ import './login-view.scss';
 function LoginView(props) {
 
      
-    let onlogin = props.onlogin;
+    // let onlogin = props.onlogin;
 
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
@@ -26,16 +26,20 @@ function LoginView(props) {
 
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', data.user.username);
+            localStorage.setItem('user_id', data.user._id);
+
+            window.location.replace("http://localhost:1234/ ");
             
             })
            .catch(e => {
-            console.log(e)
+            console.log(e);
+            alert('invalid credentials');
            });        
     }
 
     function captureCredentials(){
-        var usernameInput=document.getElementById('username').value;
-        var passwordInput=document.getElementById('password').value;
+        var usernameInput=document.getElementById('login_username').value;
+        var passwordInput=document.getElementById('login_password').value;
         
         setUsername(usernameInput);
         setPassword(passwordInput);
@@ -47,44 +51,48 @@ function LoginView(props) {
     }
 
     return(
-            <Form id='form' >
-            <Container id='container'>
-                <Row>
+                
+                
+                <Form id='login_form' >
                     
-                    <Col className='header' md='12'><h1>User Login</h1></Col>
+                <Container id='login_container'>
+                    <Row>
+                        
+                        <Col className='login_header' md='12'><h1>User Login</h1></Col>
 
-                    <Col md='2' sm='auto'></Col>
-                    <Col md='8' sm='12'><p>Username</p></Col>
-                    <Col md='2' sm='auto'></Col>
+                        <Col md='2' sm='auto'></Col>
+                        <Col md='8' sm='12'><p>Username</p></Col>
+                        <Col md='2' sm='auto'></Col>
 
-                    <Col md='2' sm='auto'></Col>
-                    <Col md='8' sm='12'><input id='username' onChange={captureCredentials} type='text'></input> </Col>
-                    <Col md='2' sm='auto'></Col>
-                </Row>
+                        <Col md='2' sm='auto'></Col>
+                        <Col md='8' sm='12'><input id='login_username' onChange={captureCredentials} type='text'></input> </Col>
+                        <Col md='2' sm='auto'></Col>
+                    </Row>
 
-                <Row>
-                    <Col md='2' sm='auto'></Col>
-                    <Col md='8' sm='12'><p>Password</p></Col>
-                    <Col md='2' sm='auto'></Col>
-                    
-                    <Col md='2' sm='auto'></Col>
-                    <Col md='8' sm='12'><input id='password' onChange={captureCredentials} type='text'></input> </Col>
-                    <Col md='2' sm='auto'></Col>
-                </Row>
+                    <Row>
+                        <Col md='2' sm='auto'></Col>
+                        <Col md='8' sm='12'><p>Password</p></Col>
+                        <Col md='2' sm='auto'></Col>
+                        
+                        <Col md='2' sm='auto'></Col>
+                        <Col md='8' sm='12'><input id='login_password' onChange={captureCredentials} type='text'></input> </Col>
+                        <Col md='2' sm='auto'></Col>
+                    </Row>
 
-                <Row>
-                    <Col md='2' sm='auto'></Col>
-                    <Col md='8' sm='12'><button id='login' type='button' onClick={login} >login</button></Col>
-                    <Col md='2' sm='auto'></Col>
-                </Row>
+                    <Row>
+                        <Col md='2' sm='auto'></Col>
+                        <Col md='8' sm='12'><button id='login_button' type='button' onClick={login} >login</button></Col>
+                        <Col md='2' sm='auto'></Col>
+                    </Row>
 
-                <Row>
-                    <Col md='2' sm='auto'></Col>
-                    <Col md='8' sm='12'><button id='signup' type='button' onClick={openregister}>signup</button></Col>
-                    <Col md='2' sm='auto'></Col>
-                </Row>
-            </Container>
-            </Form>
+                    <Row>
+                        <Col md='2' sm='auto'></Col>
+                        <Col md='8' sm='12'><button id='login_signup_button' type='button' onClick={openregister}>signup</button></Col>
+                        <Col md='2' sm='auto'></Col>
+                    </Row>
+                </Container>
+                </Form> 
+            
 
     )
     

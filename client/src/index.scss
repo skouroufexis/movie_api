@@ -1,13 +1,10 @@
+
 .row {text-align: center;justify-content: center;margin-top: 1%; }
-.col-4 {border: solid whitesmoke thin;
-      margin-top: 1%;
-      justify-content: center;
-      
-      }
-
-.col-12, col {text-align: center;}
-
-
-
 
 button, .button {cursor: pointer;}
+
+.btn_secondary1 {background-color: lightseagreen; color: white;}
+.btn_secondary2 {background-color: white; color: lightseagreen;
+                 border: solid lightseagreen thin;
+                }
+

@@ -23,20 +23,20 @@ var posters=[poster1,poster2,poster3,poster4,poster5,poster6,poster7,poster8,pos
 class MovieView extends React.Component{
   constructor(){
     super();
-    this.state={};
+    
   }
 
   render(){
 
-    const movie= this.props;
-    let goback=this.props.back;
-      console.log(goback);
-      let id=movie.movie._id;
+    let movie=localStorage.getItem('selected');
+    movie=JSON.parse(movie);
+    let id=movie._id;
+
       function findPoster(poster){
         return poster.includes(id);
       }
   
-      var poster= posters.find(findPoster);
+    var poster= posters.find(findPoster);
    
     
       
@@ -57,18 +57,18 @@ class MovieView extends React.Component{
 
               <Col md='6' sm='12'className='section'>
                 <Row>
-                  <Col md='12'><h1>{movie.movie.title}</h1></Col>
-                  <Col md='12'><p className='synopsis'>{movie.movie.description}</p></Col>
+                  <Col md='12'><h1>{movie.title}</h1></Col>
+                  <Col md='12'><p className='synopsis'>{movie.description}</p></Col>
 
                   {/* other info */}
                   <Col md='3' className='otherInfo'><h6>Director</h6></Col>
-                  <Col md='9' className='otherInfo'><p>{movie.movie.director.name}</p></Col>
+                  <Col md='9' className='otherInfo'><p>{movie.director.name}</p></Col>
 
                   <Col md='3' className='otherInfo'><h6>Genre</h6></Col>
-                  <Col md='9' className='otherInfo'><p>{movie.movie.genre.name}</p></Col>
+                  <Col md='9' className='otherInfo'><p>{movie.genre.name}</p></Col>
 
                   <Col md='3' className='otherInfo'><h6>Featured</h6></Col>
-                  <Col md='9' className='otherInfo'><p>{String(movie.movie.featured)}</p></Col>
+                  <Col md='9' className='otherInfo'><p>{String(movie.featured)}</p></Col>
                   
                 </Row>
                     
@@ -77,7 +77,7 @@ class MovieView extends React.Component{
 
               <Col>
               <div className='col-12 buttonCol'>
-              <button onClick={()=>goback()}>Back</button>
+              <button onClick={this.goback}>Back</button>
               </div>
             </Col>
               
@@ -98,7 +98,9 @@ class MovieView extends React.Component{
 
   }
 
-
+  goback(){
+    window.location.replace('http://localhost:1234/');
+  }
 
 }
 

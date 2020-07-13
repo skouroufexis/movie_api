@@ -1,7 +1,7 @@
-.row {width: 100%;
+.director_row {width: 100%;
      border: solid black thin;
     }
-.col, .col-12 {border: solid red thin;text-align: left;}
+.director_col {border: solid red thin;text-align: left;}
 
 
 
@@ -13,8 +13,11 @@
 img {width: 90%; height: 150px;}
 
 
-.title {display: flex;
+.director_title {display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         }
+
+
+.director_button{border: none;}        

@@ -4,37 +4,57 @@
   margin-top: 1%;
 }
 
-.col-4 {
-  border: solid whitesmoke thin;
-  margin-top: 1%;
-  justify-content: center;
-}
-
-.col-12, col {
-  text-align: center;
-}
-
 button, .button {
   cursor: pointer;
 }
-#form {
+
+.btn_secondary1 {
+  background-color: lightseagreen;
+  color: white;
+}
+
+.btn_secondary2 {
+  background-color: white;
+  color: lightseagreen;
+  border: solid lightseagreen thin;
+}
+.container {
+  margin-top: 1%;
+}
+
+.col {
+  border: solid whitesmoke thin;
+}
+
+#menu {
+  transform: translateY(-10px);
+  opacity: 0;
+  display: none;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.menu_item {
+  margin-top: 0.5%;
+  text-align: center;
+}
+#login_form {
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-#container {
+#login_container {
   border: solid whitesmoke thin;
   padding-top: 2%;
   padding-bottom: 2%;
 }
 
-.header {
+.login_header {
   margin-bottom: 5%;
 }
 
-#login {
+#login_button {
   background-color: blue;
   color: whitesmoke;
   margin-top: 2%;
@@ -49,7 +69,7 @@ button {
   height: 40px;
 }
 
-#signup {
+#login_signup_button {
   background-color: lightseagreen;
   color: whitesmoke;
   margin-top: 2%;
@@ -151,25 +171,6 @@ button {
   margin-top: 1%;
   margin-bottom: 1%;
 }
-.container {
-  margin-top: 1%;
-}
-
-.col {
-  border: solid whitesmoke thin;
-}
-
-#menu {
-  transform: translateY(-10px);
-  opacity: 0;
-  display: none;
-  transition: opacity 0.3s, transform 0.3s;
-}
-
-.menu_item {
-  margin-top: 0.5%;
-  text-align: center !important;
-}
 .main {
   height: 80vh;
   position: relative;
@@ -211,6 +212,45 @@ button {
   border: none;
   background-color: blue;
   color: whitesmoke;
+}
+.button_edit {
+  background-color: white;
+  color: lightseagreen;
+}
+
+#button_cancel {
+  background-color: white;
+  border: solid lightseagreen thin;
+  color: lightseagreen;
+  display: none;
+}
+
+#button_update {
+  background-color: lightseagreen;
+  margin-left: 1%;
+  display: none;
+}
+
+.button_back {
+  margin-top: 2%;
+}
+.container {
+  margin-left: auto;
+}
+
+.col {
+  border: none;
+}
+
+.row {
+  border: solid whitesmoke thin;
+}
+.notfoundmain {
+  height: 100vh;
+}
+
+.notfoundrow {
+  margin-top: 5%;
 }
 
 /*# sourceMappingURL=/src.78399e21.css.map */

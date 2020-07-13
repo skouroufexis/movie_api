@@ -29,32 +29,44 @@ class MovieCard extends React.Component{
   constructor(){
     super();
     
+    
   }
-
+  
   render (){
       
-      let movie=this.props.movie;
-      let selected=this.props.selected;
       
-
-      let id = this.props.id;
+    
+    
+      let movie=this.props.movie;
+      
       function findPoster(poster){
-        return poster.includes(id);
+        return poster.includes(movie._id);
       }
   
       let poster= posters.find(findPoster);
 
         return (
-
+          
           <Col lg='4' md='6' sm='12' className='card'>
             
             {<img className='previewImg' src={poster} />}<br></br>
             <h5>{this.props.title}</h5><br></br>
-            <button className="button_card" onClick={()=>selected(movie)} >open</button>
+            <button className="button_card" onClick={()=>this.movieSelect(movie)} >open</button>
           </Col>
         );
+
+       
   }
 
+  
+
+
+movieSelect(movie){
+  let movie_path= 'http://localhost:1234/movies/'+ movie._id;
+  
+  localStorage.setItem('selected',JSON.stringify(movie));
+  window.location.replace(movie_path);
+}
   
 
 }

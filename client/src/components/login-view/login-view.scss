@@ -1,14 +1,14 @@
-#form{    height: 100vh;
+#login_form{    height: 100vh;
         display: flex; flex-direction: column; justify-content: center;
 }
-#container {border: solid whitesmoke thin; 
+#login_container {border: solid whitesmoke thin; 
                 
             padding-top: 2%;padding-bottom: 2%;
             }
 
-.header {margin-bottom: 5%;}
+.login_header {margin-bottom: 5%;}
 
-#login {background-color: blue;
+#login_button {background-color: blue;
               color: whitesmoke;
               margin-top: 2%;
         }
@@ -20,7 +20,7 @@ button {border:none;
         height: 40px;}
 
 
-#signup {   background-color: lightseagreen;
+#login_signup_button {   background-color: lightseagreen;
             
             color: whitesmoke;
             margin-top: 2%;}
