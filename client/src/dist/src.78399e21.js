@@ -71731,7 +71731,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Account = function Account(props) {
   //make request to database to retrieve user information
-  var user = localStorage.getItem('user_id');
+  var user_id = localStorage.getItem('user_id');
+
+  _axios.default.get('https://stavflix.herokuapp.com/movies', {
+    headers: {
+      Authorization: "Bearer ".concat(token)
+    }
+  }).then(function (response) {
+    console.log(response.data + ' getMovies');
+    self.setState({
+      content: response.data
+    });
+  }).catch(function (error) {
+    console.log(error);
+  });
+
   return _react.default.createElement("div", null, _react.default.createElement("div", {
     className: "row"
   }, _react.default.createElement("div", {

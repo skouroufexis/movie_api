@@ -5,7 +5,22 @@ import './account_info.scss';
 let Account=function(props){
 
     //make request to database to retrieve user information
-    let user =localStorage.getItem('user_id');
+    let user_id =localStorage.getItem('user_id');
+
+    axios.get('https://stavflix.herokuapp.com/movies', {
+    headers: { Authorization: `Bearer ${token}`}
+    })
+    .then(function(response){
+        console.log(response.data + ' getMovies');
+        self.setState({content:response.data});
+    
+    
+    })
+    .catch(function (error) {
+       console.log(error);
+    
+  
+    });
     
 
     return(
