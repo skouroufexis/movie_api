@@ -243,7 +243,6 @@ app.get('/users/:id',passport.authenticate('jwt', {session: false}),
             }).catch(function(data){
             response.send(data);
             })
-
 })
 
 
