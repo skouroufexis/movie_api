@@ -41,9 +41,13 @@ let Account=function(props){
 
         //populate fields with user data        
         let inputs=document.getElementsByClassName('field');
-        inputs[0].value=user.username;
-        inputs[1].value=user.email;
+        inputs[0].value=username
+        inputs[1].value=email;
         inputs[2].value=day+'-'+month+'-'+year;
+
+        //upon login, the user-submitted password was saved on localStorage
+        //so that it can be accessed and shown here, that is a non hashed version
+        // of the user's password 
         inputs[3].value=localStorage.getItem('password');    
         })
         .catch(function (error) {
@@ -266,10 +270,9 @@ let Account=function(props){
         .then(function(response){
         console.log(response.data);
         alert(response.data);
-        
-        
 
-        
+        //refresh page so that updated data will be shown
+        window.location.replace('http://localhost:1234/user/account');
         })
         .catch(function (error) {
         console.log(error);  
