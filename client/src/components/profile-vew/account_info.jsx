@@ -20,7 +20,7 @@ let Account=function(props){
 
             //re-build the date in the format required by the database and save it in localStorage for later use
             let newdate=year+'-'+month+'-'+day;
-            localStorage.setItem('newdate',newdate)   
+            localStorage.setItem('newdate',newdate);   
 
     //load user information after the form has been rendered
     useEffect(function(){
@@ -253,7 +253,7 @@ let Account=function(props){
         console.log(response.data);
         alert(response.data);
 
-         
+        
 
         
         })
