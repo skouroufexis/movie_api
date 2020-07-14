@@ -72056,22 +72056,7 @@ var Account = function Account(props) {
       }
     }).then(function (response) {
       console.log(response.data);
-      alert(response.data); //reset the user in the localStorage using the new user information
-
-      resetUser(id);
-    }).catch(function (error) {
-      console.log(error);
-    });
-  }
-
-  function resetUser(id) {
-    var path = 'https://stavflix.herokuapp.com/' + id;
-
-    _axios.default.get(path, {
-      id: id
-    }).then(function (response) {
-      console.log(response.data);
-      document.write(response.data);
+      alert(response.data);
     }).catch(function (error) {
       console.log(error);
     });

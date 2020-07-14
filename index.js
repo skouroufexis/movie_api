@@ -151,7 +151,6 @@ app.post('/users',
     check('password','password must not be blank').not().isEmpty(),
     check('email','invalid email format').isEmail()
     ],
-
     function(request,response){    
         
         const errors = validationResult(request);
@@ -204,7 +203,7 @@ app.put('/users/:id',passport.authenticate('jwt', {session: false}),
             let username=request.body.username;
             let password=request.body.password;
     
-            bcrypt.hash(password,10).then(function(pass){
+            bcrypt.hashSync(password,10).then(function(pass){
                 password=pass;
                 response.end();
             }).catch(function(error){
@@ -234,22 +233,22 @@ app.put('/users/:id',passport.authenticate('jwt', {session: false}),
 
 
 //retrieve user information
-app.get('/users/:id',function(request,response){
-            var id = request.params.id;
-            users.find({_id:id}).then(function(data){
-                if(data)
-                {
-                    response.send(data);    
-                }
-                else
-                {
-                    response.send('not found');
-                }
+// app.get('/users/:id',function(request,response){
+//             var id = request.params.id;
+//             users.find({_id:id}).then(function(data){
+//                 if(data)
+//                 {
+//                     response.send(data);    
+//                 }
+//                 else
+//                 {
+//                     response.send('not found');
+//                 }
                 
-            }).catch(function(data){
-            response.send(data);
-            })
-})
+//             }).catch(function(data){
+//             response.send(data);
+//             })
+// })
 
 
 
