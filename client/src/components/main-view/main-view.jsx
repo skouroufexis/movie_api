@@ -35,7 +35,7 @@ class MainView extends React.Component{
 
   render(){
     let token = localStorage.getItem('token');
-    let user=localStorage.getItem('user');
+    let user=localStorage.getItem('username');
     let movies = this.state.content;
 
     let self=this;
@@ -57,8 +57,12 @@ class MainView extends React.Component{
     }
 
     else //user logged in
+      
+    
+    
     
     {
+
       if(this.state.content==null)
       {
         this.getMovies(token);

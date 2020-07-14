@@ -1,68 +1,91 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import axios from 'axios';
 import './account_info.scss';
 
+import {Date} from '../general/date';
+
+
 let Account=function(props){
 
-    //make request to database to retrieve user information
-    let user_id =localStorage.getItem('user_id');
+    let user =localStorage.getItem('user');
+    user=JSON.parse(user);
+    
+    //edit user.birthday
+    let birthday=user.birthday;
+    birthday=birthday.split('-');
+        let year=birthday[0];
+        let month = birthday[1];
+        let day = birthday[2].split('T');
+            day=day[0];
 
-    axios.get('https://stavflix.herokuapp.com/movies', {
-    headers: { Authorization: `Bearer ${token}`}
-    })
-    .then(function(response){
-        console.log(response.data + ' getMovies');
-        self.setState({content:response.data});
-    
-    
-    })
-    .catch(function (error) {
-       console.log(error);
-    
-  
-    });
-    
+            //re-build the date in the format required by the database and save it in localStorage for later use
+            let newdate=year+'-'+month+'-'+day;
+            localStorage.setItem('newdate',newdate)   
 
+    //load user information after the form has been rendered
+    useEffect(function(){
+        let inputs=document.getElementsByClassName('field');
+
+
+        inputs[0].value=user.username;
+        inputs[1].value=user.email;
+        inputs[2].value=day+'-'+month+'-'+year;
+        inputs[3].value=localStorage.getItem('password');
+
+    })
+
+    
+    
     return(
 
+        
+
         <div>
-              
+
+            <div id='date'>
+                <div id='dateContainer'>
+                    
+                    <Date
+                    
+                    modal={()=>{closeDate()}}
+
+                    />    
+
+                </div>
+                
+            </div>      
             
             <div className='row'>
                 <div className='col col-12'><h1>Account Information</h1></div>
             </div>
 
             <div className='row'>
-                    <button className='col-3 button_edit' onClick={enableEdit}><i class="far fa-edit"></i> edit</button>
-            </div>
+                    <button className='col-12 col-md-3 button_edit' onClick={enableEdit}><i class="far fa-edit"></i> edit</button>
+                    <button className='col-12 col-md-3 button_unregister' onClick={unregister} ><i class="fas fa-user-slash"></i>delete account</button>
 
+            </div>
+            {/* <i class="fas fa-user-slash"></i> */}
             <div className='row'>
                 
                     <form method='post' className='col-10'>
 
                     <label>Username</label>
-                    <input type='text' disabled id='account_username' onFocus={getFocus}
-                    onBlur={loseFocus}
-                    >
-
+                    <input type='text' disabled id='account_username' className='field'>
                     </input>
 
                     <label>Email</label>
-                    <input type='text' disabled id='account_email' onFocus={getFocus}
-                    onBlur={loseFocus}
-                    >
+                    <input type='text' disabled id='account_email' className='field'>
 
                     </input>
 
                     <label>Date of Birth</label>
-                    <input type='text' disabled id='account_birthday' onFocus={getFocus}
-                    onBlur={loseFocus}
-                    >
+                    <input type='text' disabled id='account_birthday' className='field' onFocus={openDate}>
+                        
                     </input>
 
                     <label>Password</label>
-                    <input type='text' disabled id='account_birthday' onFocus={getFocus}
-                    onBlur={loseFocus}
+                    <input type='password' disabled id='account_password' className='field' onFocus={password}
+                    
                     >
 
                     </input>
@@ -75,7 +98,7 @@ let Account=function(props){
             <div className='row'>                
                 
                 <button className='col-3' id='button_cancel' onClick={cancelChanges}>cancel</button>
-                <button className='col-3' id='button_update'>save changes</button>
+                <button className='col-3' id='button_update' onClick={update}>save changes</button>
             </div>
 
             <div className='row'>
@@ -83,27 +106,41 @@ let Account=function(props){
                     redirect('http://localhost:1234/user/profile');
                 }}>back</button>
             </div>
-
-
-
-            
-
-
         </div>
+        
     
     )
+
+             
+    
+
+
     //function to handle redirects            
     function redirect(path){
         window.location.replace(path);
     }    
     
+    //function to delete user account
+    function unregister(){
+     var unregister =  confirm('Are you sure you want to delete your account?');
+     if (unregister==true)
+        {
+            console.log('account deleted');
+        }
+      else
+        {
+            console.log('account not deleted');
+        }  
+    }
+
+
     //function to enable edits on the form
     function enableEdit(){
         //display 'cancel' and 'update' buttons
         document.getElementById('button_update').style.display='block';
         document.getElementById('button_cancel').style.display='block';
         //enable input fields
-        let inputs = document.getElementsByTagName('input');
+        let inputs = document.getElementsByClassName('field');
         let x;
 
         for(x=0;x<inputs.length;x++){
@@ -111,29 +148,78 @@ let Account=function(props){
         }
 
         inputs[0].focus();
-        inputs[0].style.backgroundColor='whitesmoke';
-    }    
+        // inputs[0].style.backgroundColor='rgba(32, 178, 170,0.3)';
+    }  
 
-    function getFocus(){
-
-        var item= event.target;
-        
-            if(item.tagName!='BUTTON')
-            {
-                item.style.backgroundColor='whitesmoke';
-            }
-    }
-    function loseFocus(){
-        var item= event.target
-        item.style.backgroundColor='white';
-    }
-
+    function password(){
+    var newPassword= window.prompt('please type a new password');
+    var passwordField=document.getElementById('account_password');
+    passwordField.blur();
+    if(newPassword!=null)
+        {
+            passwordField.value=newPassword;
+        }
     
-    function cancelChanges(){
-        //make GET request to database and restore previous values
+    }
 
+    //function to open the date modal
+    function openDate(){
+        var item=document.getElementById('date');
+        item.style.display='block'
+        setTimeout(() => {
+            item.style.opacity='1';
+            item.style.transform='translateY(0px)';
+        }, 200);
+    }
+
+    //function to close the date modal
+    function closeDate(){
+
+        var item=document.getElementById('date');
+
+        //close modal
+        item.style.opacity='0';
+        item.style.transform='translateY(-10px)';
+        setTimeout(() => {
+            item.style.display='none'
+            
+        }, 100);
+
+        //update the birthday field if new date was selected
+        let newday=localStorage.getItem('newday');
+        let newmonth=localStorage.getItem('newmonth');
+        let newyear=localStorage.getItem('newyear');
+
+        if(newday!=null && newmonth!=null && newyear!=null)
+            {
+                document.getElementById('account_birthday').value=newday+'-'+newmonth+'-'+newyear;
+                //re-build the selected date in the format required by the database
+                //and replace the previous value in localStorage
+                let newdate=newyear+'-'+newmonth+'-'+newday;
+                localStorage.setItem('newdate',newdate);
+        
+                localStorage.removeItem('newday');
+                localStorage.removeItem('newmonth');
+                localStorage.removeItem('newyear');
+            }
+        
+
+        
+
+        
+
+    }
+
+    //function to restore the previous input element's value
+    function cancelChanges(){
+        //restore previous values
+        let inputs = document.getElementsByClassName('field');
+        inputs[0].value=user.username;
+        inputs[1].value=user.email;
+        inputs[2].value=day+'-'+month+'-'+year;
+        inputs[3].value=user.password[0]+user.password[1]+user.password[2];
         //disable input fields
-        let inputs = document.getElementsByTagName('input');
+
         let x;
         for(x=0;x<inputs.length;x++){
             inputs[x].disabled=true;
@@ -143,6 +229,33 @@ let Account=function(props){
         //hide 'cancel' and 'update' buttons
         document.getElementById('button_update').style.display='none';
         document.getElementById('button_cancel').style.display='none';
+
+    }
+
+
+    function update(){
+        //get new field values & token
+        let username=document.getElementById('account_username').value;
+        let user = localStorage.getItem('user');
+            user=JSON.parse(user);
+            let id=user._id;
+        let email=document.getElementById('account_email').value;
+        let birthday=localStorage.getItem('newdate');
+        let password=document.getElementById('account_password').value;
+        let token = localStorage.getItem('token');
+        let path ='https://stavflix.herokuapp.com/users/'+id;
+        
+
+        axios.put(path,{id:id,username:username,password:password,email:email,birthday:birthday},
+                {headers: { Authorization: `Bearer ${token}`}}
+        )
+        .then(function(response){
+        console.log(response);
+        alert(response);
+        })
+        .catch(function (error) {
+        console.log(error);  
+        });
 
     }
 

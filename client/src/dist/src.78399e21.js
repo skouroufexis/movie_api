@@ -36202,7 +36202,7 @@ require("./header.scss");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Header = function Header(props) {
-  var user = localStorage.getItem('user');
+  var user = localStorage.getItem('username');
   user = user.charAt(0);
   user = user.toUpperCase();
   return _react.default.createElement("div", {
@@ -51884,11 +51884,14 @@ function LoginView(props) {
       password: password
     }).then(function (response) {
       var data = response.data;
-      console.log('user found'); // onlogin(data);//response as paramenter of the 'onlogin' prop which will trigger the 'onlogin' function in MainView  
+      console.log('user found'); //for later use. If user will want to modify his credentials then he
+      //will be presented with the unhashed password. 
 
+      localStorage.setItem('password', password);
       localStorage.setItem('token', data.token);
-      localStorage.setItem('user', data.user.username);
-      localStorage.setItem('user_id', data.user._id);
+      localStorage.setItem('username', data.user.username);
+      localStorage.setItem('user', JSON.stringify(data.user)); // localStorage.setItem('user', JSON.stringify(data.user));
+
       window.location.replace("http://localhost:1234/ ");
     }).catch(function (e) {
       console.log(e);
@@ -71713,7 +71716,112 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/profile-vew/account_info.jsx":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/general/date.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/general/date.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Date = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+require("./date.scss");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//Date modal for capturing date inputs
+var Date = function Date(props) {
+  var closedate = props.modal;
+  return _react.default.createElement("div", {
+    className: "container"
+  }, _react.default.createElement("div", {
+    className: "row"
+  }, _react.default.createElement("div", {
+    className: "col-12"
+  }, _react.default.createElement("label", {
+    className: "col-5"
+  }, "Day")), _react.default.createElement("div", {
+    className: "col-12"
+  }, _react.default.createElement("select", {
+    className: "col-2",
+    id: "day"
+  }, _react.default.createElement("option", null, "01"), _react.default.createElement("option", null, "02"), _react.default.createElement("option", null, "03"), _react.default.createElement("option", null, "04"), _react.default.createElement("option", null, "05"), _react.default.createElement("option", null, "06"), _react.default.createElement("option", null, "07"), _react.default.createElement("option", null, "08"), _react.default.createElement("option", null, "09"), _react.default.createElement("option", null, "10"), _react.default.createElement("option", null, "11"), _react.default.createElement("option", null, "12"), _react.default.createElement("option", null, "12"), _react.default.createElement("option", null, "13"), _react.default.createElement("option", null, "14"), _react.default.createElement("option", null, "15"), _react.default.createElement("option", null, "16"), _react.default.createElement("option", null, "17"), _react.default.createElement("option", null, "18"), _react.default.createElement("option", null, "19"), _react.default.createElement("option", null, "20"), _react.default.createElement("option", null, "21"), _react.default.createElement("option", null, "22"), _react.default.createElement("option", null, "23"), _react.default.createElement("option", null, "24"), _react.default.createElement("option", null, "25"), _react.default.createElement("option", null, "26"), _react.default.createElement("option", null, "27"), _react.default.createElement("option", null, "28"), _react.default.createElement("option", null, "29"), _react.default.createElement("option", null, "30"), _react.default.createElement("option", null, "31")))), _react.default.createElement("div", {
+    className: "row"
+  }, _react.default.createElement("div", {
+    className: "col-12"
+  }, _react.default.createElement("label", {
+    className: "col-5"
+  }, "Month")), _react.default.createElement("div", {
+    className: "col-12"
+  }, _react.default.createElement("select", {
+    className: "col-2",
+    id: "month"
+  }, _react.default.createElement("option", {
+    value: "01"
+  }, "Jan"), _react.default.createElement("option", {
+    value: "02"
+  }, "Feb"), _react.default.createElement("option", {
+    value: "03"
+  }, "Mar"), _react.default.createElement("option", {
+    value: "04"
+  }, "Apr"), _react.default.createElement("option", {
+    value: "05"
+  }, "May"), _react.default.createElement("option", {
+    value: "06"
+  }, "Jun"), _react.default.createElement("option", {
+    value: "07"
+  }, "Jul"), _react.default.createElement("option", {
+    value: "08"
+  }, "Aug"), _react.default.createElement("option", {
+    value: "09"
+  }, "Sep"), _react.default.createElement("option", {
+    value: "10"
+  }, "Oct"), _react.default.createElement("option", {
+    value: "11"
+  }, "Nov"), _react.default.createElement("option", {
+    value: "12"
+  }, "Dec")))), _react.default.createElement("div", {
+    className: "row"
+  }, _react.default.createElement("div", {
+    className: "col-12"
+  }, _react.default.createElement("label", {
+    className: "col-5"
+  }, "Year")), _react.default.createElement("input", {
+    className: "col-5 date",
+    id: "year"
+  })), _react.default.createElement("div", {
+    className: "row"
+  }, _react.default.createElement("button", {
+    className: "col-5 btn_secondary1",
+    onClick: newdate
+  }, "save")), _react.default.createElement("div", {
+    className: "row"
+  }, _react.default.createElement("button", {
+    className: "col-5 btn_secondary2",
+    onClick: function onClick() {
+      return closedate();
+    }
+  }, "cancel")));
+
+  function newdate() {
+    var newday = document.getElementById('day').value;
+    var newmonth = document.getElementById('month').value;
+    var newyear = document.getElementById('year').value;
+    localStorage.setItem('newday', newday);
+    localStorage.setItem('newmonth', newmonth);
+    localStorage.setItem('newyear', newyear);
+    closedate();
+  }
+};
+
+exports.Date = Date;
+},{"react":"../node_modules/react/index.js","./date.scss":"components/general/date.scss"}],"components/profile-vew/account_info.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -71721,43 +71829,66 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Account = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _axios = _interopRequireDefault(require("axios"));
 
 require("./account_info.scss");
 
+var _date = require("../general/date");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
 var Account = function Account(props) {
-  //make request to database to retrieve user information
-  var user_id = localStorage.getItem('user_id');
+  var user = localStorage.getItem('user');
+  user = JSON.parse(user); //edit user.birthday
 
-  _axios.default.get('https://stavflix.herokuapp.com/movies', {
-    headers: {
-      Authorization: "Bearer ".concat(token)
-    }
-  }).then(function (response) {
-    console.log(response.data + ' getMovies');
-    self.setState({
-      content: response.data
-    });
-  }).catch(function (error) {
-    console.log(error);
+  var birthday = user.birthday;
+  birthday = birthday.split('-');
+  var year = birthday[0];
+  var month = birthday[1];
+  var day = birthday[2].split('T');
+  day = day[0]; //re-build the date in the format required by the database and save it in localStorage for later use
+
+  var newdate = year + '-' + month + '-' + day;
+  localStorage.setItem('newdate', newdate); //load user information after the form has been rendered
+
+  (0, _react.useEffect)(function () {
+    var inputs = document.getElementsByClassName('field');
+    inputs[0].value = user.username;
+    inputs[1].value = user.email;
+    inputs[2].value = day + '-' + month + '-' + year;
+    inputs[3].value = localStorage.getItem('password');
   });
-
   return _react.default.createElement("div", null, _react.default.createElement("div", {
+    id: "date"
+  }, _react.default.createElement("div", {
+    id: "dateContainer"
+  }, _react.default.createElement(_date.Date, {
+    modal: function modal() {
+      closeDate();
+    }
+  }))), _react.default.createElement("div", {
     className: "row"
   }, _react.default.createElement("div", {
     className: "col col-12"
   }, _react.default.createElement("h1", null, "Account Information"))), _react.default.createElement("div", {
     className: "row"
   }, _react.default.createElement("button", {
-    className: "col-3 button_edit",
+    className: "col-12 col-md-3 button_edit",
     onClick: enableEdit
   }, _react.default.createElement("i", {
     "class": "far fa-edit"
-  }), " edit")), _react.default.createElement("div", {
+  }), " edit"), _react.default.createElement("button", {
+    className: "col-12 col-md-3 button_unregister",
+    onClick: unregister
+  }, _react.default.createElement("i", {
+    "class": "fas fa-user-slash"
+  }), "delete account")), _react.default.createElement("div", {
     className: "row"
   }, _react.default.createElement("form", {
     method: "post",
@@ -71766,26 +71897,24 @@ var Account = function Account(props) {
     type: "text",
     disabled: true,
     id: "account_username",
-    onFocus: getFocus,
-    onBlur: loseFocus
+    className: "field"
   }), _react.default.createElement("label", null, "Email"), _react.default.createElement("input", {
     type: "text",
     disabled: true,
     id: "account_email",
-    onFocus: getFocus,
-    onBlur: loseFocus
+    className: "field"
   }), _react.default.createElement("label", null, "Date of Birth"), _react.default.createElement("input", {
     type: "text",
     disabled: true,
     id: "account_birthday",
-    onFocus: getFocus,
-    onBlur: loseFocus
+    className: "field",
+    onFocus: openDate
   }), _react.default.createElement("label", null, "Password"), _react.default.createElement("input", {
-    type: "text",
+    type: "password",
     disabled: true,
-    id: "account_birthday",
-    onFocus: getFocus,
-    onBlur: loseFocus
+    id: "account_password",
+    className: "field",
+    onFocus: password
   }))), _react.default.createElement("div", {
     className: "row"
   }, _react.default.createElement("button", {
@@ -71794,7 +71923,8 @@ var Account = function Account(props) {
     onClick: cancelChanges
   }, "cancel"), _react.default.createElement("button", {
     className: "col-3",
-    id: "button_update"
+    id: "button_update",
+    onClick: update
   }, "save changes")), _react.default.createElement("div", {
     className: "row"
   }, _react.default.createElement("button", {
@@ -71806,6 +71936,17 @@ var Account = function Account(props) {
 
   function redirect(path) {
     window.location.replace(path);
+  } //function to delete user account
+
+
+  function unregister() {
+    var unregister = confirm('Are you sure you want to delete your account?');
+
+    if (unregister == true) {
+      console.log('account deleted');
+    } else {
+      console.log('account not deleted');
+    }
   } //function to enable edits on the form
 
 
@@ -71814,34 +71955,72 @@ var Account = function Account(props) {
     document.getElementById('button_update').style.display = 'block';
     document.getElementById('button_cancel').style.display = 'block'; //enable input fields
 
-    var inputs = document.getElementsByTagName('input');
+    var inputs = document.getElementsByClassName('field');
     var x;
 
     for (x = 0; x < inputs.length; x++) {
       inputs[x].disabled = false;
     }
 
-    inputs[0].focus();
-    inputs[0].style.backgroundColor = 'whitesmoke';
+    inputs[0].focus(); // inputs[0].style.backgroundColor='rgba(32, 178, 170,0.3)';
   }
 
-  function getFocus() {
-    var item = event.target;
+  function password() {
+    var newPassword = window.prompt('please type a new password');
+    var passwordField = document.getElementById('account_password');
+    passwordField.blur();
 
-    if (item.tagName != 'BUTTON') {
-      item.style.backgroundColor = 'whitesmoke';
+    if (newPassword != null) {
+      passwordField.value = newPassword;
     }
-  }
+  } //function to open the date modal
 
-  function loseFocus() {
-    var item = event.target;
-    item.style.backgroundColor = 'white';
-  }
+
+  function openDate() {
+    var item = document.getElementById('date');
+    item.style.display = 'block';
+    setTimeout(function () {
+      item.style.opacity = '1';
+      item.style.transform = 'translateY(0px)';
+    }, 200);
+  } //function to close the date modal
+
+
+  function closeDate() {
+    var item = document.getElementById('date'); //close modal
+
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(-10px)';
+    setTimeout(function () {
+      item.style.display = 'none';
+    }, 100); //update the birthday field if new date was selected
+
+    var newday = localStorage.getItem('newday');
+    var newmonth = localStorage.getItem('newmonth');
+    var newyear = localStorage.getItem('newyear');
+
+    if (newday != null && newmonth != null && newyear != null) {
+      document.getElementById('account_birthday').value = newday + '-' + newmonth + '-' + newyear; //re-build the selected date in the format required by the database
+      //and replace the previous value in localStorage
+
+      var _newdate = newyear + '-' + newmonth + '-' + newday;
+
+      localStorage.setItem('newdate', _newdate);
+      localStorage.removeItem('newday');
+      localStorage.removeItem('newmonth');
+      localStorage.removeItem('newyear');
+    }
+  } //function to restore the previous input element's value
+
 
   function cancelChanges() {
-    //make GET request to database and restore previous values
-    //disable input fields
-    var inputs = document.getElementsByTagName('input');
+    //restore previous values
+    var inputs = document.getElementsByClassName('field');
+    inputs[0].value = user.username;
+    inputs[1].value = user.email;
+    inputs[2].value = day + '-' + month + '-' + year;
+    inputs[3].value = user.password[0] + user.password[1] + user.password[2]; //disable input fields
+
     var x;
 
     for (x = 0; x < inputs.length; x++) {
@@ -71852,10 +72031,40 @@ var Account = function Account(props) {
     document.getElementById('button_update').style.display = 'none';
     document.getElementById('button_cancel').style.display = 'none';
   }
+
+  function update() {
+    //get new field values & token
+    var username = document.getElementById('account_username').value;
+    var user = localStorage.getItem('user');
+    user = JSON.parse(user);
+    var id = user._id;
+    var email = document.getElementById('account_email').value;
+    var birthday = localStorage.getItem('newdate');
+    var password = document.getElementById('account_password').value;
+    var token = localStorage.getItem('token');
+    var path = 'https://stavflix.herokuapp.com/users/' + id;
+
+    _axios.default.put(path, {
+      id: id,
+      username: username,
+      password: password,
+      email: email,
+      birthday: birthday
+    }, {
+      headers: {
+        Authorization: "Bearer ".concat(token)
+      }
+    }).then(function (response) {
+      console.log(response);
+      alert(response);
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }
 };
 
 exports.Account = Account;
-},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","./account_info.scss":"components/profile-vew/account_info.scss"}],"components/profile-vew/mymovies.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","./account_info.scss":"components/profile-vew/account_info.scss","../general/date":"components/general/date.jsx"}],"components/profile-vew/mymovies.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -72069,7 +72278,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var token = localStorage.getItem('token');
-      var user = localStorage.getItem('user');
+      var user = localStorage.getItem('username');
       var movies = this.state.content;
       var self = this;
 
@@ -73886,12 +74095,14 @@ var _morgan = require("morgan");
 
 var _mymovies = require("./components/profile-vew/mymovies");
 
+var _date = require("./components/general/date");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var container = document.getElementById('root');
+var container = document.getElementById('root'); // localStorage.clear();
 
-_reactDom.default.render(_react.default.createElement(_mainView.MainView, null), container); // localStorage.clear();
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./index.scss":"index.scss","./components/main-view/main-view":"components/main-view/main-view.jsx","morgan":"../../node_modules/morgan/index.js","./components/profile-vew/mymovies":"components/profile-vew/mymovies.jsx"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+_reactDom.default.render(_react.default.createElement(_mainView.MainView, null), container);
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./index.scss":"index.scss","./components/main-view/main-view":"components/main-view/main-view.jsx","morgan":"../../node_modules/morgan/index.js","./components/profile-vew/mymovies":"components/profile-vew/mymovies.jsx","./components/general/date":"components/general/date.jsx"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -73919,7 +74130,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49418" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49506" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -5,7 +5,8 @@ var Header = function(props){
 
     
 
-    let user=localStorage.getItem('user');
+    let user=localStorage.getItem('username');
+    
     user = user.charAt(0);
     user = user.toUpperCase();
 

@@ -22,11 +22,16 @@ function LoginView(props) {
            .then(function(response){
                  const data = response.data;
                  console.log('user found');
-            // onlogin(data);//response as paramenter of the 'onlogin' prop which will trigger the 'onlogin' function in MainView  
+
+                //for later use. If user will want to modify his credentials then he
+                //will be presented with the unhashed password. 
+                localStorage.setItem('password',password);
 
             localStorage.setItem('token', data.token);
-            localStorage.setItem('user', data.user.username);
-            localStorage.setItem('user_id', data.user._id);
+            localStorage.setItem('username', data.user.username);
+            localStorage.setItem('user', JSON.stringify(data.user));
+            
+            // localStorage.setItem('user', JSON.stringify(data.user));
 
             window.location.replace("http://localhost:1234/ ");
             

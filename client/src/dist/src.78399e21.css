@@ -213,9 +213,20 @@ button {
   background-color: blue;
   color: whitesmoke;
 }
+label {
+  background-color: whitesmoke;
+  width: 100%;
+  height: 30px;
+}
+
 .button_edit {
   background-color: white;
   color: lightseagreen;
+}
+
+.button_unregister {
+  background-color: white;
+  color: red;
 }
 
 #button_cancel {
@@ -233,6 +244,33 @@ button {
 
 .button_back {
   margin-top: 2%;
+}
+
+#date {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+  transform: translateY(-10px);
+}
+
+#dateContainer {
+  position: relative;
+  margin-top: 3%;
+  margin-left: auto;
+  margin-right: auto;
+}
+select {
+  text-align: center;
+}
+
+input {
+  text-align: center;
 }
 .container {
   margin-left: auto;
