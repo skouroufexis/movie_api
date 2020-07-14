@@ -71845,7 +71845,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var Account = function Account(props) {
   var user = localStorage.getItem('user');
-  user = JSON.parse(user); //edit user.birthday
+  user = JSON.parse(user);
+  var id = user._id; //edit user.birthday
 
   var birthday = user.birthday;
   birthday = birthday.split('-');
@@ -71858,6 +71859,18 @@ var Account = function Account(props) {
   localStorage.setItem('newdate', newdate); //load user information after the form has been rendered
 
   (0, _react.useEffect)(function () {
+    var path = 'https://stavflix.herokuapp.com/users/' + id; // axios.get(path,{id:id},
+    //     {headers: { Authorization: `Bearer ${token}`}}
+    // )
+    // .then(function(response){
+    // console.log(response.data);
+    // alert(response.data);
+    // })
+    // .catch(function (error) {
+    // console.log(error);  
+    // });
+    // alert(id);
+
     var inputs = document.getElementsByClassName('field');
     inputs[0].value = user.username;
     inputs[1].value = user.email;

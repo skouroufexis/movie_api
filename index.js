@@ -232,7 +232,7 @@ app.put('/users/:id',passport.authenticate('jwt', {session: false}),
 
 
 
-retrieve user information
+// retrieve user information
 app.get('/users/:id',passport.authenticate('jwt', {session: false}),
         function(request,response){
             var id = request.params.id;

@@ -9,6 +9,7 @@ let Account=function(props){
 
     let user =localStorage.getItem('user');
     user=JSON.parse(user);
+    let id=user._id;
     
     //edit user.birthday
     let birthday=user.birthday;
@@ -24,6 +25,22 @@ let Account=function(props){
 
     //load user information after the form has been rendered
     useEffect(function(){
+
+        let path ='https://stavflix.herokuapp.com/users/'+id;
+
+        // axios.get(path,{id:id},
+        //     {headers: { Authorization: `Bearer ${token}`}}
+        // )
+        // .then(function(response){
+        // console.log(response.data);
+        // alert(response.data);
+        // })
+        // .catch(function (error) {
+        // console.log(error);  
+        // });
+
+        // alert(id);
+
         let inputs=document.getElementsByClassName('field');
 
 
@@ -265,6 +282,11 @@ let Account=function(props){
 
 
     }
+
+    
+
+
+
 
 }
 
