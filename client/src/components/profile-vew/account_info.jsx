@@ -250,12 +250,36 @@ let Account=function(props){
                 {headers: { Authorization: `Bearer ${token}`}}
         )
         .then(function(response){
-        console.log(response);
-        alert(response);
+        console.log(response.data);
+        alert(response.data);
+
+        //reset the user in the localStorage using the new user information
+        resetUser(id);    
+
+        
         })
         .catch(function (error) {
         console.log(error);  
         });
+
+
+
+
+    }
+
+
+    function resetUser(id){
+
+        let path='https://stavflix.herokuapp.com/'+id;
+        axios.get(path,{id:id})
+        .then(function(response){
+        console.log(response.data);
+        document.write(response.data);
+
+    })
+    .catch(function (error) {
+    console.log(error);  
+    });
 
     }
 

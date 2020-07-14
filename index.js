@@ -56,11 +56,11 @@ app.get('/login',function(request,response){
 
 
 
-app.get('/index', function(request,response){
+// app.get('/index', function(request,response){
     
-    response.sendFile(__dirname+'/index.html');
+//     response.sendFile(__dirname+'/index.html');
     
-});
+// });
 
 
 
@@ -234,7 +234,7 @@ app.put('/users/:id',passport.authenticate('jwt', {session: false}),
 
 
 //retrieve user information
-app.get('/users/:id',passport.authenticate('jwt', {session: false}),function(request,response){
+app.get('/users/:id',function(request,response){
             var id = request.params.id;
             users.find({_id:id}).then(function(data){
                 if(data)
