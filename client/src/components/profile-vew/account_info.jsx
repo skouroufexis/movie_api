@@ -3,71 +3,65 @@ import axios from 'axios';
 import './account_info.scss';
 
 import {Date} from '../general/date';
+import { json } from 'body-parser';
 
 
 let Account=function(props){
 
-    let token = localStorage.getItem('token');
-    let user =localStorage.getItem('user');
-    user=JSON.parse(user);
-    let id=user._id;
     
-    //edit user.birthday
-    let birthday=user.birthday;
-    birthday=birthday.split('-');
-        let year=birthday[0];
-        let month = birthday[1];
-        let day = birthday[2].split('T');
-            day=day[0];
-
-            //re-build the date in the format required by the database and save it in localStorage for later use
-            let newdate=year+'-'+month+'-'+day;
-            localStorage.setItem('newdate',newdate);   
+    
+    
 
     //load user information after the form has been rendered
     useEffect(function(){
-
+        let user =localStorage.getItem('user');
+        user=JSON.parse(user);
+        let id=user._id;
+        let token = localStorage.getItem('token');
         let path ='https://stavflix.herokuapp.com/users/'+id;
-        
-        // alert(token);
-        axios.get(path,{id:id},
-            {headers: { Authorization: `Bearer ${token}`}}
-        )
+
+        axios.get(path,{headers: { Authorization: `Bearer ${token}`}}
+         )
         .then(function(response){
-        console.log(response);
-        alert(response);
-        })
-        .catch(function (error) {
-        console.log(error);  
-        });
+
 
         
+        let username=response.data[0].username; 
+        let email=response.data[0].email;
+        let birthday=response.data[0].birthday;     
+            birthday=birthday.split('-');
+            let year=birthday[0];
+            let month = birthday[1];
+            let day = birthday[2].split('T');
+                day=day[0];
+            
+                //re-build the date in the format required by the database and save it in localStorage for later use
+                let newdate=year+'-'+month+'-'+day;
+                localStorage.setItem('newdate',newdate);   
 
+        //populate fields with user data        
         let inputs=document.getElementsByClassName('field');
-
-
         inputs[0].value=user.username;
         inputs[1].value=user.email;
         inputs[2].value=day+'-'+month+'-'+year;
-        inputs[3].value=localStorage.getItem('password');
+        inputs[3].value=localStorage.getItem('password');    
+        })
+        .catch(function (error) {
+         console.log(error);  
+         });
 
     })
 
     
     
     return(
-
-        
-
         <div>
 
             <div id='date'>
                 <div id='dateContainer'>
                     
                     <Date
-                    
                     modal={()=>{closeDate()}}
-
                     />    
 
                 </div>
@@ -261,6 +255,7 @@ let Account=function(props){
         let email=document.getElementById('account_email').value;
         let birthday=localStorage.getItem('newdate');
         let password=document.getElementById('account_password').value;
+            localStorage.setItem('password',password);
         let token = localStorage.getItem('token');
         let path ='https://stavflix.herokuapp.com/users/'+id;
         
@@ -271,7 +266,7 @@ let Account=function(props){
         .then(function(response){
         console.log(response.data);
         alert(response.data);
-
+        
         
 
         
@@ -279,15 +274,7 @@ let Account=function(props){
         .catch(function (error) {
         console.log(error);  
         });
-
-
-
-
     }
-
-    
-
-
 
 
 }
