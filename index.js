@@ -202,13 +202,13 @@ app.put('/users/:id',passport.authenticate('jwt', {session: false}),
             var id = request.params.id;
             let username=request.body.username;
             let password=request.body.password;
-    
-            bcrypt.hashSync(password,10).then(function(pass){
-                password=pass;
-                response.end();
-            }).catch(function(error){
-                response.send('Error:'+error );
-            })
+                password= bcrypt.hashSync(password,10);
+            // bcrypt.hashSync(password,10).then(function(pass){
+            //     password=pass;
+            //     response.end();
+            // }).catch(function(error){
+            //     response.send('Error:'+error );
+            // })
     
             let email=request.body.email;    
             let birthday=request.body.birthday;
