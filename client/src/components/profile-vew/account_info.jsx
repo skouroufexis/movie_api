@@ -7,6 +7,7 @@ import {Date} from '../general/date';
 
 let Account=function(props){
 
+    let token = localStorage.getItem('token');
     let user =localStorage.getItem('user');
     user=JSON.parse(user);
     let id=user._id;
@@ -27,19 +28,20 @@ let Account=function(props){
     useEffect(function(){
 
         let path ='https://stavflix.herokuapp.com/users/'+id;
+        
+        // alert(token);
+        axios.get(path,{id:id},
+            {headers: { Authorization: `Bearer ${token}`}}
+        )
+        .then(function(response){
+        console.log(response);
+        alert(response);
+        })
+        .catch(function (error) {
+        console.log(error);  
+        });
 
-        // axios.get(path,{id:id},
-        //     {headers: { Authorization: `Bearer ${token}`}}
-        // )
-        // .then(function(response){
-        // console.log(response.data);
-        // alert(response.data);
-        // })
-        // .catch(function (error) {
-        // console.log(error);  
-        // });
-
-        // alert(id);
+        
 
         let inputs=document.getElementsByClassName('field');
 

@@ -224,10 +224,7 @@ app.put('/users/:id',passport.authenticate('jwt', {session: false}),
             response.send(data);
             })
 
-        }
-
-
-       
+        }       
 })
 
 

@@ -71844,6 +71844,7 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 var Account = function Account(props) {
+  var token = localStorage.getItem('token');
   var user = localStorage.getItem('user');
   user = JSON.parse(user);
   var id = user._id; //edit user.birthday
@@ -71859,17 +71860,20 @@ var Account = function Account(props) {
   localStorage.setItem('newdate', newdate); //load user information after the form has been rendered
 
   (0, _react.useEffect)(function () {
-    var path = 'https://stavflix.herokuapp.com/users/' + id; // axios.get(path,{id:id},
-    //     {headers: { Authorization: `Bearer ${token}`}}
-    // )
-    // .then(function(response){
-    // console.log(response.data);
-    // alert(response.data);
-    // })
-    // .catch(function (error) {
-    // console.log(error);  
-    // });
-    // alert(id);
+    var path = 'https://stavflix.herokuapp.com/users/' + id; // alert(token);
+
+    _axios.default.get(path, {
+      id: id
+    }, {
+      headers: {
+        Authorization: "Bearer ".concat(token)
+      }
+    }).then(function (response) {
+      console.log(response);
+      alert(response);
+    }).catch(function (error) {
+      console.log(error);
+    });
 
     var inputs = document.getElementsByClassName('field');
     inputs[0].value = user.username;
