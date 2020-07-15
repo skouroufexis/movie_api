@@ -52329,7 +52329,10 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         className: "col-12"
       }, _react.default.createElement("button", {
         className: "col-12",
-        id: "button_favourites_on"
+        id: "button_favourites_on",
+        onClick: function onClick() {
+          return _this2.handleFavourites(2);
+        }
       }, _react.default.createElement("i", {
         "class": "fas fa-heart favourites_icon"
       })), _react.default.createElement("p", {
@@ -52342,7 +52345,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         className: "col-12",
         id: "button_favourites_off",
         onClick: function onClick() {
-          return _this2.addFavourite();
+          return _this2.handleFavourites(1);
         }
       }, _react.default.createElement("i", {
         "class": "far fa-heart favourites_icon"
@@ -52385,9 +52388,42 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
-    key: "addFavourite",
-    value: function addFavourite() {
+    key: "handleFavourites",
+    value: function handleFavourites(n) {
+      var _this3 = this;
+
       //request to add movie to user's favourites_icon
+      var self = this;
+
+      var isFavourite = _react.default.createElement("div", {
+        className: "col-12"
+      }, _react.default.createElement("button", {
+        className: "col-12",
+        id: "button_favourites_on",
+        onClick: function onClick() {
+          return _this3.handleFavourites(2);
+        }
+      }, _react.default.createElement("i", {
+        "class": "fas fa-heart favourites_icon"
+      })), _react.default.createElement("p", {
+        className: "col-12 p_favourites"
+      }, "Remove from favourites"));
+
+      var isNotFavourite = _react.default.createElement("div", {
+        className: "col-12"
+      }, _react.default.createElement("button", {
+        className: "col-12",
+        id: "button_favourites_off",
+        onClick: function onClick() {
+          return _this3.handleFavourites(1);
+        }
+      }, _react.default.createElement("i", {
+        "class": "far fa-heart favourites_icon"
+      })), _react.default.createElement("p", {
+        className: "col-12 p_favourites"
+      }, "Add to favourites")); //get user id
+
+
       var user = localStorage.getItem('user');
       user = JSON.parse(user);
       var user_id = user._id;
@@ -52398,17 +52434,37 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       var movie_id = movie._id;
       var path = 'https://stavflix.herokuapp.com/users/' + user_id + '/favourites/' + movie_id;
 
-      _axios.default.post(path, {
-        headers: {
-          Authorization: "Bearer ".concat(token)
+      if (n == 1) //add movie to favourites
+        {
+          _axios.default.post(path, {}, {
+            headers: {
+              Authorization: "Bearer ".concat(token)
+            }
+          }).then(function (response) {
+            console.log(response);
+            self.setState({
+              favourite: isFavourite
+            });
+          }).catch(function (response) {
+            alert(response);
+            console.log(response);
+          });
+        } else //remove movie from favourites
+        {
+          _axios.default.put(path, {}, {
+            headers: {
+              Authorization: "Bearer ".concat(token)
+            }
+          }).then(function (response) {
+            console.log(response);
+            self.setState({
+              favourite: isNotFavourite
+            });
+          }).catch(function (response) {
+            alert(response);
+            console.log(response);
+          });
         }
-      }).then(function (response) {
-        alert(response);
-        console.log(response);
-      }).catch(function (response) {
-        alert(response);
-        console.log(response);
-      });
     }
   }, {
     key: "goback",
@@ -101069,7 +101125,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53501" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54871" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

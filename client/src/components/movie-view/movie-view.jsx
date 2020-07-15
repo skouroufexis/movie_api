@@ -27,8 +27,9 @@ class MovieView extends React.Component{
     super();
 
     this.state ={favourite:null}
-
+    
   }
+  
   
   render(){
 
@@ -123,7 +124,7 @@ class MovieView extends React.Component{
      //in user's favourites
      let isFavourite=( 
       <div className='col-12'>
-        <button className='col-12' id='button_favourites_on'>
+        <button className='col-12' id='button_favourites_on' onClick={()=>this.handleFavourites(2)}>
           <i class="fas fa-heart favourites_icon"></i>
         </button>
         <p className='col-12 p_favourites'>Remove from favourites</p>
@@ -131,7 +132,7 @@ class MovieView extends React.Component{
     )
     let isNotFavourite=( 
           <div className='col-12'>
-            <button className='col-12' id='button_favourites_off' onClick={()=>this.addFavourite()}>
+            <button className='col-12' id='button_favourites_off' onClick={()=>this.handleFavourites(1)}>
               <i class="far fa-heart favourites_icon"></i>
             </button>
             <p className='col-12 p_favourites'>Add to favourites</p>
@@ -176,9 +177,31 @@ class MovieView extends React.Component{
   }
 
 
-  addFavourite(){
+  handleFavourites(n){
     //request to add movie to user's favourites_icon
-    
+
+
+    let self=this;
+
+
+    let isFavourite=( 
+      <div className='col-12'>
+        <button className='col-12' id='button_favourites_on' onClick={()=>this.handleFavourites(2)}>
+          <i class="fas fa-heart favourites_icon"></i>
+        </button>
+        <p className='col-12 p_favourites'>Remove from favourites</p>
+      </div>
+    )
+    let isNotFavourite=( 
+          <div className='col-12'>
+            <button className='col-12' id='button_favourites_off' onClick={()=>this.handleFavourites(1)}>
+              <i class="far fa-heart favourites_icon"></i>
+            </button>
+            <p className='col-12 p_favourites'>Add to favourites</p>
+          </div>
+        )
+
+    //get user id
     let user =localStorage.getItem('user');
     user=JSON.parse(user);
     let user_id=user._id;
@@ -189,17 +212,39 @@ class MovieView extends React.Component{
     movie=JSON.parse(movie);
     let movie_id=movie._id;
 
+
     let path='https://stavflix.herokuapp.com/users/'+user_id+'/favourites/'+movie_id;
-    axios.post(path,{headers: { Authorization: `Bearer ${token}`}})
-    .then(function(response){
-      alert(response);
-      console.log(response);
-    }
-    )
-    .catch(function(response){
-      alert(response);
-      console.log(response);
-    })
+    
+    if(n==1)//add movie to favourites
+      {
+        axios.post(path,{},{headers: {Authorization: `Bearer ${token}`}})
+        .then(function(response){
+          
+          console.log(response);
+          self.setState({favourite:isFavourite});
+        }
+        )
+        .catch(function(response){
+          alert(response);
+          console.log(response);
+        });
+      }
+     else //remove movie from favourites
+     {
+        axios.put(path,{},{headers: {Authorization: `Bearer ${token}`}})
+        .then(function(response){
+          console.log(response);
+          self.setState({favourite:isNotFavourite});
+        }
+        )
+        .catch(function(response){
+          alert(response);
+          console.log(response);
+        });
+     } 
+    
+
+    
     
     
     
