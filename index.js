@@ -308,7 +308,7 @@ app.put('/users/:id/favourites/:movieID',passport.authenticate('jwt', {session: 
 //delete user
 app.delete('/users/:id',passport.authenticate('jwt', {session: false}), function(request,response){
     var id = request.params.id;
-    users.findOneAndDelete({_id:id})
+    users.findOneAndDelete({_id:id},)
     .then(function(data){
         if(!data)
             {

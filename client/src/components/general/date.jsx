@@ -13,8 +13,10 @@ var Date = function(props){
             <div className='row'>
 
                 <div className='col-12'>
-                <label className='col-5'>Day
-                </label>
+                    <div className='row'>   
+                        <label className='col-5'>Day
+                        </label>
+                    </div>
                 </div>
 
                 <div className='col-12'>
@@ -57,33 +59,39 @@ var Date = function(props){
 
             <div className='row'>
                 <div className='col-12'>
-                    <label className='col-5'>Month
-                    </label>
+                    <div className='row'>
+                        <label className='col-5'>Month
+                        </label>
+                    </div>
                 </div>
 
                 <div className='col-12'>
-                    <select className='col-2' id='month'>
-                        <option value='01'>Jan</option>
-                        <option value='02'>Feb</option>
-                        <option value='03'>Mar</option>
-                        <option value='04'>Apr</option>
-                        <option value='05'>May</option>
-                        <option value='06'>Jun</option>
-                        <option value='07'>Jul</option>
-                        <option value='08'>Aug</option>
-                        <option value='09'>Sep</option>
-                        <option value='10'>Oct</option>
-                        <option value='11'>Nov</option>
-                        <option value='12'>Dec</option>
-                    </select>
+                    <div className='row'>
+                        <select className='col-2' id='month'>
+                            <option value='01'>Jan</option>
+                            <option value='02'>Feb</option>
+                            <option value='03'>Mar</option>
+                            <option value='04'>Apr</option>
+                            <option value='05'>May</option>
+                            <option value='06'>Jun</option>
+                            <option value='07'>Jul</option>
+                            <option value='08'>Aug</option>
+                            <option value='09'>Sep</option>
+                            <option value='10'>Oct</option>
+                            <option value='11'>Nov</option>
+                            <option value='12'>Dec</option>
+                        </select>
+                        </div>
                 </div>
             </div>
 
             
             <div className='row'>
                 <div className='col-12'>
+                        <div className='row'>
                         <label className='col-5'>Year
                         </label>
+                        </div>
                 </div>
                 <input className='col-5 date' id='year'></input>
 

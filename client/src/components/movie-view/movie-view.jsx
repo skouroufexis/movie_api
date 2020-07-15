@@ -1,5 +1,5 @@
 import React from 'react';
-
+import axios from 'axios';
 import './movie-view.scss';
 
 import {Container, Row, Col} from 'react-bootstrap';
@@ -15,6 +15,7 @@ import poster7 from '../../../../public/images/5ea9f19cd5fcc5119a040af7.jpg';
 import poster8 from '../../../../public/images/5ea9f19cd5fcc5119a040af8.jpg';
 import poster9 from '../../../../public/images/5ea9f19cd5fcc5119a040af9.jpeg';
 import poster10 from '../../../../public/images/5ea9f19cd5fcc5119a040afa.jpg';
+import Axios from 'axios';
 
 var posters=[poster1,poster2,poster3,poster4,poster5,poster6,poster7,poster8,poster9,poster10];
 
@@ -22,15 +23,22 @@ var posters=[poster1,poster2,poster3,poster4,poster5,poster6,poster7,poster8,pos
 
 class MovieView extends React.Component{
   constructor(){
-    super();
-    
-  }
 
+    super();
+
+    this.state ={favourite:null}
+
+  }
+  
   render(){
 
+    
     let movie=localStorage.getItem('selected');
     movie=JSON.parse(movie);
     let id=movie._id;
+
+    
+    
 
       function findPoster(poster){
         return poster.includes(id);
@@ -42,7 +50,7 @@ class MovieView extends React.Component{
       
 
     return(
-      <div className='wrapper'>
+      <div id='wrapper'>
         
 
         
@@ -50,52 +58,152 @@ class MovieView extends React.Component{
 
           
 
-          <Row>
-              <Col md="6" className="bigPoster section">
+          <Row id='movie_row'>
+              <Col md="6" id='test'>
                 <img src={poster}></img>
-              </Col>
 
-              <Col md='6' sm='12'className='section'>
                 <Row>
-                  <Col md='12'><h1>{movie.title}</h1></Col>
-                  <Col md='12'><p className='synopsis'>{movie.description}</p></Col>
+                  <Col md='12'>
 
-                  {/* other info */}
-                  <Col md='3' className='otherInfo'><h6>Director</h6></Col>
-                  <Col md='9' className='otherInfo'><p>{movie.director.name}</p></Col>
-
-                  <Col md='3' className='otherInfo'><h6>Genre</h6></Col>
-                  <Col md='9' className='otherInfo'><p>{movie.genre.name}</p></Col>
-
-                  <Col md='3' className='otherInfo'><h6>Featured</h6></Col>
-                  <Col md='9' className='otherInfo'><p>{String(movie.featured)}</p></Col>
+                    {this.state.favourite}
+                     
                   
+                 </Col>
+                 
+                        
+              </Row>
+
+              </Col>
+              
+
+              <Col md='6' sm='12'>
+                <Row id='other_info_row'>
+                  <div id='movie_description_container'>
+                  <Col md='12'><h1 className='movie_view_h1'>{movie.title}</h1></Col>
+                  <Col md='12'><p className='synopsis'>{movie.description}</p></Col>
+                  </div>
+                  {/* other info */}
+                  <div id='other_info_container'>
+                  <Col md='12' className='otherInfo'><b><h6>Director</h6></b></Col>
+                  <Col md='12' className='otherInfo'><p className='button' id='director'>{movie.director.name}</p></Col>
+
+                  <Col md='12' className='otherInfo'><b><h6>Genre</h6></b></Col>
+                  <Col md='12' className='otherInfo'><p className='button' id='genre'>{movie.genre.name}</p></Col>
+
+                  <Col md='12' className='otherInfo'><b><h6>Featured</h6></b></Col>
+                  <Col md='12' className='otherInfo'><p>{String(movie.featured)}</p></Col>
+                  </div>
                 </Row>
                     
               </Col>
-
-
-              <Col>
-              <div className='col-12 buttonCol'>
-              <button onClick={this.goback}>Back</button>
-              </div>
-            </Col>
-              
-          </Row>
-
-          
-
+        </Row>
          </Container>
-         
-        
-         
+
+         <Container>
+            <Row  id="back_row">
+              <Col md="6">
+              
+              </Col>
+              <Col md="6">
+              <button className='col-12' onClick={this.goback}>Back</button>
+              </Col>
+            </Row>
+         </Container>
+
       </div>
 
-      
-
-    
     )
 
+  }
+
+
+  componentDidMount(){
+    let self= this;
+     //icons to show depending on whether the movie is included or not 
+     //in user's favourites
+     let isFavourite=( 
+      <div className='col-12'>
+        <button className='col-12' id='button_favourites_on'>
+          <i class="fas fa-heart favourites_icon"></i>
+        </button>
+        <p className='col-12 p_favourites'>Remove from favourites</p>
+      </div>
+    )
+    let isNotFavourite=( 
+          <div className='col-12'>
+            <button className='col-12' id='button_favourites_off' onClick={()=>this.addFavourite()}>
+              <i class="far fa-heart favourites_icon"></i>
+            </button>
+            <p className='col-12 p_favourites'>Add to favourites</p>
+          </div>
+        )
+
+    //get user id
+    let user =localStorage.getItem('user');
+    user=JSON.parse(user);
+    let user_id=user._id;
+    let token = localStorage.getItem('token');
+    let path ='https://stavflix.herokuapp.com/users/'+user_id;   
+
+    //get movie id
+    let movie=localStorage.getItem('selected');
+    movie=JSON.parse(movie);
+    let movie_id=movie._id;
+    
+    //retrieve user info from database & control whether movie id is 
+    //included in user's favourites
+    axios.get(path,{headers: { Authorization: `Bearer ${token}`}}
+         )
+        .then(function(response){
+
+          let userFavourites=response.data[0].favourites;
+          let fav=userFavourites.includes(movie_id);
+          console.log(fav);
+
+          if(fav==false)
+            {
+              self.setState({favourite:isNotFavourite});
+            }
+          else
+            {
+              self.setState({favourite:isFavourite});
+            }  
+
+        })
+        .catch(function (error) {
+         console.log(error);  
+         });
+  }
+
+
+  addFavourite(){
+    //request to add movie to user's favourites_icon
+    
+    let user =localStorage.getItem('user');
+    user=JSON.parse(user);
+    let user_id=user._id;
+    let token = localStorage.getItem('token');
+    
+    //get movie id
+    let movie=localStorage.getItem('selected');
+    movie=JSON.parse(movie);
+    let movie_id=movie._id;
+
+    let path='https://stavflix.herokuapp.com/users/'+user_id+'/favourites/'+movie_id;
+    axios.post(path,{headers: { Authorization: `Bearer ${token}`}})
+    .then(function(response){
+      alert(response);
+      console.log(response);
+    }
+    )
+    .catch(function(response){
+      alert(response);
+      console.log(response);
+    })
+    
+    
+    
+    
   }
 
   goback(){

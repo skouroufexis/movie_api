@@ -1,5 +1,6 @@
-label {background-color: whitesmoke; width: 100%;
+label {background-color: rgba(32,178,170,0.1); width: 100%;
        height: 30px; 
+       display: flex;flex-direction: column;justify-content: center;
         }
 .button_edit{background-color: white; color: lightseagreen;}
 .button_unregister {background-color: white; color: red;}

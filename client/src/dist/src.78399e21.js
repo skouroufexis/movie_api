@@ -36210,7 +36210,8 @@ var Header = function Header(props) {
   }, _react.default.createElement("div", {
     className: "row"
   }, _react.default.createElement("div", {
-    className: "col col-10"
+    className: "col col-10 button",
+    onClick: mainMenu
   }, _react.default.createElement("h3", null, "Myflix")), _react.default.createElement("div", {
     className: "col col-1"
   }, _react.default.createElement("i", {
@@ -36235,7 +36236,7 @@ var Header = function Header(props) {
   }
 
   function openProfile() {
-    window.location.replace("http://localhost:1234/user/profile");
+    window.location.replace("http://localhost:1234/users/profile");
   }
 
   function logout() {
@@ -52170,6 +52171,8 @@ exports.MovieView = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _axios = _interopRequireDefault(require("axios"));
+
 require("./movie-view.scss");
 
 var _reactBootstrap = require("react-bootstrap");
@@ -52226,9 +52229,15 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(MovieView);
 
   function MovieView() {
+    var _this;
+
     _classCallCheck(this, MovieView);
 
-    return _super.call(this);
+    _this = _super.call(this);
+    _this.state = {
+      favourite: null
+    };
+    return _this;
   }
 
   _createClass(MovieView, [{
@@ -52244,47 +52253,162 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
 
       var poster = posters.find(findPoster);
       return _react.default.createElement("div", {
-        className: "wrapper"
+        id: "wrapper"
       }, _react.default.createElement(_reactBootstrap.Container, {
         className: "movieViewContainer"
-      }, _react.default.createElement(_reactBootstrap.Row, null, _react.default.createElement(_reactBootstrap.Col, {
+      }, _react.default.createElement(_reactBootstrap.Row, {
+        id: "movie_row"
+      }, _react.default.createElement(_reactBootstrap.Col, {
         md: "6",
-        className: "bigPoster section"
+        id: "test"
       }, _react.default.createElement("img", {
         src: poster
-      })), _react.default.createElement(_reactBootstrap.Col, {
-        md: "6",
-        sm: "12",
-        className: "section"
-      }, _react.default.createElement(_reactBootstrap.Row, null, _react.default.createElement(_reactBootstrap.Col, {
+      }), _react.default.createElement(_reactBootstrap.Row, null, _react.default.createElement(_reactBootstrap.Col, {
         md: "12"
-      }, _react.default.createElement("h1", null, movie.title)), _react.default.createElement(_reactBootstrap.Col, {
+      }, this.state.favourite))), _react.default.createElement(_reactBootstrap.Col, {
+        md: "6",
+        sm: "12"
+      }, _react.default.createElement(_reactBootstrap.Row, {
+        id: "other_info_row"
+      }, _react.default.createElement("div", {
+        id: "movie_description_container"
+      }, _react.default.createElement(_reactBootstrap.Col, {
+        md: "12"
+      }, _react.default.createElement("h1", {
+        className: "movie_view_h1"
+      }, movie.title)), _react.default.createElement(_reactBootstrap.Col, {
         md: "12"
       }, _react.default.createElement("p", {
         className: "synopsis"
-      }, movie.description)), _react.default.createElement(_reactBootstrap.Col, {
-        md: "3",
+      }, movie.description))), _react.default.createElement("div", {
+        id: "other_info_container"
+      }, _react.default.createElement(_reactBootstrap.Col, {
+        md: "12",
         className: "otherInfo"
-      }, _react.default.createElement("h6", null, "Director")), _react.default.createElement(_reactBootstrap.Col, {
-        md: "9",
+      }, _react.default.createElement("b", null, _react.default.createElement("h6", null, "Director"))), _react.default.createElement(_reactBootstrap.Col, {
+        md: "12",
         className: "otherInfo"
-      }, _react.default.createElement("p", null, movie.director.name)), _react.default.createElement(_reactBootstrap.Col, {
-        md: "3",
+      }, _react.default.createElement("p", {
+        className: "button",
+        id: "director"
+      }, movie.director.name)), _react.default.createElement(_reactBootstrap.Col, {
+        md: "12",
         className: "otherInfo"
-      }, _react.default.createElement("h6", null, "Genre")), _react.default.createElement(_reactBootstrap.Col, {
-        md: "9",
+      }, _react.default.createElement("b", null, _react.default.createElement("h6", null, "Genre"))), _react.default.createElement(_reactBootstrap.Col, {
+        md: "12",
         className: "otherInfo"
-      }, _react.default.createElement("p", null, movie.genre.name)), _react.default.createElement(_reactBootstrap.Col, {
-        md: "3",
+      }, _react.default.createElement("p", {
+        className: "button",
+        id: "genre"
+      }, movie.genre.name)), _react.default.createElement(_reactBootstrap.Col, {
+        md: "12",
         className: "otherInfo"
-      }, _react.default.createElement("h6", null, "Featured")), _react.default.createElement(_reactBootstrap.Col, {
-        md: "9",
+      }, _react.default.createElement("b", null, _react.default.createElement("h6", null, "Featured"))), _react.default.createElement(_reactBootstrap.Col, {
+        md: "12",
         className: "otherInfo"
-      }, _react.default.createElement("p", null, String(movie.featured))))), _react.default.createElement(_reactBootstrap.Col, null, _react.default.createElement("div", {
-        className: "col-12 buttonCol"
+      }, _react.default.createElement("p", null, String(movie.featured)))))))), _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement(_reactBootstrap.Row, {
+        id: "back_row"
+      }, _react.default.createElement(_reactBootstrap.Col, {
+        md: "6"
+      }), _react.default.createElement(_reactBootstrap.Col, {
+        md: "6"
       }, _react.default.createElement("button", {
+        className: "col-12",
         onClick: this.goback
-      }, "Back"))))));
+      }, "Back")))));
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var self = this; //icons to show depending on whether the movie is included or not 
+      //in user's favourites
+
+      var isFavourite = _react.default.createElement("div", {
+        className: "col-12"
+      }, _react.default.createElement("button", {
+        className: "col-12",
+        id: "button_favourites_on"
+      }, _react.default.createElement("i", {
+        "class": "fas fa-heart favourites_icon"
+      })), _react.default.createElement("p", {
+        className: "col-12 p_favourites"
+      }, "Remove from favourites"));
+
+      var isNotFavourite = _react.default.createElement("div", {
+        className: "col-12"
+      }, _react.default.createElement("button", {
+        className: "col-12",
+        id: "button_favourites_off",
+        onClick: function onClick() {
+          return _this2.addFavourite();
+        }
+      }, _react.default.createElement("i", {
+        "class": "far fa-heart favourites_icon"
+      })), _react.default.createElement("p", {
+        className: "col-12 p_favourites"
+      }, "Add to favourites")); //get user id
+
+
+      var user = localStorage.getItem('user');
+      user = JSON.parse(user);
+      var user_id = user._id;
+      var token = localStorage.getItem('token');
+      var path = 'https://stavflix.herokuapp.com/users/' + user_id; //get movie id
+
+      var movie = localStorage.getItem('selected');
+      movie = JSON.parse(movie);
+      var movie_id = movie._id; //retrieve user info from database & control whether movie id is 
+      //included in user's favourites
+
+      _axios.default.get(path, {
+        headers: {
+          Authorization: "Bearer ".concat(token)
+        }
+      }).then(function (response) {
+        var userFavourites = response.data[0].favourites;
+        var fav = userFavourites.includes(movie_id);
+        console.log(fav);
+
+        if (fav == false) {
+          self.setState({
+            favourite: isNotFavourite
+          });
+        } else {
+          self.setState({
+            favourite: isFavourite
+          });
+        }
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
+    key: "addFavourite",
+    value: function addFavourite() {
+      //request to add movie to user's favourites_icon
+      var user = localStorage.getItem('user');
+      user = JSON.parse(user);
+      var user_id = user._id;
+      var token = localStorage.getItem('token'); //get movie id
+
+      var movie = localStorage.getItem('selected');
+      movie = JSON.parse(movie);
+      var movie_id = movie._id;
+      var path = 'https://stavflix.herokuapp.com/users/' + user_id + '/favourites/' + movie_id;
+
+      _axios.default.post(path, {
+        headers: {
+          Authorization: "Bearer ".concat(token)
+        }
+      }).then(function (response) {
+        alert(response);
+        console.log(response);
+      }).catch(function (response) {
+        alert(response);
+        console.log(response);
+      });
     }
   }, {
     key: "goback",
@@ -52297,7 +52421,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.MovieView = MovieView;
-},{"react":"../node_modules/react/index.js","./movie-view.scss":"components/movie-view/movie-view.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","../../../../public/images/5ea9f0f2d5fcc5119a040af1.jpg":"../../public/images/5ea9f0f2d5fcc5119a040af1.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af2.jpg":"../../public/images/5ea9f19cd5fcc5119a040af2.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af3.jpg":"../../public/images/5ea9f19cd5fcc5119a040af3.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af4.jpg":"../../public/images/5ea9f19cd5fcc5119a040af4.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af5.jpg":"../../public/images/5ea9f19cd5fcc5119a040af5.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af6.jpg":"../../public/images/5ea9f19cd5fcc5119a040af6.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af7.jpg":"../../public/images/5ea9f19cd5fcc5119a040af7.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af8.jpg":"../../public/images/5ea9f19cd5fcc5119a040af8.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af9.jpeg":"../../public/images/5ea9f19cd5fcc5119a040af9.jpeg","../../../../public/images/5ea9f19cd5fcc5119a040afa.jpg":"../../public/images/5ea9f19cd5fcc5119a040afa.jpg"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/base64-js/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","./movie-view.scss":"components/movie-view/movie-view.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","../../../../public/images/5ea9f0f2d5fcc5119a040af1.jpg":"../../public/images/5ea9f0f2d5fcc5119a040af1.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af2.jpg":"../../public/images/5ea9f19cd5fcc5119a040af2.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af3.jpg":"../../public/images/5ea9f19cd5fcc5119a040af3.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af4.jpg":"../../public/images/5ea9f19cd5fcc5119a040af4.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af5.jpg":"../../public/images/5ea9f19cd5fcc5119a040af5.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af6.jpg":"../../public/images/5ea9f19cd5fcc5119a040af6.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af7.jpg":"../../public/images/5ea9f19cd5fcc5119a040af7.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af8.jpg":"../../public/images/5ea9f19cd5fcc5119a040af8.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af9.jpeg":"../../public/images/5ea9f19cd5fcc5119a040af9.jpeg","../../../../public/images/5ea9f19cd5fcc5119a040afa.jpg":"../../public/images/5ea9f19cd5fcc5119a040afa.jpg"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/base64-js/index.js":[function(require,module,exports) {
 'use strict'
 
 exports.byteLength = byteLength
@@ -71681,7 +71805,7 @@ var Profile = function Profile(props) {
   }, _react.default.createElement("div", {
     className: "col-10 menu_option   button",
     onClick: function onClick() {
-      redirect('http://localhost:1234/user/movies');
+      redirect('http://localhost:1234/users/movies');
     }
   }, _react.default.createElement("i", {
     "class": "fas fa-film col-12 icon"
@@ -71690,7 +71814,7 @@ var Profile = function Profile(props) {
   }, "My movies")), _react.default.createElement("div", {
     className: "col-10 menu_option button",
     onClick: function onClick() {
-      redirect('http://localhost:1234/user/account');
+      redirect('http://localhost:1234/users/account');
     }
   }, _react.default.createElement("i", {
     "class": "fas fa-info col-12 icon"
@@ -71744,9 +71868,11 @@ var Date = function Date(props) {
     className: "row"
   }, _react.default.createElement("div", {
     className: "col-12"
+  }, _react.default.createElement("div", {
+    className: "row"
   }, _react.default.createElement("label", {
     className: "col-5"
-  }, "Day")), _react.default.createElement("div", {
+  }, "Day"))), _react.default.createElement("div", {
     className: "col-12"
   }, _react.default.createElement("select", {
     className: "col-2",
@@ -71755,10 +71881,14 @@ var Date = function Date(props) {
     className: "row"
   }, _react.default.createElement("div", {
     className: "col-12"
+  }, _react.default.createElement("div", {
+    className: "row"
   }, _react.default.createElement("label", {
     className: "col-5"
-  }, "Month")), _react.default.createElement("div", {
+  }, "Month"))), _react.default.createElement("div", {
     className: "col-12"
+  }, _react.default.createElement("div", {
+    className: "row"
   }, _react.default.createElement("select", {
     className: "col-2",
     id: "month"
@@ -71786,13 +71916,15 @@ var Date = function Date(props) {
     value: "11"
   }, "Nov"), _react.default.createElement("option", {
     value: "12"
-  }, "Dec")))), _react.default.createElement("div", {
+  }, "Dec"))))), _react.default.createElement("div", {
     className: "row"
   }, _react.default.createElement("div", {
     className: "col-12"
+  }, _react.default.createElement("div", {
+    className: "row"
   }, _react.default.createElement("label", {
     className: "col-5"
-  }, "Year")), _react.default.createElement("input", {
+  }, "Year"))), _react.default.createElement("input", {
     className: "col-5 date",
     id: "year"
   })), _react.default.createElement("div", {
@@ -99421,14 +99553,13 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 var Account = function Account(props) {
-  //load user information after the form has been rendered
-  (0, _react.useEffect)(function () {
-    var user = localStorage.getItem('user');
-    user = JSON.parse(user);
-    var id = user._id;
-    var token = localStorage.getItem('token');
-    var path = 'https://stavflix.herokuapp.com/users/' + id;
+  var user = localStorage.getItem('user');
+  user = JSON.parse(user);
+  var id = user._id;
+  var token = localStorage.getItem('token');
+  var path = 'https://stavflix.herokuapp.com/users/' + id; //load user information after the form has been rendered
 
+  (0, _react.useEffect)(function () {
     _axios.default.get(path, {
       headers: {
         Authorization: "Bearer ".concat(token)
@@ -99524,7 +99655,7 @@ var Account = function Account(props) {
   }, _react.default.createElement("button", {
     className: "col-8 button_back",
     onClick: function onClick() {
-      redirect('http://localhost:1234/user/profile');
+      redirect('http://localhost:1234/users/profile');
     }
   }, "back"))); //function to handle redirects            
 
@@ -99537,7 +99668,19 @@ var Account = function Account(props) {
     var unregister = confirm('Are you sure you want to delete your account?');
 
     if (unregister == true) {
-      console.log('account deleted');
+      _axios.default.delete(path, {
+        headers: {
+          Authorization: "Bearer ".concat(token)
+        }
+      }).then(function (response) {
+        alert(response.data);
+        console.log(response);
+        localStorage.clear();
+        redirect('http://localhost:1234/');
+      }).catch(function (response) {
+        alert(response.data);
+        console.log(response);
+      });
     } else {
       console.log('account not deleted');
     }
@@ -99652,7 +99795,7 @@ var Account = function Account(props) {
       console.log(response.data);
       alert(response.data); //refresh page so that updated data will be shown
 
-      window.location.replace('http://localhost:1234/user/account');
+      window.location.replace('http://localhost:1234/users/account');
     }).catch(function (error) {
       console.log(error);
     });
@@ -99720,7 +99863,7 @@ var Mymovies = function Mymovies() {
     className: "col"
   }, _react.default.createElement("button", {
     onClick: function onClick() {
-      redirect('http://localhost:1234/user/profile/');
+      redirect('http://localhost:1234/users/profile/');
     }
   }, "back"))));
 
@@ -99928,15 +100071,15 @@ var MainView = /*#__PURE__*/function (_React$Component) {
               component: _movieView.MovieView
             }), _react.default.createElement(_reactRouterDom.Route, {
               exact: true,
-              path: "/user/profile",
+              path: "/users/profile",
               component: _profileView.Profile
             }), _react.default.createElement(_reactRouterDom.Route, {
               exact: true,
-              path: "/user/account",
+              path: "/users/account",
               component: _account_info.Account
             }), _react.default.createElement(_reactRouterDom.Route, {
               exact: true,
-              path: "/user/movies",
+              path: "/users/movies",
               component: _mymovies.Mymovies
             }))));
           }
@@ -100926,7 +101069,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49506" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53501" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

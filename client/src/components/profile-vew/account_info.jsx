@@ -8,17 +8,18 @@ import { json } from 'body-parser';
 
 let Account=function(props){
 
+    let user =localStorage.getItem('user');
+    user=JSON.parse(user);
+    let id=user._id;
+    let token = localStorage.getItem('token');
+    let path ='https://stavflix.herokuapp.com/users/'+id;   
     
     
     
 
     //load user information after the form has been rendered
     useEffect(function(){
-        let user =localStorage.getItem('user');
-        user=JSON.parse(user);
-        let id=user._id;
-        let token = localStorage.getItem('token');
-        let path ='https://stavflix.herokuapp.com/users/'+id;
+        
 
         axios.get(path,{headers: { Authorization: `Bearer ${token}`}}
          )
@@ -120,7 +121,7 @@ let Account=function(props){
 
             <div className='row'>
                 <button className='col-8 button_back' onClick={()=>{
-                    redirect('http://localhost:1234/user/profile');
+                    redirect('http://localhost:1234/users/profile');
                 }}>back</button>
             </div>
         </div>
@@ -142,7 +143,20 @@ let Account=function(props){
      var unregister =  confirm('Are you sure you want to delete your account?');
      if (unregister==true)
         {
-            console.log('account deleted');
+            
+            axios.delete(path,{headers: { Authorization: `Bearer ${token}`}})
+            .then(function(response){
+                alert(response.data);
+                console.log(response);
+                localStorage.clear();
+                redirect('http://localhost:1234/');
+            })
+            .catch(function(response){
+                alert(response.data);
+                console.log(response);
+                
+            })
+            
         }
       else
         {
@@ -272,7 +286,7 @@ let Account=function(props){
         alert(response.data);
 
         //refresh page so that updated data will be shown
-        window.location.replace('http://localhost:1234/user/account');
+        window.location.replace('http://localhost:1234/users/account');
         })
         .catch(function (error) {
         console.log(error);  

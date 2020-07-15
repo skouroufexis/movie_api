@@ -117,9 +117,9 @@ class MainView extends React.Component{
               
             }} />
               <Route exact path='/movies/:id' component={MovieView} />
-              <Route exact path='/user/profile' component={Profile} />
-              <Route exact path='/user/account' component={Account} />
-              <Route exact path='/user/movies' component={Mymovies} />
+              <Route exact path='/users/profile' component={Profile} />
+              <Route exact path='/users/account' component={Account} />
+              <Route exact path='/users/movies' component={Mymovies} />
               
             </div>
           </Router>
@@ -188,9 +188,9 @@ getMovies(token){
 
   
   let self = this;
-  axios.get('https://stavflix.herokuapp.com/movies', {
-    headers: { Authorization: `Bearer ${token}`}
-  })
+  axios.get('https://stavflix.herokuapp.com/movies', 
+  {headers: { Authorization: `Bearer ${token}`}}
+  )
   .then(function(response){
     console.log(response.data + ' getMovies');
     self.setState({content:response.data});

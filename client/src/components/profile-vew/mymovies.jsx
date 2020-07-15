@@ -34,7 +34,7 @@ var Mymovies=function(){
              <div className='row'>
                  <div className='col'>
                      <button onClick={()=>{
-                    redirect('http://localhost:1234/user/profile/');
+                    redirect('http://localhost:1234/users/profile/');
                 }}>back</button>
                  </div>
             </div>   

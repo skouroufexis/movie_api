@@ -16,7 +16,7 @@ var Header = function(props){
 
             <div className='row'>
 
-                <div className='col col-10'>
+                <div className='col col-10 button' onClick={mainMenu}>
                     <h3>Myflix</h3>
                 </div>
 
@@ -43,7 +43,7 @@ var Header = function(props){
     }    
 
     function openProfile(){
-        window.location.replace("http://localhost:1234/user/profile");
+        window.location.replace("http://localhost:1234/users/profile");
     }
 
     function logout(){
