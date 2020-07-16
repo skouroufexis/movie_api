@@ -16,6 +16,7 @@ import poster8 from '../../../../public/images/5ea9f19cd5fcc5119a040af8.jpg';
 import poster9 from '../../../../public/images/5ea9f19cd5fcc5119a040af9.jpeg';
 import poster10 from '../../../../public/images/5ea9f19cd5fcc5119a040afa.jpg';
 import Axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 var posters=[poster1,poster2,poster3,poster4,poster5,poster6,poster7,poster8,poster9,poster10];
 
@@ -86,10 +87,12 @@ class MovieView extends React.Component{
                   {/* other info */}
                   <div id='other_info_container'>
                   <Col md='12' className='otherInfo'><b><h6>Director</h6></b></Col>
-                  <Col md='12' className='otherInfo'><p className='button' id='director'>{movie.director.name}</p></Col>
-
+                  <Col md='12' className='otherInfo'>
+                    <p className='button' id='director' onClick={()=>this.redir(1)}>{movie.director.name}</p>
+                  </Col>
+                                                            
                   <Col md='12' className='otherInfo'><b><h6>Genre</h6></b></Col>
-                  <Col md='12' className='otherInfo'><p className='button' id='genre'>{movie.genre.name}</p></Col>
+                  <Col md='12' className='otherInfo'><p className='button' id='genre' onClick={()=>this.redir(2)}>{movie.genre.name}</p></Col>
 
                   <Col md='12' className='otherInfo'><b><h6>Featured</h6></b></Col>
                   <Col md='12' className='otherInfo'><p>{String(movie.featured)}</p></Col>
@@ -177,10 +180,8 @@ class MovieView extends React.Component{
   }
 
 
+  //add or remove movie from favourites
   handleFavourites(n){
-    //request to add movie to user's favourites_icon
-
-
     let self=this;
 
 
@@ -242,13 +243,35 @@ class MovieView extends React.Component{
           console.log(response);
         });
      } 
+
+  }
+
+  //redirect to 'director' or 'genre' view
+  redir(n){
+
+
+    //get movie id
+    let movie=localStorage.getItem('selected');
+    movie=JSON.parse(movie);
+    let movie_id=movie._id;
+    let director = movie.director.name;
+    let genre = movie.genre.name;
     
 
-    
-    
-    
-    
-    
+    let path;
+
+    if(n=='1')//go to 'director' view
+      {
+        path = 'http://localhost:1234/movies/directors/'+director;
+        window.location.replace(path);
+      }
+
+    else //go to genre view
+      {
+        path = 'http://localhost:1234/movies/genres/'+genre;
+        window.location.replace(path);
+      }
+
   }
 
   goback(){

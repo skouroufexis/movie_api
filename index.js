@@ -70,7 +70,8 @@ app.get('/login',function(request,response){
 //retrieve all movies
 app.get('/movies',passport.authenticate('jwt', {session: false}), function(request,response){
     
-    movies.find({},{title:true,"director.name":true,"genre.name":true,
+    movies.find({},{title:true,"director.name":true,"director.bio":true,"director.birth":true,   
+                    "genre.name":true,
                     description:true,language:true,featured:true,
                     year:true}).sort({title:'ascending'})
     .then(function(data){

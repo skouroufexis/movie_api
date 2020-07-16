@@ -12,13 +12,16 @@ import {LoginView} from '../login-view/login-view';
 import {RegistrationView} from '../registration-view/registration.view';
 import {MovieCard, BtnMovieCard} from '../movie-card/movie-card';
 import {MovieView} from '../movie-view/movie-view';
+import {Director} from '../director-view/director-view';
+import {Genre} from '../genre-view/genre-view';
 
 import {Profile} from '../profile-vew/profile-view';
 import {Account} from '../profile-vew/account_info';
 import {Mymovies} from '../profile-vew/mymovies';
 import {Notfound} from '../errors/notfound';
 
-let test=[1,2,3,4]
+
+
 
 class MainView extends React.Component{
   
@@ -37,7 +40,7 @@ class MainView extends React.Component{
     let token = localStorage.getItem('token');
     let user=localStorage.getItem('username');
     let movies = this.state.content;
-
+    console.log(movies);
     let self=this;
 
     if(!token) //user not logged in
@@ -120,6 +123,10 @@ class MainView extends React.Component{
               <Route exact path='/users/profile' component={Profile} />
               <Route exact path='/users/account' component={Account} />
               <Route exact path='/users/movies' component={Mymovies} />
+              <Route exact path='/movies/directors/:name/' render={Director} />
+              <Route exact path='/movies/genres/:name/' render={Genre} />
+
+              
               
             </div>
           </Router>
