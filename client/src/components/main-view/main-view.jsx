@@ -123,8 +123,24 @@ class MainView extends React.Component{
               <Route exact path='/users/profile' component={Profile} />
               <Route exact path='/users/account' component={Account} />
               <Route exact path='/users/movies' component={Mymovies} />
-              <Route exact path='/movies/directors/:name/' render={Director} />
-              <Route exact path='/movies/genres/:name/' render={Genre} />
+              <Route exact path='/movies/directors/:name/'>
+                  <Director
+                    key={movies}
+                    movies={movies}
+
+                  />
+              </Route>
+
+
+              {/* <Route exact path='/movies/directors/:name/' render={Director} /> */}
+              <Route exact path='/movies/genres/:name/' >
+                <Genre 
+
+                  key={movies}
+                  movies={movies}
+
+                />
+              </Route>
 
               
               

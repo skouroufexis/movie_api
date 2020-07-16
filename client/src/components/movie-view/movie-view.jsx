@@ -109,7 +109,7 @@ class MovieView extends React.Component{
               
               </Col>
               <Col md="6">
-              <button className='col-12' onClick={this.goback}>Back</button>
+              <button className='col-12' onClick={this.goback}>Exit</button>
               </Col>
             </Row>
          </Container>

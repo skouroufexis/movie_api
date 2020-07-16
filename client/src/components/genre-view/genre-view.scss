@@ -1,12 +1,16 @@
-.row {width: 100%;
+.genre_row {text-align: left; margin-top: 2%;width: 100%;    
+            margin-left: auto;  
    }
-.genre_col{text-align: left;}
+.link {color:lightseagreen}
 
+.genre_container { margin-top: auto;}
 
-.title {display: flex;
-       flex-direction: column;
-       align-items: center;
-       justify-content: center;
-       }
+.genre_name {background-color: rgba(32,178,170,0.3);
+   color: rgba(0,0,0,0.8);    
+   
+   }
+   
+.genre_main {padding: 1%; border: solid whitesmoke thin;margin-top: 2%;}
 
+.genre_p {margin-top: 1%;}
        

@@ -1,23 +1,17 @@
-.director_row {width: 100%;
-     border: solid black thin;
-    }
-.director_col {border: solid red thin;text-align: left;}
 
 
+.director_row {text-align: left; margin-top: 2%;width: 100%;
+                
+                margin-left: auto;  
+                }
+.link {color:lightseagreen}
 
-.img_container {border: solid red thin;
-                height: 150px;
-                white-space: nowrap;
-                overflow-x: scroll;}
-.div_img {border: solid blue thin;}
-.director_img {width: 90%; height: 150px;}
+.director_container { margin-top: auto;}
 
+.director_name {background-color: rgba(32,178,170,0.3);
+                color: rgba(0,0,0,0.8);    
+                
+                }
+                
+.director_main {padding: 1%; border: solid whitesmoke thin;margin-top: 2%;}
 
-.director_title {display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        }
-
-
-.director_button{border: none;}        

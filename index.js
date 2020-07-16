@@ -71,8 +71,7 @@ app.get('/login',function(request,response){
 app.get('/movies',passport.authenticate('jwt', {session: false}), function(request,response){
     
     movies.find({},{title:true,"director.name":true,"director.bio":true,"director.birth":true,   
-                    "genre.name":true,
-                    description:true,language:true,featured:true,
+                    "genre.name":true,description:true,language:true,featured:true,
                     year:true}).sort({title:'ascending'})
     .then(function(data){
         console.log(data);
@@ -112,6 +111,7 @@ app.get('/movies/genres/:name',passport.authenticate('jwt', {session: false}), f
        if(data)
             {
                 response.send(data);
+                
             }
         else
             {

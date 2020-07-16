@@ -52325,7 +52325,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       }, _react.default.createElement("button", {
         className: "col-12",
         onClick: this.goback
-      }, "Back")))));
+      }, "Exit")))));
     }
   }, {
     key: "componentDidMount",
@@ -71891,39 +71891,81 @@ var Director = function Director(props) {
   var movie = localStorage.getItem('selected');
   movie = JSON.parse(movie);
   var name = movie.director.name;
-  var birthdate = movie.director.birth;
+  var birth = movie.director.birth;
+  birth = birth.split('-');
+  var year = birth[0];
+  var month = birth[1];
+  var day = birth[2].split('T');
+  day = day[0];
+  birth = day + '-' + month + '-' + year;
   var bio = movie.director.bio;
-  console.log(movie);
-  return _react.default.createElement("div", null, _react.default.createElement("div", {
-    className: "row"
+  return _react.default.createElement("div", {
+    className: "container director_main"
+  }, _react.default.createElement("div", {
+    className: "container director_container"
+  }, _react.default.createElement("div", {
+    className: "row director_row director_name"
   }, _react.default.createElement("div", {
     className: "col col-12 director_col"
   }, _react.default.createElement("h1", null, name))), _react.default.createElement("div", {
-    className: "row header"
+    className: "row director_row"
   }, _react.default.createElement("div", {
     className: "col col-12 director_col"
   }, _react.default.createElement("h5", null, "Biography"), _react.default.createElement("p", null, bio))), _react.default.createElement("div", {
     className: "row director_row"
   }, _react.default.createElement("div", {
     className: "col col-12 director_col"
-  }, _react.default.createElement("h5", null, "Movies"))), _react.default.createElement("div", {
-    className: "row director_row header"
-  }, _react.default.createElement("div", {
-    className: "col col-6 director_col"
-  }, _react.default.createElement("img", {
-    className: "director_img"
-  })), _react.default.createElement("div", {
-    className: "col col-6 director_col director_title"
-  }, _react.default.createElement("h6", null, "Movie Title"))), _react.default.createElement("div", {
+  }, _react.default.createElement("h5", null, "Date of birth"), _react.default.createElement("p", null, birth))), _react.default.createElement("div", {
     className: "row director_row"
   }, _react.default.createElement("div", {
-    className: "col-10 md-col-4"
-  }, _react.default.createElement("button", {
-    className: "col-md-4  col-10 director_button",
+    className: "col col-12 director_col"
+  }, _react.default.createElement("h5", null, "Movies"))), _react.default.createElement("div", {
+    className: "row director_row"
+  }, findMovies()), _react.default.createElement("div", {
+    className: "row director_row"
+  }, _react.default.createElement("div", {
+    className: "col-5"
+  }), _react.default.createElement("button", {
+    className: "col-5 director_back",
     onClick: function onClick() {
       return back();
     }
   }, "Back"))));
+
+  function findMovies() {
+    var c;
+    var m = props.movies;
+    var l = m.length;
+    var titles = [];
+    var movs = []; //movies to return
+
+    for (c = 0; c < l; c++) {
+      if (m[c].director.name == name) {
+        titles.push(m[c]);
+      }
+    }
+
+    l = titles.length;
+
+    var _loop = function _loop() {
+      var n = c;
+      movs[c] = _react.default.createElement("div", {
+        className: "col-12 director_col link button",
+        onClick: function onClick() {
+          redirect(n, titles[n]);
+        }
+      }, titles[c].title);
+      console.log(titles[c].title);
+    };
+
+    for (c = 0; c < l; c++) {
+      _loop();
+    }
+
+    return _react.default.createElement("div", {
+      className: "col-12 director_col"
+    }, movs);
+  }
 
   function back() {
     //get movie id
@@ -71931,6 +71973,14 @@ var Director = function Director(props) {
     movie = JSON.parse(movie);
     var movie_id = movie._id;
     var path = 'http://localhost:1234/movies/' + movie_id;
+    window.location.replace(path);
+  }
+
+  function redirect(path, newSelectedMovie) {
+    //set new selected movie in localStorage
+    localStorage.setItem('selected', JSON.stringify(newSelectedMovie)); //redirect to the new selected movie
+
+    path = 'http://localhost:1234/movies/' + path;
     window.location.replace(path);
   }
 };
@@ -71949,39 +71999,78 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Genre = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _header = require("../header/header");
+
+var _axios = _interopRequireDefault(require("axios"));
 
 require("./genre-view.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 var Genre = function Genre(props) {
-  return _react.default.createElement("div", null, _react.default.createElement("div", {
-    className: "row genre_row header"
+  //get genre name & token
+  var _useState = (0, _react.useState)(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      genreDescription = _useState2[0],
+      setGenre = _useState2[1];
+
+  var movie = localStorage.getItem('selected');
+  movie = JSON.parse(movie);
+  var genre_name = movie.genre.name;
+  var path = 'https://stavflix.herokuapp.com/movies/genres/' + genre_name;
+  var token = localStorage.getItem('token');
+
+  _axios.default.get(path, {
+    headers: {
+      Authorization: "Bearer ".concat(token)
+    }
+  }).then(function (response) {
+    var data = response.data;
+    setGenre(response.data.genre.description);
+  }).catch(function (response) {
+    console.log(response);
+  });
+
+  return _react.default.createElement("div", {
+    className: "container genre_main"
+  }, _react.default.createElement("div", {
+    className: "container genre_container"
+  }, _react.default.createElement("div", {
+    className: "row genre_row genre_name"
   }, _react.default.createElement("div", {
     className: "col col-12 genre_col"
-  }, _react.default.createElement("h1", null, "Genre Name"))), _react.default.createElement("div", {
-    className: "row genre_row header"
-  }, _react.default.createElement("div", {
-    className: "col col-12"
-  }, _react.default.createElement("p", null, "Genre description"))), _react.default.createElement("div", {
-    className: "row genre_row header"
-  }, _react.default.createElement("div", {
-    className: "col col-12 genre_col"
-  }, _react.default.createElement("h5", null, "Movies listed as GenreName"))), _react.default.createElement("div", {
-    className: "row genre_row header"
-  }, _react.default.createElement("div", {
-    className: "col col-6 genre_col"
-  }, _react.default.createElement("img", null)), _react.default.createElement("div", {
-    className: "col col-6 genre_col title"
-  }, _react.default.createElement("h6", null, "Movie Title"))), _react.default.createElement("div", {
+  }, _react.default.createElement("h1", null, genre_name))), _react.default.createElement("p", {
+    className: "col-12 genre_p"
+  }, genreDescription), _react.default.createElement("div", {
     className: "row genre_row"
   }, _react.default.createElement("div", {
-    className: "col-10 md-col-4"
-  }, _react.default.createElement("button", {
-    className: "col-md-4  col-10 ",
+    className: "col col-12 genre_col"
+  }, _react.default.createElement("h5", null, "Movies the same genre"))), _react.default.createElement("div", {
+    className: "row genre_row"
+  }, findMovies()), _react.default.createElement("div", {
+    className: "row genre_row"
+  }, _react.default.createElement("div", {
+    className: "col-5"
+  }), _react.default.createElement("button", {
+    className: "col-5 genre_back",
     onClick: function onClick() {
       return back();
     }
@@ -71995,10 +72084,53 @@ var Genre = function Genre(props) {
     var path = 'http://localhost:1234/movies/' + movie_id;
     window.location.replace(path);
   }
+
+  function findMovies() {
+    var c;
+    var m = props.movies;
+    var l = m.length;
+    var titles = [];
+    var movs = []; //movies to return
+
+    for (c = 0; c < l; c++) {
+      if (m[c].genre.name == genre_name) {
+        titles.push(m[c]);
+      }
+    }
+
+    l = titles.length;
+
+    var _loop = function _loop() {
+      var n = c;
+      movs[c] = _react.default.createElement("div", {
+        className: "col-12 director_col link button",
+        onClick: function onClick() {
+          redirect(n, titles[n]);
+        }
+      }, titles[c].title);
+      console.log(titles[c].title);
+    };
+
+    for (c = 0; c < l; c++) {
+      _loop();
+    }
+
+    return _react.default.createElement("div", {
+      className: "col-12 director_col"
+    }, movs);
+  }
+
+  function redirect(path, newSelectedMovie) {
+    //set new selected movie in localStorage
+    localStorage.setItem('selected', JSON.stringify(newSelectedMovie)); //redirect to the new selected movie
+
+    path = 'http://localhost:1234/movies/' + path;
+    window.location.replace(path);
+  }
 };
 
 exports.Genre = Genre;
-},{"react":"../node_modules/react/index.js","../header/header":"components/header/header.jsx","./genre-view.scss":"components/genre-view/genre-view.scss"}],"components/profile-vew/profile-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../header/header":"components/header/header.jsx","axios":"../node_modules/axios/index.js","./genre-view.scss":"components/genre-view/genre-view.scss"}],"components/profile-vew/profile-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -100307,13 +100439,17 @@ var MainView = /*#__PURE__*/function (_React$Component) {
               component: _mymovies.Mymovies
             }), _react.default.createElement(_reactRouterDom.Route, {
               exact: true,
-              path: "/movies/directors/:name/",
-              render: _directorView.Director
-            }), _react.default.createElement(_reactRouterDom.Route, {
+              path: "/movies/directors/:name/"
+            }, _react.default.createElement(_directorView.Director, {
+              key: movies,
+              movies: movies
+            })), _react.default.createElement(_reactRouterDom.Route, {
               exact: true,
-              path: "/movies/genres/:name/",
-              render: _genreView.Genre
-            }))));
+              path: "/movies/genres/:name/"
+            }, _react.default.createElement(_genreView.Genre, {
+              key: movies,
+              movies: movies
+            })))));
           }
         }
     } // componentDidMount(){
@@ -101301,7 +101437,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51406" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56531" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
