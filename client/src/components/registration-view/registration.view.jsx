@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import {Container, Row, Col, Form} from 'react-bootstrap';
+import axios from 'axios';
 
 import './registration-view.scss';
 
@@ -8,7 +9,24 @@ function RegistrationView(props) {
 
     function register(){
         //capture credentials and add new user
+        let email=document.getElementById('email').value;
+        let username=document.getElementById('username').value;
+        let password=document.getElementById('password').value;
+        let birthday=document.getElementById('birthday').value;
 
+        axios.post('https://stavflix.herokuapp.com/users',
+                   {email:email,username:username,password:password,birthday:birthday}
+                   )
+              .then(function(response){
+                  console.log(response);
+                  alert('Account successfully created');
+                  window.location.replace('http://localhost:1234/')
+              })
+              .catch(function(response){
+                  console.log(response);
+              })     
+                   
+        
         
     }
 

@@ -40,7 +40,7 @@ class MainView extends React.Component{
     let token = localStorage.getItem('token');
     let user=localStorage.getItem('username');
     let movies = this.state.content;
-    console.log(movies);
+    
     let self=this;
 
     if(!token) //user not logged in
@@ -102,7 +102,8 @@ class MainView extends React.Component{
               let x = movies.map(function(movie){
                 return (
                   
-                  <MovieCard key={movie._id}
+                  <MovieCard 
+                  key={movie._id}
                   title={movie.title}
                   id={movie._id}  
                   movie={movie}
@@ -122,7 +123,15 @@ class MainView extends React.Component{
               <Route exact path='/movies/:id' component={MovieView} />
               <Route exact path='/users/profile' component={Profile} />
               <Route exact path='/users/account' component={Account} />
-              <Route exact path='/users/movies' component={Mymovies} />
+
+              <Route exact path='/users/movies'>
+                 <Mymovies 
+
+                      key={movies}
+                      movies= {movies}
+
+                 />
+              </Route>
               <Route exact path='/movies/directors/:name/'>
                   <Director
                     key={movies}
@@ -141,9 +150,6 @@ class MainView extends React.Component{
 
                 />
               </Route>
-
-              
-              
             </div>
           </Router>
           </div>
@@ -154,58 +160,9 @@ class MainView extends React.Component{
 
   } 
   
-  
-  // componentDidMount(){
-    
-
-    
-  //   let token = localStorage.getItem('token');
-  //   let user=localStorage.getItem('user');
-    
-
-  //   if(token!=null)
-  //     {
-  //       this.getMovies(token);
-  //       console.log(movies + 'didmount');
-
-  //     }
-    
-    
-  // }
-
-
   selectedMovie(movie){
     this.setState({selected:movie});
   }
-
-  //go back to movies screen
-  // goBack(){
-  //   this.setState({selected:null});
-    
-  // }
-
-  //open user register screen
-  // openRegister(){
-    
-  //   this.setState({openRegister:true})
-  // }
-
- //open movies screen after successful login
-  // login(data){
-
-  //   this.setState({user:data.user}); //user logged in
-  //   localStorage.setItem('token', data.token);
-  //   localStorage.setItem('user', data.user.username);
-    
-  //   this.setState({user:data.user.username});
-  //   console.log(data.user.username);
-  //   this.getMovies(data.token);
-    
-  // }
-
-
-
-
 
 getMovies(token){
 

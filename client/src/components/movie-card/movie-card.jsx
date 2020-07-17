@@ -13,7 +13,7 @@ import poster5 from '../../../../public/images/5ea9f19cd5fcc5119a040af5.jpg';
 import poster6 from '../../../../public/images/5ea9f19cd5fcc5119a040af6.jpg';
 import poster7 from '../../../../public/images/5ea9f19cd5fcc5119a040af7.jpg';
 import poster8 from '../../../../public/images/5ea9f19cd5fcc5119a040af8.jpg';
-import poster9 from '../../../../public/images/5ea9f19cd5fcc5119a040af9.jpeg';
+import poster9 from '../../../../public/images/5ea9f19cd5fcc5119a040af9.jpg';
 import poster10 from '../../../../public/images/5ea9f19cd5fcc5119a040afa.jpg';
 import { selectFields } from 'express-validator/src/select-fields';
 

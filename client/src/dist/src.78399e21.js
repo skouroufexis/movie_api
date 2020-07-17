@@ -52007,14 +52007,36 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactBootstrap = require("react-bootstrap");
 
+var _axios = _interopRequireDefault(require("axios"));
+
 require("./registration-view.scss");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function RegistrationView(props) {
-  function register() {//capture credentials and add new user
+  function register() {
+    //capture credentials and add new user
+    var email = document.getElementById('email').value;
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+    var birthday = document.getElementById('birthday').value;
+
+    _axios.default.post('https://stavflix.herokuapp.com/users', {
+      email: email,
+      username: username,
+      password: password,
+      birthday: birthday
+    }).then(function (response) {
+      console.log(response);
+      alert('Account successfully created');
+      window.location.replace('http://localhost:1234/');
+    }).catch(function (response) {
+      console.log(response);
+    });
   }
 
   function openlogin() {
@@ -52131,7 +52153,7 @@ function RegistrationView(props) {
     onClick: openlogin
   }, "back")))));
 }
-},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./registration-view.scss":"components/registration-view/registration-view.scss"}],"components/movie-card/movie-card.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","axios":"../node_modules/axios/index.js","./registration-view.scss":"components/registration-view/registration-view.scss"}],"components/movie-card/movie-card.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -52157,8 +52179,8 @@ module.exports = "/5ea9f19cd5fcc5119a040af6.1e159adc.jpg";
 module.exports = "/5ea9f19cd5fcc5119a040af7.f48004fe.jpg";
 },{}],"../../public/images/5ea9f19cd5fcc5119a040af8.jpg":[function(require,module,exports) {
 module.exports = "/5ea9f19cd5fcc5119a040af8.fce9b3c6.jpg";
-},{}],"../../public/images/5ea9f19cd5fcc5119a040af9.jpeg":[function(require,module,exports) {
-module.exports = "/5ea9f19cd5fcc5119a040af9.02913c23.jpeg";
+},{}],"../../public/images/5ea9f19cd5fcc5119a040af9.jpg":[function(require,module,exports) {
+module.exports = "/5ea9f19cd5fcc5119a040af9.791e65c7.jpg";
 },{}],"../../public/images/5ea9f19cd5fcc5119a040afa.jpg":[function(require,module,exports) {
 module.exports = "/5ea9f19cd5fcc5119a040afa.65fcb110.jpg";
 },{}],"components/movie-view/movie-view.jsx":[function(require,module,exports) {
@@ -52193,7 +52215,7 @@ var _ea9f19cd5fcc5119a040af6 = _interopRequireDefault(require("../../../../publi
 
 var _ea9f19cd5fcc5119a040af7 = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040af8.jpg"));
 
-var _ea9f19cd5fcc5119a040af8 = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040af9.jpeg"));
+var _ea9f19cd5fcc5119a040af8 = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040af9.jpg"));
 
 var _ea9f19cd5fcc5119a040afa = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040afa.jpg"));
 
@@ -52509,7 +52531,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.MovieView = MovieView;
-},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","./movie-view.scss":"components/movie-view/movie-view.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","../../../../public/images/5ea9f0f2d5fcc5119a040af1.jpg":"../../public/images/5ea9f0f2d5fcc5119a040af1.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af2.jpg":"../../public/images/5ea9f19cd5fcc5119a040af2.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af3.jpg":"../../public/images/5ea9f19cd5fcc5119a040af3.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af4.jpg":"../../public/images/5ea9f19cd5fcc5119a040af4.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af5.jpg":"../../public/images/5ea9f19cd5fcc5119a040af5.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af6.jpg":"../../public/images/5ea9f19cd5fcc5119a040af6.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af7.jpg":"../../public/images/5ea9f19cd5fcc5119a040af7.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af8.jpg":"../../public/images/5ea9f19cd5fcc5119a040af8.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af9.jpeg":"../../public/images/5ea9f19cd5fcc5119a040af9.jpeg","../../../../public/images/5ea9f19cd5fcc5119a040afa.jpg":"../../public/images/5ea9f19cd5fcc5119a040afa.jpg","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/base64-js/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","./movie-view.scss":"components/movie-view/movie-view.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","../../../../public/images/5ea9f0f2d5fcc5119a040af1.jpg":"../../public/images/5ea9f0f2d5fcc5119a040af1.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af2.jpg":"../../public/images/5ea9f19cd5fcc5119a040af2.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af3.jpg":"../../public/images/5ea9f19cd5fcc5119a040af3.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af4.jpg":"../../public/images/5ea9f19cd5fcc5119a040af4.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af5.jpg":"../../public/images/5ea9f19cd5fcc5119a040af5.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af6.jpg":"../../public/images/5ea9f19cd5fcc5119a040af6.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af7.jpg":"../../public/images/5ea9f19cd5fcc5119a040af7.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af8.jpg":"../../public/images/5ea9f19cd5fcc5119a040af8.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af9.jpg":"../../public/images/5ea9f19cd5fcc5119a040af9.jpg","../../../../public/images/5ea9f19cd5fcc5119a040afa.jpg":"../../public/images/5ea9f19cd5fcc5119a040afa.jpg","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/base64-js/index.js":[function(require,module,exports) {
 'use strict'
 
 exports.byteLength = byteLength
@@ -71782,7 +71804,7 @@ var _ea9f19cd5fcc5119a040af6 = _interopRequireDefault(require("../../../../publi
 
 var _ea9f19cd5fcc5119a040af7 = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040af8.jpg"));
 
-var _ea9f19cd5fcc5119a040af8 = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040af9.jpeg"));
+var _ea9f19cd5fcc5119a040af8 = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040af9.jpg"));
 
 var _ea9f19cd5fcc5119a040afa = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040afa.jpg"));
 
@@ -71865,7 +71887,7 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.MovieCard = MovieCard;
-},{"react":"../node_modules/react/index.js","./movie-card.scss":"components/movie-card/movie-card.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../../../../public/images/5ea9f0f2d5fcc5119a040af1.jpg":"../../public/images/5ea9f0f2d5fcc5119a040af1.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af2.jpg":"../../public/images/5ea9f19cd5fcc5119a040af2.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af3.jpg":"../../public/images/5ea9f19cd5fcc5119a040af3.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af4.jpg":"../../public/images/5ea9f19cd5fcc5119a040af4.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af5.jpg":"../../public/images/5ea9f19cd5fcc5119a040af5.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af6.jpg":"../../public/images/5ea9f19cd5fcc5119a040af6.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af7.jpg":"../../public/images/5ea9f19cd5fcc5119a040af7.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af8.jpg":"../../public/images/5ea9f19cd5fcc5119a040af8.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af9.jpeg":"../../public/images/5ea9f19cd5fcc5119a040af9.jpeg","../../../../public/images/5ea9f19cd5fcc5119a040afa.jpg":"../../public/images/5ea9f19cd5fcc5119a040afa.jpg","express-validator/src/select-fields":"../../node_modules/express-validator/src/select-fields.js"}],"components/director-view/director-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./movie-card.scss":"components/movie-card/movie-card.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../../../../public/images/5ea9f0f2d5fcc5119a040af1.jpg":"../../public/images/5ea9f0f2d5fcc5119a040af1.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af2.jpg":"../../public/images/5ea9f19cd5fcc5119a040af2.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af3.jpg":"../../public/images/5ea9f19cd5fcc5119a040af3.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af4.jpg":"../../public/images/5ea9f19cd5fcc5119a040af4.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af5.jpg":"../../public/images/5ea9f19cd5fcc5119a040af5.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af6.jpg":"../../public/images/5ea9f19cd5fcc5119a040af6.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af7.jpg":"../../public/images/5ea9f19cd5fcc5119a040af7.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af8.jpg":"../../public/images/5ea9f19cd5fcc5119a040af8.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af9.jpg":"../../public/images/5ea9f19cd5fcc5119a040af9.jpg","../../../../public/images/5ea9f19cd5fcc5119a040afa.jpg":"../../public/images/5ea9f19cd5fcc5119a040afa.jpg","express-validator/src/select-fields":"../../node_modules/express-validator/src/select-fields.js"}],"components/director-view/director-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -99928,7 +99950,10 @@ var Account = function Account(props) {
       day = day[0]; //re-build the date in the format required by the database and save it in localStorage for later use
 
       var newdate = year + '-' + month + '-' + day;
-      localStorage.setItem('newdate', newdate); //populate fields with user data        
+      var currentdate = day + '-' + month + '-' + year;
+      localStorage.setItem('newdate', newdate);
+      localStorage.setItem('currentdate', currentdate); //to show if user cancel changes   
+      //populate fields with user data        
 
       var inputs = document.getElementsByClassName('field');
       inputs[0].value = username;
@@ -100107,7 +100132,7 @@ var Account = function Account(props) {
     var inputs = document.getElementsByClassName('field');
     inputs[0].value = user.username;
     inputs[1].value = user.email;
-    inputs[2].value = day + '-' + month + '-' + year;
+    inputs[2].value = localStorage.getItem('currentdate');
     inputs[3].value = user.password[0] + user.password[1] + user.password[2]; //disable input fields
 
     var x;
@@ -100169,64 +100194,208 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Mymovies = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 require("./mymovies.scss");
 
+var _axios = _interopRequireDefault(require("axios"));
+
+var _ea9f0f2d5fcc5119a040af = _interopRequireDefault(require("../../../../public/images/5ea9f0f2d5fcc5119a040af1.jpg"));
+
+var _ea9f19cd5fcc5119a040af = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040af2.jpg"));
+
+var _ea9f19cd5fcc5119a040af2 = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040af3.jpg"));
+
+var _ea9f19cd5fcc5119a040af3 = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040af4.jpg"));
+
+var _ea9f19cd5fcc5119a040af4 = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040af5.jpg"));
+
+var _ea9f19cd5fcc5119a040af5 = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040af6.jpg"));
+
+var _ea9f19cd5fcc5119a040af6 = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040af7.jpg"));
+
+var _ea9f19cd5fcc5119a040af7 = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040af8.jpg"));
+
+var _ea9f19cd5fcc5119a040af8 = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040af9.jpg"));
+
+var _ea9f19cd5fcc5119a040afa = _interopRequireDefault(require("../../../../public/images/5ea9f19cd5fcc5119a040afa.jpg"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Mymovies = function Mymovies() {
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var posters = [_ea9f0f2d5fcc5119a040af.default, _ea9f19cd5fcc5119a040af.default, _ea9f19cd5fcc5119a040af2.default, _ea9f19cd5fcc5119a040af3.default, _ea9f19cd5fcc5119a040af4.default, _ea9f19cd5fcc5119a040af5.default, _ea9f19cd5fcc5119a040af6.default, _ea9f19cd5fcc5119a040af7.default, _ea9f19cd5fcc5119a040af8.default, _ea9f19cd5fcc5119a040afa.default];
+
+var Mymovies = function Mymovies(props) {
+  var _useState = (0, _react.useState)(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      myFavourites = _useState2[0],
+      handleFavourites = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      favouritesChange = _useState4[0],
+      changeFavourites = _useState4[1];
+
+  var user = localStorage.getItem('user');
+  user = JSON.parse(user);
+  var user_id = user._id;
+  var token = localStorage.getItem('token');
+  (0, _react.useEffect)(function () {
+    var path = 'https://stavflix.herokuapp.com/users/' + user_id;
+
+    _axios.default.get(path, {
+      headers: {
+        Authorization: "Bearer ".concat(token)
+      }
+    }).then(function (response) {
+      var favourites = response.data[0].favourites;
+
+      if (favourites != null) {
+        handleFavourites(favourites);
+      }
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }, [favouritesChange]);
   return _react.default.createElement("div", {
     className: "container main"
   }, _react.default.createElement("div", {
     className: "row"
   }, _react.default.createElement("div", {
-    className: "col-12"
+    className: "col-12 mymovies_header"
   }, _react.default.createElement("h1", null, "My Movies"))), _react.default.createElement("div", {
-    className: "row",
-    id: "no_content"
-  }, _react.default.createElement("div", {
-    className: "col"
-  }, "No favourite movies found")), _react.default.createElement("div", {
-    className: "row",
-    id: "content"
-  }, _react.default.createElement("div", {
-    className: "col"
-  }, "image"), _react.default.createElement("div", {
-    className: "col"
-  }, _react.default.createElement("div", {
-    className: "row"
-  }, _react.default.createElement("div", {
-    className: "col"
-  }, "Title")), _react.default.createElement("div", {
+    className: "mymovies_content_container"
+  }, fetchFavourites()), _react.default.createElement("div", {
     className: "row"
   }, _react.default.createElement("div", {
     className: "col"
   }, _react.default.createElement("button", {
-    className: "btn_secondary1"
-  }, "open")), _react.default.createElement("div", {
-    className: "col"
-  }, _react.default.createElement("button", {
-    className: "btn_secondary2"
-  }, _react.default.createElement("i", {
-    "class": "fas fa-times"
-  })))))), _react.default.createElement("div", {
-    className: "row"
-  }, _react.default.createElement("div", {
-    className: "col"
-  }, _react.default.createElement("button", {
+    id: "mymovies_back",
     onClick: function onClick() {
       redirect('http://localhost:1234/users/profile/');
     }
   }, "back"))));
 
-  function redirect(path) {
+  function fetchFavourites() {
+    if (myFavourites == null) {
+      return myFavourites;
+    } else {
+      var _ret = function () {
+        var movies = props.movies;
+        var l = movies.length;
+        var c;
+        var c2;
+        var titles = []; //array to hold movie titles
+
+        var favs = []; //array to be returned as rendered elements with movie titles
+
+        var favsPosters = []; //array to hold the movie favourites' posters
+
+        for (c = 0; c < l; c++) {
+          if (myFavourites.includes(movies[c]._id)) //movie id matches favourite movies id
+            {
+              titles.push(movies[c]); //take matching movies
+            }
+        }
+
+        for (c = 0; c < myFavourites.length; c++) {
+          for (c2 = 0; c2 < posters.length; c2++) {
+            if (posters[c2].includes(myFavourites[c])) {
+              favsPosters.push(posters[c2]);
+            }
+          }
+        }
+
+        var _loop = function _loop() {
+          var n = c;
+          favs[c] = _react.default.createElement("div", {
+            className: "mymovies_main"
+          }, _react.default.createElement("div", {
+            className: "row",
+            id: "mymovies_content"
+          }, _react.default.createElement("div", {
+            className: "col-8 link button"
+          }, _react.default.createElement("div", {
+            className: "row"
+          }, _react.default.createElement("div", {
+            className: "col-12 col-md-4"
+          }, _react.default.createElement("img", {
+            className: "mymovies_img",
+            src: favsPosters[c]
+          })), _react.default.createElement("div", {
+            className: "col-12 col-md-8 mymovies_title button",
+            onClick: function onClick() {
+              redirect(titles[n], titles[n]._id);
+            }
+          }, titles[c].title))), _react.default.createElement("div", {
+            className: "col-2  button",
+            onClick: function onClick() {
+              removeFavourite(titles[n]._id);
+            }
+          }, _react.default.createElement("i", {
+            "class": "fas fa-times"
+          }))));
+        };
+
+        for (c = 0; c < titles.length; c++) {
+          _loop();
+        }
+
+        return {
+          v: _react.default.createElement("div", {
+            className: "col-12 director_col"
+          }, favs)
+        };
+      }();
+
+      if (_typeof(_ret) === "object") return _ret.v;
+    }
+  } // redirect to selected movie
+
+
+  function redirect(movie, id) {
+    localStorage.setItem('selected', JSON.stringify(movie));
+    var path = 'http://localhost:1234/movies/' + id;
     window.location.replace(path);
+  } //remove movie from favourites
+
+
+  function removeFavourite(movie_id) {
+    var path = 'https://stavflix.herokuapp.com/users/' + user_id + '/favourites/' + movie_id;
+
+    _axios.default.put(path, {}, {
+      headers: {
+        Authorization: "Bearer ".concat(token)
+      }
+    }).then(function (response) {
+      console.log(response.data);
+      changeFavourites(movie_id); //change the useState variable that will trigger
+      //the useEffect
+    }).catch(function (error) {
+      console.log(error);
+    });
   }
 };
 
 exports.Mymovies = Mymovies;
-},{"react":"../node_modules/react/index.js","./mymovies.scss":"components/profile-vew/mymovies.scss"}],"components/errors/notfound.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./mymovies.scss":"components/profile-vew/mymovies.scss","axios":"../node_modules/axios/index.js","../../../../public/images/5ea9f0f2d5fcc5119a040af1.jpg":"../../public/images/5ea9f0f2d5fcc5119a040af1.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af2.jpg":"../../public/images/5ea9f19cd5fcc5119a040af2.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af3.jpg":"../../public/images/5ea9f19cd5fcc5119a040af3.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af4.jpg":"../../public/images/5ea9f19cd5fcc5119a040af4.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af5.jpg":"../../public/images/5ea9f19cd5fcc5119a040af5.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af6.jpg":"../../public/images/5ea9f19cd5fcc5119a040af6.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af7.jpg":"../../public/images/5ea9f19cd5fcc5119a040af7.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af8.jpg":"../../public/images/5ea9f19cd5fcc5119a040af8.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af9.jpg":"../../public/images/5ea9f19cd5fcc5119a040af9.jpg","../../../../public/images/5ea9f19cd5fcc5119a040afa.jpg":"../../public/images/5ea9f19cd5fcc5119a040afa.jpg"}],"components/errors/notfound.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -100374,7 +100543,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       var token = localStorage.getItem('token');
       var user = localStorage.getItem('username');
       var movies = this.state.content;
-      console.log(movies);
       var self = this;
 
       if (!token) //user not logged in
@@ -100435,9 +100603,11 @@ var MainView = /*#__PURE__*/function (_React$Component) {
               component: _account_info.Account
             }), _react.default.createElement(_reactRouterDom.Route, {
               exact: true,
-              path: "/users/movies",
-              component: _mymovies.Mymovies
-            }), _react.default.createElement(_reactRouterDom.Route, {
+              path: "/users/movies"
+            }, _react.default.createElement(_mymovies.Mymovies, {
+              key: movies,
+              movies: movies
+            })), _react.default.createElement(_reactRouterDom.Route, {
               exact: true,
               path: "/movies/directors/:name/"
             }, _react.default.createElement(_directorView.Director, {
@@ -100452,40 +100622,14 @@ var MainView = /*#__PURE__*/function (_React$Component) {
             })))));
           }
         }
-    } // componentDidMount(){
-    //   let token = localStorage.getItem('token');
-    //   let user=localStorage.getItem('user');
-    //   if(token!=null)
-    //     {
-    //       this.getMovies(token);
-    //       console.log(movies + 'didmount');
-    //     }
-    // }
-
+    }
   }, {
     key: "selectedMovie",
     value: function selectedMovie(movie) {
       this.setState({
         selected: movie
       });
-    } //go back to movies screen
-    // goBack(){
-    //   this.setState({selected:null});
-    // }
-    //open user register screen
-    // openRegister(){
-    //   this.setState({openRegister:true})
-    // }
-    //open movies screen after successful login
-    // login(data){
-    //   this.setState({user:data.user}); //user logged in
-    //   localStorage.setItem('token', data.token);
-    //   localStorage.setItem('user', data.user.username);
-    //   this.setState({user:data.user.username});
-    //   console.log(data.user.username);
-    //   this.getMovies(data.token);
-    // }
-
+    }
   }, {
     key: "getMovies",
     value: function getMovies(token) {
@@ -101437,7 +101581,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56531" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54403" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

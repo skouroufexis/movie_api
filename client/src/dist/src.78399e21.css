@@ -335,12 +335,53 @@ select {
 input {
   text-align: center;
 }
+.mymovies_header {
+  background-color: rgba(32, 178, 170, 0.1);
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.mymovies_content_container {
+  height: 100%;
+  overflow-y: scroll;
+}
+
 .container {
   margin-left: auto;
 }
 
 .col {
   border: none;
+}
+
+.mymovies_main {
+  margin-top: 1%;
+  border: solid whitesmoke thin;
+  padding: 1%;
+}
+
+#mymovies_content {
+  margin-top: 2%;
+}
+
+#mymovies_content .button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mymovies_img {
+  height: 100px;
+  width: 100px;
+}
+
+.mymovies_title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#mymovies_back {
+  margin-top: 1%;
 }
 .notfoundmain {
   height: 100vh;

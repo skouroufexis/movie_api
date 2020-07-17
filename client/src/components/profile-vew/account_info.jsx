@@ -19,14 +19,9 @@ let Account=function(props){
 
     //load user information after the form has been rendered
     useEffect(function(){
-        
-
         axios.get(path,{headers: { Authorization: `Bearer ${token}`}}
          )
         .then(function(response){
-
-
-        
         let username=response.data[0].username; 
         let email=response.data[0].email;
         let birthday=response.data[0].birthday;     
@@ -38,7 +33,10 @@ let Account=function(props){
             
                 //re-build the date in the format required by the database and save it in localStorage for later use
                 let newdate=year+'-'+month+'-'+day;
+                let currentdate=day+'-'+month+'-'+year;
+
                 localStorage.setItem('newdate',newdate);   
+                localStorage.setItem('currentdate',currentdate);//to show if user cancel changes   
 
         //populate fields with user data        
         let inputs=document.getElementsByClassName('field');
@@ -247,7 +245,7 @@ let Account=function(props){
         let inputs = document.getElementsByClassName('field');
         inputs[0].value=user.username;
         inputs[1].value=user.email;
-        inputs[2].value=day+'-'+month+'-'+year;
+        inputs[2].value=localStorage.getItem('currentdate');   
         inputs[3].value=user.password[0]+user.password[1]+user.password[2];
         //disable input fields
 
