@@ -47,7 +47,7 @@ let MainView = function(props){
               <Switch>
               <Route exact path='/client' component={LoginView} />
               <Route exact path='/client/register' component={RegistrationView} />
-              <Route path='/client' component={Notfound} /> 
+              {/* <Route path='/client' component={Notfound} />  */}
               </Switch>
             </div>
           </Router>
@@ -121,10 +121,6 @@ let MainView = function(props){
                     <Route exact path='/client/users/account' component={Account} />
 
                     <Route exact path='/client/users/movies' component={Mymovies}/>
-                      
-
-                    
-                        
 
                     <Route exact path='/client/movies/directors/:name/' component={Director}/>
 
