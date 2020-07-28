@@ -5,10 +5,7 @@ const express = require('express');
     app.use("/client", express.static(path.join(__dirname, "client", "dist")));
 
 
-    app.get("/client/*", (req, res) => {
-        res.send('a');
-        // res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
-      });
+    
 
 //body-parser
 const bodyparser = require('body-parser');
@@ -50,7 +47,10 @@ mongoose.connect(process.env.connectURI,{ useNewUrlParser: true, useUnifiedTopol
 
 require('./auth.js')(app);
 
-
+app.get("/client/*", (req, res) => {
+    res.send('a');
+    // res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+  });
 
 //routes
 app.get('/' , function(request,response){
