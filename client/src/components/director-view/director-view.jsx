@@ -2,14 +2,30 @@ import React from 'react';
 import {Header} from '../header/header';
 import './director-view.scss';
 
+import { connect } from 'react-redux';
+
+import {movies, visibilityFilter,selectedMovie, moviesApp} from '../../reducers/reducers';
+
+
 let Director = function(props){
 
-     //get movie id
-     let movie=localStorage.getItem('selected');
-     movie=JSON.parse(movie);
+     //get director name
+     let director= props.match.params.name;
+     console.log(director);
+     
+     let movies=props.movies;
+     let c;
 
-     let name=movie.director.name;
-     let birth=movie.director.birth;
+     for(c=0;c<movies.length;c++)
+       {
+         if(movies[c].director.name==director)
+           {
+             director=movies[c].director;
+           }
+       }
+
+     let name=director.name;
+     let birth=director.birth;
          birth=birth.split('-');
             let year=birth[0];
             let month = birth[1];
@@ -17,7 +33,7 @@ let Director = function(props){
                  day=day[0];
         birth=day+'-'+month+'-'+year;
         
-        let bio=movie.director.bio;    
+        let bio=director.bio;    
      
 
 
@@ -71,29 +87,29 @@ let Director = function(props){
     function findMovies(){
        
         let c;
-        let m=props.movies;
-        let l =m.length;
+        let movies=props.movies;
         let titles=[];
+        
         let movs=[]; //movies to return
         
 
-        for(c=0;c<l;c++)
+        for(c=0;c<movies.length;c++)
             {
                 
-                if (m[c].director.name==name)
+                if (movies[c].director.name==name)
                     {
-                        titles.push(m[c]);
+                        titles.push(movies[c]);
                         
                     }
             }    
 
-            l=titles.length;
+            
 
 
-            for(c=0;c<l;c++)
+            for(c=0;c<titles.length;c++)
             {
                 let n =c;
-                movs[c]=<div className='col-12 director_col link button' onClick={()=>{redirect(n,titles[n])}} >{titles[c].title}</div>
+                movs[c]=<div className='col-12 director_col link button' onClick={()=>{redirect(titles[n]._id)}} >{titles[c].title}</div>
                 console.log(titles[c].title);
             }    
 
@@ -103,18 +119,16 @@ let Director = function(props){
 
     function back(){
         //get movie id
-        let movie=localStorage.getItem('selected');
-        movie=JSON.parse(movie);
-        let movie_id=movie._id;
-        let path ='http://localhost:1234/movies/'+movie_id;
+        let id=localStorage.getItem('selected');
+        let path ='http://localhost:1234/movies/'+id;
         window.location.replace(path);
     }
 
 
-    function redirect(path,newSelectedMovie){
+    function redirect(path){
         
         //set new selected movie in localStorage
-        localStorage.setItem('selected',JSON.stringify (newSelectedMovie));
+        localStorage.setItem('selected',path);
 
         //redirect to the new selected movie
         
@@ -124,5 +138,12 @@ let Director = function(props){
 
 }
 
+const mapStateToProps = function(state) {
+    return { movies: state.movies,
+             visibilityFilter:state.visibilityFilter,
+             selectedMovie:state.selectedMovie
+  
+            }
+  }
 
-export{Director};
+  export default connect(mapStateToProps)(Director);    

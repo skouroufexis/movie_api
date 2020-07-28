@@ -2,25 +2,52 @@ import React, {useState} from 'react';
 import {Header} from '../header/header';
 import axios from 'axios';
 import './genre-view.scss';
+
+import { connect } from 'react-redux';
+import {movies, visibilityFilter,selectedMovie} from '../../reducers/reducers';
+import {setMovies,setFilter,setSelected}from '../../actions/actions';
+
+
 let Genre = function(props){
-    //get genre name & token
 
-    const [genreDescription, setGenre] = useState('');
+    const [description, setDescription] = useState('');
+    const [name, setName] = useState('');
 
-    let movie=localStorage.getItem('selected');
-        movie=JSON.parse(movie);
+    // Similar to componentDidMount and componentDidUpdate:
+    
+    
+    //variables to be filled
+    
+    //get genre name
+    let genre= props.match.params.name;
+    
+    
+    let movies=props.movies;
+    let c;
+
+    for(c=0;c<movies.length;c++)
+      {
+        if(movies[c].genre.name==genre)
+          {
+            genre=movies[c].genre;
+          }
+      }
 
 
-    let genre_name=movie.genre.name;
+    let genre_name=genre.name;
     let path ='https://stavflix.herokuapp.com/movies/genres/'+ genre_name;
     let token = localStorage.getItem('token');
     
-
+    
     axios.get(path,{headers: { Authorization: `Bearer ${token}`}})
     .then(function(response){
         let data=response.data;
-        setGenre(response.data.genre.description);
-         
+        console.log(data.genre);
+        setDescription(data.genre.description);
+        setName(data.genre.name);
+        
+
+        
     })
     .catch(function(response){
         console.log(response);
@@ -31,13 +58,13 @@ let Genre = function(props){
         <div className='container genre_main' >
             <div className='container genre_container'>
                 <div className='row genre_row genre_name'>
-                    <div className='col col-12 genre_col'><h1>{genre_name}</h1></div>
+                    <div className='col col-12 genre_col'><h1>{name}</h1></div>
                     </div>
-                    <p className='col-12 genre_p'>{genreDescription}</p>
+                    <p className='col-12 genre_p'>{description}</p>
 
                 <div className='row genre_row'>
                     <div className='col col-12 genre_col'>
-                        <h5>Movies the same genre</h5>
+                        <h5>Movies of the same genre</h5>
                     </div>
                 </div>
 
@@ -61,10 +88,9 @@ let Genre = function(props){
 
 function back(){
     //get movie id
-    let movie=localStorage.getItem('selected');
-    movie=JSON.parse(movie);
-    let movie_id=movie._id;
-    let path ='http://localhost:1234/movies/'+movie_id;
+    let id=localStorage.getItem('selected');
+    
+    let path ='http://localhost:1234/movies/'+id;
     window.location.replace(path);
 }
 
@@ -72,40 +98,39 @@ function back(){
 
 function findMovies(){
     let c;
-    let m=props.movies;
-    
-    let l =m.length;
+    let movies=props.movies;
+
     let titles=[];
     let movs=[]; //movies to return
 
-    for(c=0;c<l;c++)
+    for(c=0;c<movies.length;c++)
         {
             
-            if (m[c].genre.name==genre_name)
+            if (movies[c].genre.name==genre_name)
                 {
-                    titles.push(m[c]);
+                    titles.push(movies[c]);
                     
                 }
         }    
 
-        l=titles.length;
+        
 
 
-        for(c=0;c<l;c++)
+        for(c=0;c<titles.length;c++)
         {
             let n =c;
-            movs[c]=<div className='col-12 director_col link button' onClick={()=>{redirect(n,titles[n])}} >{titles[c].title}</div>
-            console.log(titles[c].title);
+            movs[c]=<div className='col-12 director_col link button' onClick={()=>{redirect(titles[n]._id)}} >{titles[c].title}</div>
+            
         }    
 
         return <div className='col-12 director_col'>{movs}</div> ;
 
 }
 
-function redirect(path,newSelectedMovie){
+function redirect(path){
         
     //set new selected movie in localStorage
-    localStorage.setItem('selected',JSON.stringify (newSelectedMovie));
+    localStorage.setItem('selected',path);
 
     //redirect to the new selected movie
     
@@ -117,4 +142,13 @@ function redirect(path,newSelectedMovie){
 }
 
 
-export{Genre};
+const mapStateToProps = function(state) {
+    return { movies: state.movies,
+             visibilityFilter:state.visibilityFilter,
+             selectedMovie:state.selectedMovie,
+             selectedGenre:state.selectedGenre 
+            }
+  }
+  
+  
+  export default connect(mapStateToProps)(Genre);    

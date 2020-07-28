@@ -1,51 +1,46 @@
+import './main-view.scss';
 import React from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import {Header} from '../header/header';
 
-
-import './main-view.scss';
+// REDUX
+import { connect } from 'react-redux';
+import {setMovies,setFilter,setSelected,setUser}from '../../actions/actions';
+import {movies, visibilityFilter,selectedMovie,selectedUser} from '../../reducers/reducers';
 
 import {Container, Row, Col} from 'react-bootstrap';
 
-import {LoginView} from '../login-view/login-view';
+import Header from '../header/header';
+import LoginView from '../login-view/login-view';
 import {RegistrationView} from '../registration-view/registration.view';
-import {MovieCard, BtnMovieCard} from '../movie-card/movie-card';
-import {MovieView} from '../movie-view/movie-view';
-import {Director} from '../director-view/director-view';
-import {Genre} from '../genre-view/genre-view';
+
+
+import Visibility from '../visibility-filter-input/visibility-filter-input';
+import MoviesList from '../movies-list/movies-list';
+
+import MovieView from '../movie-view/movie-view';
+import Director from '../director-view/director-view';
+import Genre from '../genre-view/genre-view';
 
 import {Profile} from '../profile-vew/profile-view';
-import {Account} from '../profile-vew/account_info';
-import {Mymovies} from '../profile-vew/mymovies';
+import Account from '../profile-vew/account_info';
+import Mymovies from '../profile-vew/mymovies';
 import {Notfound} from '../errors/notfound';
 
 
 
 
-class MainView extends React.Component{
+let MainView = function(props){
+
+
+
+  let token = localStorage.getItem('token');
   
-  constructor(){
-    super();
-    this.state ={content:null,
-                 selected:null,
-                 user:null,
-                 openRegister:null
-                }
-  }
-
-    
-
-  render(){
-    let token = localStorage.getItem('token');
-    let user=localStorage.getItem('username');
-    let movies = this.state.content;
-    
-    let self=this;
-
-    if(!token) //user not logged in
+  
+  if(!token) //user not logged in
     {
        return(
+         
           <Router>
             
             <div>
@@ -57,159 +52,139 @@ class MainView extends React.Component{
             </div>
           </Router>
        ) 
-    }
+   }
 
-    else //user logged in
-      
-    
-    
-    
-    {
 
-      if(this.state.content==null)
-      {
-        this.getMovies(token);
-        
-        return(
-            <div>
-            
-            <Header />
-            
-            <Router>
+   else //user is logged in
+        {
+          
+
+          if(props.selectedUser=="")
+            {
+              let user = localStorage.getItem('user');
+              user=JSON.parse(user);
+              props.setUser(user);
+              
+            }
+
+          if(props.movies=="")
+          {
+          
+            getMovies(token);
+            return(
+
               <div>
-              <Route exact path='/' render={function(){
-                
-                return <div>loading</div>;
-              }} />
-                
+            
+              <Header />
+              
+              <Router>
+                <div>
+                <Route exact path='/' render={function(){
+                  
+                  return (<div className='container'>
+                            <div className='row'> loading</div>
+                          </div>
+                         )
+                }} />
+                  
+                </div>
+              </Router>
               </div>
-            </Router>
-            </div>
-        )
-      }
-      else
-      {
 
-        return (
-          <div>
+              )
+          }
+
+
+          else //movies loaded in the Store
+          {
+            
           
-          <Header />
           
-          <Router>
-            <div>
-            <Route exact path='/' render={function(){
-              
-              let x = movies.map(function(movie){
-                return (
-                  
-                  <MovieCard 
-                  key={movie._id}
-                  title={movie.title}
-                  id={movie._id}  
-                  movie={movie}
-                  
-                />
-                );
-              })
-              return (
-                  <div className='container'>
-                  <div className='row'>
-                  {x}
-                  </div>
-                  </div>
-              ) 
-              
-            }} />
-              <Route exact path='/movies/:id' component={MovieView} />
-              <Route exact path='/users/profile' component={Profile} />
-              <Route exact path='/users/account' component={Account} />
+            
+            return(
 
-              <Route exact path='/users/movies'>
-                 <Mymovies 
+              <div>
+                 <Header />   
 
-                      key={movies}
-                      movies= {movies}
+                 <Router>
+                   <div>
+                   <Route exact path='/' >
+                     
+                     {/* FILTER BAR */}
+                      <Visibility />
 
-                 />
-              </Route>
-              <Route exact path='/movies/directors/:name/'>
-                  <Director
-                    key={movies}
-                    movies={movies}
+                     {/* <div className='row filter_container'>
+                        <div className='col'>
+                          <input className='col-10' id='input_filter' type='text' placeholder= 'search movie title here' onKeyUp={()=>{filterMovies()}}></input>
+                        </div>
+                     </div> */}
+                     <MoviesList />
+                    </Route>
 
-                  />
-              </Route>
+                    <Route exact path='/movies/:id' component={MovieView} />
+                    <Route exact path='/users/profile' component={Profile} />
+                    <Route exact path='/users/account' component={Account} />
 
+                    <Route exact path='/users/movies' component={Mymovies}/>
+                      
 
-              {/* <Route exact path='/movies/directors/:name/' render={Director} /> */}
-              <Route exact path='/movies/genres/:name/' >
-                <Genre 
+                    
+                        
 
-                  key={movies}
-                  movies={movies}
+                    <Route exact path='/movies/directors/:name/' component={Director}/>
 
-                />
-              </Route>
+                    <Route exact path='/movies/genres/:name/' component={Genre}/>
+                      
+                   
             </div>
           </Router>
-          </div>
-        )
-      }
-      
-    }
 
-  } 
-  
-  selectedMovie(movie){
-    this.setState({selected:movie});
-  }
 
-getMovies(token){
 
-  
-  let self = this;
-  axios.get('https://stavflix.herokuapp.com/movies', 
-  {headers: { Authorization: `Bearer ${token}`}}
-  )
-  .then(function(response){
-    console.log(response.data + ' getMovies');
-    self.setState({content:response.data});
-    
-    
-  })
-  .catch(function (error) {
-    console.log(error);
-    
-  
-  });
+              </div>
 
-  
-  
-}
 
-mountMovies(movies){
-  
-}
 
-  //go back to login page
-  // baktoLogin=()=>{
-  //   this.setState({isLogged:null, openRegister:null})
-  // }
 
-  
-  loggedIn=(user)=>{
-    this.setState({user:user});
-  }
+            )
+          }
+          
+        }
 
-  
-  logout=()=>{
-    localStorage.clear();
-    this.setState({user:null});
-    
-  }
 
+        function getMovies(token){
+          
+          axios.get('https://stavflix.herokuapp.com/movies', 
+          {headers: { Authorization: `Bearer ${token}`}}
+          )
+          .then((response)=>{props.loadMovies(response.data);})
+          .catch(function (error) {
+            console.log(error);
+            
+          
+          });
+        }
+        
 }
 
 
+const mapStateToProps = function(state) {
+  return { movies: state.movies,
+           visibilityFilter:state.visibilityFilter,
+           selectedMovie:state.selectedMovie,
+           selectedUser:state.selectedUser
+          }
+}
 
-export {MainView};
+const mapDispatchToProps=function(dispatch){
+  
+    return {
+            loadMovies:(data)=>{dispatch(setMovies(data));},
+            filter:(data)=>{dispatch(setFilter(data));},
+            setSelected:(data)=>{dispatch(setSelected(data));},
+            setUser:(data)=>{dispatch(setUser(data));}
+           }
+   
+ }
+
+ export default connect(mapStateToProps,mapDispatchToProps)(MainView);    

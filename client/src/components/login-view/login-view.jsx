@@ -4,6 +4,11 @@ import {Header} from '../header/header';
 
 import {Container, Row, Col,Form} from 'react-bootstrap';
 
+// REDUX
+import { connect } from 'react-redux';
+import {setUser}from '../../actions/actions';
+import {selectedUser} from '../../reducers/reducers';
+
 import './login-view.scss';
 
 function LoginView(props) {
@@ -21,18 +26,20 @@ function LoginView(props) {
              {username:username,password:password})
            .then(function(response){
                  const data = response.data;
+                 
                  console.log('user found');
+                 
 
-                //for later use. If user will want to modify his credentials then he
-                //will be presented with the unhashed password. 
-                localStorage.setItem('password',password);
+            //for later use. If user will want to modify his credentials then he
+            //will be presented with the unhashed password. 
+            localStorage.setItem('password',password);
 
             localStorage.setItem('token', data.token);
-            localStorage.setItem('username', data.user.username);
-            localStorage.setItem('user', JSON.stringify(data.user));
-            
-            // localStorage.setItem('user', JSON.stringify(data.user));
 
+            //main view will take this and add user to Store
+            
+            localStorage.setItem('user', JSON.stringify(data.user));
+        
             window.location.replace("http://localhost:1234/ ");
             
             })
@@ -103,4 +110,27 @@ function LoginView(props) {
     
 } 
 
-export {LoginView};
+const mapStateToProps = function(state) {
+    return { movies: state.movies,
+             visibilityFilter:state.visibilityFilter,
+             selectedMovie:state.selectedMovie,
+             selectedUser:state.selectedUser
+            }
+  }
+  
+  const mapDispatchToProps=function(dispatch){
+    
+      return {
+              loadMovies:(data)=>{dispatch(setMovies(data));},
+              filter:(data)=>{dispatch(setFilter(data));},
+              setSelected:(data)=>{dispatch(setSelected(data));},
+              setUser:(data)=>{dispatch(setUser(data));}
+             }
+     
+   }
+  
+  
+  
+    
+  
+   export default connect(mapStateToProps,mapDispatchToProps)(LoginView);  

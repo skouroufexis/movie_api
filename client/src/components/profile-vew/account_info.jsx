@@ -1,59 +1,77 @@
-import React,{useEffect} from 'react';
+import React,{useEffect,useState} from 'react';
 import axios from 'axios';
 import './account_info.scss';
 
 import {Date} from '../general/date';
 import { json } from 'body-parser';
 
+// REDUX
+import { connect } from 'react-redux';
+import {setMovies,setFilter,setSelected,setUser}from '../../actions/actions';
+import {movies, visibilityFilter,selectedMovie,selectedUser} from '../../reducers/reducers';
 
 let Account=function(props){
 
-    let user =localStorage.getItem('user');
-    user=JSON.parse(user);
-    let id=user._id;
+    const [updatedUser, updateUser] = useState('');
+    
+    let user =props.selectedUser;
     let token = localStorage.getItem('token');
-    let path ='https://stavflix.herokuapp.com/users/'+id;   
+
+    let path ='https://stavflix.herokuapp.com/users/'+user._id;
     
-    
-    
+        axios.get(path,{headers: { Authorization: `Bearer ${token}`}}
+                )
+                .then(function(response){
+                    console.log(response.data[0]);
+                    //update the state
+                    if(updatedUser=='')
+                    {
+                        updateUser(response.data[0]);
+                    }
+                    
+
+                })
+                .catch(function (error) {
+                console.log(error);  
+                });
+
 
     //load user information after the form has been rendered
     useEffect(function(){
-        axios.get(path,{headers: { Authorization: `Bearer ${token}`}}
-         )
-        .then(function(response){
-        let username=response.data[0].username; 
-        let email=response.data[0].email;
-        let birthday=response.data[0].birthday;     
+        if(updatedUser!=''){
+        console.log(updatedUser);
+        let username=updatedUser.username;
+        let email=updatedUser.email;
+        let birthday=updatedUser.birthday;     
             birthday=birthday.split('-');
             let year=birthday[0];
             let month = birthday[1];
             let day = birthday[2].split('T');
                 day=day[0];
             
-                //re-build the date in the format required by the database and save it in localStorage for later use
-                let newdate=year+'-'+month+'-'+day;
-                let currentdate=day+'-'+month+'-'+year;
+        //re-build the date in the format required by the database and save it in localStorage for later use
+        let newdate=year+'-'+month+'-'+day;
+        localStorage.setItem('newdate',newdate);  
 
-                localStorage.setItem('newdate',newdate);   
-                localStorage.setItem('currentdate',currentdate);//to show if user cancel changes   
+        //to show if user cancel changes
+        let currentdate=day+'-'+month+'-'+year; 
+        localStorage.setItem('currentdate',currentdate);   
 
         //populate fields with user data        
         let inputs=document.getElementsByClassName('field');
-        inputs[0].value=username
+        inputs[0].value=username;
         inputs[1].value=email;
         inputs[2].value=day+'-'+month+'-'+year;
 
         //upon login, the user-submitted password was saved on localStorage
         //so that it can be accessed and shown here, that is a non hashed version
         // of the user's password 
-        inputs[3].value=localStorage.getItem('password');    
-        })
-        .catch(function (error) {
-         console.log(error);  
-         });
+        inputs[3].value=localStorage.getItem('password');   
 
-    })
+        }
+        
+
+    },[updatedUser])
 
     
     
@@ -241,12 +259,15 @@ let Account=function(props){
 
     //function to restore the previous input element's value
     function cancelChanges(){
+
+        
         //restore previous values
         let inputs = document.getElementsByClassName('field');
-        inputs[0].value=user.username;
-        inputs[1].value=user.email;
+        
+        inputs[0].value=updatedUser.username;
+        inputs[1].value=updatedUser.email;
         inputs[2].value=localStorage.getItem('currentdate');   
-        inputs[3].value=user.password[0]+user.password[1]+user.password[2];
+        inputs[3].value=updatedUser.password[0]+user.password[1]+user.password[2];
         //disable input fields
 
         let x;
@@ -263,36 +284,80 @@ let Account=function(props){
 
 
     function update(){
-        //get new field values & token
+
+        
+        //get new field values 
         let username=document.getElementById('account_username').value;
-        let user = localStorage.getItem('user');
-            user=JSON.parse(user);
-            let id=user._id;
         let email=document.getElementById('account_email').value;
         let birthday=localStorage.getItem('newdate');
         let password=document.getElementById('account_password').value;
             localStorage.setItem('password',password);
-        let token = localStorage.getItem('token');
-        let path ='https://stavflix.herokuapp.com/users/'+id;
-        
 
-        axios.put(path,{id:id,username:username,password:password,email:email,birthday:birthday},
+        //get token    
+        let token = localStorage.getItem('token');
+
+        //set path
+        let path ='https://stavflix.herokuapp.com/users/'+user._id;
+        axios.put(path,{id:user._id,username:username,password:password,email:email,birthday:birthday},
                 {headers: { Authorization: `Bearer ${token}`}}
         )
         .then(function(response){
         console.log(response.data);
         alert(response.data);
 
-        //refresh page so that updated data will be shown
-        window.location.replace('http://localhost:1234/users/account');
+
+        //retrieve updated user info from database
+        //to update the state
+        axios.get(path,{headers: { Authorization: `Bearer ${token}`}}
+        )
+        .then(function(response){
+            console.log(response.data[0]);
+            console.log(response.data[0].username);
+            //update the state
+            updateUser(response.data[0]);
+            console.log(updatedUser);
+            console.log(updatedUser.username);
         })
         .catch(function (error) {
         console.log(error);  
         });
+
+
+        })
+        .catch(function (error) {
+        console.log(error);  
+        });
+
+        
+        //hide 'cancel' and 'update' buttons
+        document.getElementById('button_update').style.display='none';
+        document.getElementById('button_cancel').style.display='none';
+
     }
-
-
 }
 
 
-export {Account};
+const mapStateToProps = function(state) {
+    return { movies: state.movies,
+             visibilityFilter:state.visibilityFilter,
+             selectedMovie:state.selectedMovie,
+             selectedUser:state.selectedUser
+            }
+  }
+  
+  const mapDispatchToProps=function(dispatch){
+    
+      return {
+              loadMovies:(data)=>{dispatch(setMovies(data));},
+              filter:(data)=>{dispatch(setFilter(data));},
+              setSelected:(data)=>{dispatch(setSelected(data));},
+              setUser:(data)=>{dispatch(setUser(data));}
+             }
+     
+   }
+  
+  
+  
+    
+  
+   export default connect(mapStateToProps,mapDispatchToProps)(Account);    

@@ -1,8 +1,13 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import axios from 'axios';
 import './movie-view.scss';
 
 import {Container, Row, Col} from 'react-bootstrap';
+
+import { connect } from 'react-redux';
+import {setMovies,setFilter,setSelected}from '../../actions/actions';
+import {movies, visibilityFilter,selectedMovie} from '../../reducers/reducers';
+
 
 
 import poster1 from '../../../../public/images/5ea9f0f2d5fcc5119a040af1.jpg';
@@ -20,38 +25,95 @@ import { Redirect } from 'react-router-dom';
 
 var posters=[poster1,poster2,poster3,poster4,poster5,poster6,poster7,poster8,poster9,poster10];
 
+let MovieView = function (props) {
 
 
-class MovieView extends React.Component{
-  constructor(){
+      //icon templates for when movie is in favourites or is not in favourites  
+      let favourite=( 
+        <div className='col-12'>
+          <button className='col-12' id='button_favourites_on' onClick={()=>{handleFavourites(2)}}>
+            <i class="fas fa-heart favourites_icon"></i>
+          </button>
+          <p className='col-12 p_favourites'>Remove from favourites</p>
+        </div>
+      )
 
-    super();
 
-    this.state ={favourite:null}
+
+      let notFavourite= ( 
+      <div className='col-12'>
+        <button className='col-12' id='button_favourites_off' onClick={()=>{handleFavourites(1)}}>
+          <i class="far fa-heart favourites_icon"></i>
+        </button>
+        <p className='col-12 p_favourites'>Add to favourites</p>
+      </div>
+      );
+
+      // USE STATE & USE EFFECT
+      const [isFavourite, setFavourite] = useState(null);
+
+      useEffect(function(){
+        
+        //query to see if movie is listed in favourites
+        let user =props.selectedUser;
+
+        let token = localStorage.getItem('token');
+        let path ='https://stavflix.herokuapp.com/users/'+user._id;  
+
     
-  }
-  
-  
-  render(){
+        // retrieve user info from database & control whether movie id is 
+        // included in user's favourites
+        axios.get(path,{headers: { Authorization: `Bearer ${token}`}}
+            )
+            .then(function(response){
+              let userFavourites=response.data[0].favourites;
+              let fav=userFavourites.includes(movie_id);
+              
 
-    
-    let movie=localStorage.getItem('selected');
-    movie=JSON.parse(movie);
-    let id=movie._id;
+              if(fav==false)
+                {
+                  setFavourite(notFavourite);
+                  
+                }
+              else
+                {
+                  setFavourite(favourite);
+                }  
 
-    
-    
+            })
+            .catch(function (error) {
+            console.log(error);  
+            });
+            
 
+      },[isFavourite])
+
+      //retrieve movie from url
+      let movie_id= props.match.params.id;
+      let movies=props.movies;
+      let movie;
+      let c;
+      let featured;
+
+      for(c=0;c<movies.length;c++)
+        {
+          if(movies[c]._id==movie_id)
+            {
+              movie=movies[c];
+            }
+        }
+
+       if(String(movie.featured)=='true')
+        {featured='YES';}
+        
+        
       function findPoster(poster){
-        return poster.includes(id);
+        return poster.includes(movie_id);
       }
   
-    var poster= posters.find(findPoster);
-   
-    
-      
+      var poster= posters.find(findPoster);
 
-    return(
+   return(
       <div id='wrapper'>
         
 
@@ -66,10 +128,11 @@ class MovieView extends React.Component{
 
                 <Row>
                   <Col md='12'>
-
-                    {this.state.favourite}
+                    <div id='divFavourite'>
+                      {isFavourite}
+                    </div>
+                    
                      
-                  
                  </Col>
                  
                         
@@ -88,14 +151,14 @@ class MovieView extends React.Component{
                   <div id='other_info_container'>
                   <Col md='12' className='otherInfo'><b><h6>Director</h6></b></Col>
                   <Col md='12' className='otherInfo'>
-                    <p className='button' id='director' onClick={()=>this.redir(1)}>{movie.director.name}</p>
+                    <p className='button' id='director' onClick={()=>{redir(movie,1)}} >{movie.director.name}</p>
                   </Col>
                                                             
                   <Col md='12' className='otherInfo'><b><h6>Genre</h6></b></Col>
-                  <Col md='12' className='otherInfo'><p className='button' id='genre' onClick={()=>this.redir(2)}>{movie.genre.name}</p></Col>
+   <Col md='12' className='otherInfo'><p className='button' id='genre' onClick={()=>{redir(movie,2)}} >{movie.genre.name}</p></Col>
 
                   <Col md='12' className='otherInfo'><b><h6>Featured</h6></b></Col>
-                  <Col md='12' className='otherInfo'><p>{String(movie.featured)}</p></Col>
+                  <Col md='12' className='otherInfo'><p>{featured}</p></Col>
                   </div>
                 </Row>
                     
@@ -109,7 +172,7 @@ class MovieView extends React.Component{
               
               </Col>
               <Col md="6">
-              <button className='col-12' onClick={this.goback}>Exit</button>
+              <button className='col-12' onClick={goback}>Exit</button>
               </Col>
             </Row>
          </Container>
@@ -117,104 +180,24 @@ class MovieView extends React.Component{
       </div>
 
     )
+    function goback(){
+      window.location.replace('http://localhost:1234/');
+    }  
 
-  }
 
-
-  componentDidMount(){
-    let self= this;
-     //icons to show depending on whether the movie is included or not 
-     //in user's favourites
-     let isFavourite=( 
-      <div className='col-12'>
-        <button className='col-12' id='button_favourites_on' onClick={()=>this.handleFavourites(2)}>
-          <i class="fas fa-heart favourites_icon"></i>
-        </button>
-        <p className='col-12 p_favourites'>Remove from favourites</p>
-      </div>
-    )
-    let isNotFavourite=( 
-          <div className='col-12'>
-            <button className='col-12' id='button_favourites_off' onClick={()=>this.handleFavourites(1)}>
-              <i class="far fa-heart favourites_icon"></i>
-            </button>
-            <p className='col-12 p_favourites'>Add to favourites</p>
-          </div>
-        )
-
-    //get user id
-    let user =localStorage.getItem('user');
-    user=JSON.parse(user);
-    let user_id=user._id;
-    let token = localStorage.getItem('token');
-    let path ='https://stavflix.herokuapp.com/users/'+user_id;   
-
-    //get movie id
-    let movie=localStorage.getItem('selected');
-    movie=JSON.parse(movie);
-    let movie_id=movie._id;
+      //add or remove movie from favourites
+  function handleFavourites(n){
     
-    //retrieve user info from database & control whether movie id is 
-    //included in user's favourites
-    axios.get(path,{headers: { Authorization: `Bearer ${token}`}}
-         )
-        .then(function(response){
-
-          let userFavourites=response.data[0].favourites;
-          let fav=userFavourites.includes(movie_id);
-          console.log(fav);
-
-          if(fav==false)
-            {
-              self.setState({favourite:isNotFavourite});
-            }
-          else
-            {
-              self.setState({favourite:isFavourite});
-            }  
-
-        })
-        .catch(function (error) {
-         console.log(error);  
-         });
-  }
-
-
-  //add or remove movie from favourites
-  handleFavourites(n){
-    let self=this;
-
-
-    let isFavourite=( 
-      <div className='col-12'>
-        <button className='col-12' id='button_favourites_on' onClick={()=>this.handleFavourites(2)}>
-          <i class="fas fa-heart favourites_icon"></i>
-        </button>
-        <p className='col-12 p_favourites'>Remove from favourites</p>
-      </div>
-    )
-    let isNotFavourite=( 
-          <div className='col-12'>
-            <button className='col-12' id='button_favourites_off' onClick={()=>this.handleFavourites(1)}>
-              <i class="far fa-heart favourites_icon"></i>
-            </button>
-            <p className='col-12 p_favourites'>Add to favourites</p>
-          </div>
-        )
-
     //get user id
-    let user =localStorage.getItem('user');
-    user=JSON.parse(user);
-    let user_id=user._id;
+    let user=props.selectedUser;
     let token = localStorage.getItem('token');
     
     //get movie id
-    let movie=localStorage.getItem('selected');
-    movie=JSON.parse(movie);
-    let movie_id=movie._id;
+    let movie_id=localStorage.getItem('selected');
+    
 
 
-    let path='https://stavflix.herokuapp.com/users/'+user_id+'/favourites/'+movie_id;
+    let path='https://stavflix.herokuapp.com/users/'+user._id+'/favourites/'+movie_id;
     
     if(n==1)//add movie to favourites
       {
@@ -222,7 +205,7 @@ class MovieView extends React.Component{
         .then(function(response){
           
           console.log(response);
-          self.setState({favourite:isFavourite});
+          setFavourite(favourite);
         }
         )
         .catch(function(response){
@@ -235,7 +218,7 @@ class MovieView extends React.Component{
         axios.put(path,{},{headers: {Authorization: `Bearer ${token}`}})
         .then(function(response){
           console.log(response);
-          self.setState({favourite:isNotFavourite});
+          setFavourite(notFavourite);
         }
         )
         .catch(function(response){
@@ -246,38 +229,57 @@ class MovieView extends React.Component{
 
   }
 
+}
+
+  
+
+  
+
+
+  
+
   //redirect to 'director' or 'genre' view
-  redir(n){
-
-
-    //get movie id
-    let movie=localStorage.getItem('selected');
-    movie=JSON.parse(movie);
-    let movie_id=movie._id;
-    let director = movie.director.name;
-    let genre = movie.genre.name;
-    
-
+  function redir(movie,n){
     let path;
 
     if(n=='1')//go to 'director' view
       {
-        path = 'http://localhost:1234/movies/directors/'+director;
+        path = 'http://localhost:1234/movies/directors/'+movie.director.name;
         window.location.replace(path);
       }
 
     else //go to genre view
       {
-        path = 'http://localhost:1234/movies/genres/'+genre;
+        path = 'http://localhost:1234/movies/genres/'+movie.genre.name;
         window.location.replace(path);
       }
 
   }
 
-  goback(){
-    window.location.replace('http://localhost:1234/');
-  }
 
+
+const mapStateToProps = function(state) {
+  return { movies: state.movies,
+           visibilityFilter:state.visibilityFilter,
+           selectedMovie:state.selectedMovie,
+           selectedUser:state.selectedUser
+
+          }
 }
 
-export {MovieView}
+
+const mapDispatchToProps=function(dispatch){
+
+  return {
+          loadMovies:(data)=>{dispatch(setMovies(data));},
+          filter:(data)=>{dispatch(setFilter(data));},
+          setSelected:(data)=>{dispatch(setSelected(data));}
+          
+         }
+ 
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(MovieView);    
+
+
+ 

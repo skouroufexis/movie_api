@@ -1,9 +1,10 @@
 import React from 'react';
 import './movie-card.scss';
 
-
+import  { Redirect } from 'react-router-dom'
+import axios from 'axios'; 
 import {Container, Row, Col} from 'react-bootstrap';
-import {MovieView} from '../movie-view/movie-view';
+
 
 import poster1 from '../../../../public/images/5ea9f0f2d5fcc5119a040af1.jpg';
 import poster2 from '../../../../public/images/5ea9f19cd5fcc5119a040af2.jpg';
@@ -22,23 +23,20 @@ var posters=[poster1,poster2,poster3,poster4,poster5,poster6,poster7,poster8,pos
 
 
 
+import { connect } from 'react-redux';
+import {setMovies,setFilter,setSelected}from '../../actions/actions';
+import {movies, visibilityFilter,selectedMovie, moviesApp} from '../../reducers/reducers';
 
 
-class MovieCard extends React.Component{
 
-  constructor(){
-    super();
-    
-    
-  }
+
+let MovieCard = function (props){
+ 
   
-  render (){
-      
-      
-    
-    
-      let movie=this.props.movie;
-      
+
+
+      let movie=props.movie;
+
       function findPoster(poster){
         return poster.includes(movie._id);
       }
@@ -50,25 +48,43 @@ class MovieCard extends React.Component{
           <Col lg='4' md='6' sm='12' className='card'>
             
             {<img className='previewImg' src={poster} />}<br></br>
-            <h5>{this.props.title}</h5><br></br>
-            <button className="button_card" onClick={()=>this.movieSelect(movie)} >open</button>
+            <h5>{props.title}</h5><br></br>
+            <button className="button_card" onClick={openMovie}>
+              open
+            </button>
           </Col>
         );
 
-       
-  }
 
-  
+    function openMovie(){
+      let path = 'http://localhost:1234/movies/'+movie._id;
+      //open movie_view 
+      window.location.replace(path);
 
-
-movieSelect(movie){
-  let movie_path= 'http://localhost:1234/movies/'+ movie._id;
-  
-  localStorage.setItem('selected',JSON.stringify(movie));
-  window.location.replace(movie_path);
-}
-  
-
+      localStorage.setItem('selected',movie._id);
+    }
 }
 
-export {MovieCard};
+
+
+
+const mapStateToProps = function(state) {
+  return { movies: state.movies,
+           visibilityFilter:state.visibilityFilter,
+           selectedMovie:state.selectedMovie
+
+          }
+}
+
+
+const mapDispatchToProps=function(dispatch){
+
+  return {
+          loadMovies:(data)=>{dispatch(setMovies(data));},
+          filter:(data)=>{dispatch(setFilter(data));},
+          setSelected:(data)=>{dispatch(setSelected(data));}
+         }
+ 
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(MovieCard);    

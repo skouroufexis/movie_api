@@ -1,14 +1,28 @@
 import React from 'react';
 import './header.scss';
 
+// REDUX
+import { connect } from 'react-redux';
+
+import {selectedUser} from '../../reducers/reducers';
+
+let username;
 var Header = function(props){
-
+    let user;
+    if(props.selectedUser!="")
+    {
+        user=props.selectedUser;
+        username = user.username;
+        username=username.charAt(0);
+        username=username.toUpperCase();   
+        
+    }
     
-
-    let user=localStorage.getItem('username');
+        
     
-    user = user.charAt(0);
-    user = user.toUpperCase();
+    
+    
+    
 
 
     return(
@@ -21,7 +35,7 @@ var Header = function(props){
                 </div>
 
                 <div className='col col-1'>
-                    <i className="fas fa-user button" onClick={toggleMenu}></i> {user}
+    <i className="fas fa-user button" onClick={toggleMenu}></i>{' '+username}
                 </div>
 
             </div>
@@ -79,5 +93,12 @@ var Header = function(props){
 
 }
 
+const mapStateToProps = function(state) {
+    return { movies: state.movies,
+             visibilityFilter:state.visibilityFilter,
+             selectedMovie:state.selectedMovie,
+             selectedUser:state.selectedUser
+            }
+  }
 
-export {Header};
+export default connect(mapStateToProps)(Header);  
