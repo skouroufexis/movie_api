@@ -6,7 +6,8 @@ const express = require('express');
 
 
     app.get("/client/*", (req, res) => {
-        res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+        res.send('a');
+        // res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
       });
 
 //body-parser
