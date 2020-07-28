@@ -1,6 +1,10 @@
 const express = require('express');
     const app=express();
     app.use(express.static('public'));
+    app.use("/client", express.static(path.join(__dirname, "client", "dist"))); 
+    app.get("/client/*", (req, res) => {
+        res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+      });
 
 //body-parser
 const bodyparser = require('body-parser');
@@ -20,7 +24,7 @@ const models = require('./models.js');
 const cors = require('cors');
 app.use(cors());
 
-
+const path = require("path");
 
 
 
