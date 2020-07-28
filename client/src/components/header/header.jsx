@@ -62,7 +62,7 @@ var Header = function(props){
 
     function logout(){
         localStorage.clear();
-        window.location.replace("http://localhost:1234/client");
+        window.location.replace("http://localhost:1234/");
     }
     function toggleMenu(){
         var state = document.getElementById('menu');

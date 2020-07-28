@@ -165,7 +165,7 @@ let Account=function(props){
                 alert(response.data);
                 console.log(response);
                 localStorage.clear();
-                redirect('http://localhost:1234/client');
+                redirect('http://localhost:1234/');
             })
             .catch(function(response){
                 alert(response.data);
