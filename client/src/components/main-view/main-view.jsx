@@ -47,7 +47,7 @@ let MainView = function(props){
               <Switch>
               <Route exact path='/client' component={LoginView} />
               <Route exact path='/client/register' component={RegistrationView} />
-              <Route path='/' component={Notfound} /> 
+              <Route path='/client' component={Notfound} /> 
               </Switch>
             </div>
           </Router>
