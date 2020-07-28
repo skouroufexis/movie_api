@@ -47,7 +47,7 @@ let MainView = function(props){
               <Switch>
               <Route exact path='/' component={LoginView} />
               <Route exact path='/register' component={RegistrationView} />
-              <Route path='/' component={Notfound} /> 
+              {/* <Route path='/' component={Notfound} />  */}
               </Switch>
             </div>
           </Router>
@@ -113,11 +113,6 @@ let MainView = function(props){
                      {/* FILTER BAR */}
                       <Visibility />
 
-                     {/* <div className='row filter_container'>
-                        <div className='col'>
-                          <input className='col-10' id='input_filter' type='text' placeholder= 'search movie title here' onKeyUp={()=>{filterMovies()}}></input>
-                        </div>
-                     </div> */}
                      <MoviesList />
                     </Route>
 

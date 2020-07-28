@@ -54676,7 +54676,7 @@ function RegistrationView(props) {
     }).then(function (response) {
       console.log(response);
       alert('Account successfully created');
-      window.location.replace('http://localhost:1234/');
+      window.location.replace('http://localhost:1234/client');
     }).catch(function (response) {
       console.log(response);
     });
@@ -103456,7 +103456,9 @@ var MainView = function MainView(props) {
         }))));
       } else //movies loaded in the Store
         {
-          return _react.default.createElement("div", null, _react.default.createElement(_header.default, null), _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", null, _react.default.createElement(_reactRouterDom.Route, {
+          return _react.default.createElement("div", null, _react.default.createElement(_header.default, null), _react.default.createElement(_reactRouterDom.BrowserRouter, {
+            basename: "/client"
+          }, _react.default.createElement("div", null, _react.default.createElement(_reactRouterDom.Route, {
             exact: true,
             path: "/"
           }, _react.default.createElement(_visibilityFilterInput.default, null), _react.default.createElement(_moviesList.default, null)), _react.default.createElement(_reactRouterDom.Route, {
@@ -104463,7 +104465,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58745" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59135" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
