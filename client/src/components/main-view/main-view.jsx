@@ -41,7 +41,7 @@ let MainView = function(props){
     {
        return(
          
-          <Router basename="/client">
+          <Router>
             
             <div>
               <Switch>
