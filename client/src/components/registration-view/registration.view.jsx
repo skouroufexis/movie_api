@@ -20,7 +20,7 @@ function RegistrationView(props) {
               .then(function(response){
                   console.log(response);
                   alert('Account successfully created');
-                  window.location.replace('http://localhost:1234/')
+                  window.location.replace('http://localhost:1234/client')
               })
               .catch(function(response){
                   console.log(response);

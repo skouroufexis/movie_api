@@ -106,7 +106,7 @@ let MainView = function(props){
               <div>
                  <Header />   
 
-                 <Router>
+                 <Router basename="/client">
                    <div>
                    <Route exact path='/' >
                      
