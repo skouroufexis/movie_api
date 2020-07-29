@@ -53,16 +53,16 @@ var Header = function(props){
     )
 
     function mainMenu(){
-        window.location.replace("https://stavflix.herokuapp.com/");
+        window.location.replace("https://stavflix.herokuapp.com/client");
     }    
 
     function openProfile(){
-        window.location.replace("https://stavflix.herokuapp.com/profile");
+        window.location.replace("https://stavflix.herokuapp.com/client/profile");
     }
 
     function logout(){
         localStorage.clear();
-        window.location.replace("https://stavflix.herokuapp.com/");
+        window.location.replace("https://stavflix.herokuapp.com/client");
     }
     function toggleMenu(){
         var state = document.getElementById('menu');

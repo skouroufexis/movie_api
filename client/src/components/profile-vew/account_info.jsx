@@ -137,7 +137,7 @@ let Account=function(props){
 
             <div className='row'>
                 <button className='col-8 button_back' onClick={()=>{
-                    redirect('https://stavflix.herokuapp.com/users/profile');
+                    redirect('https://stavflix.herokuapp.com/client/users/profile');
                 }}>back</button>
             </div>
         </div>
@@ -165,7 +165,7 @@ let Account=function(props){
                 alert(response.data);
                 console.log(response);
                 localStorage.clear();
-                redirect('https://stavflix.herokuapp.com/');
+                redirect('https://stavflix.herokuapp.com/client');
             })
             .catch(function(response){
                 alert(response.data);
