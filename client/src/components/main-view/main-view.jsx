@@ -41,11 +41,11 @@ let MainView = function(props){
     {
        return(
          
-          <Router basename='/client'>
+          <Router>
             
             <div>
               <Switch>
-              <Route exact path='client/' component={LoginView} />
+              <Route exact path='/login' component={LoginView} />
               <Route exact path='client/register' component={RegistrationView} />
               <Route path='client/' component={Notfound} /> 
               </Switch>
