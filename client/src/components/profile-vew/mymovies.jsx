@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react';
-import './mymovies.scss';
+import './mymovies.css';
 import axios from 'axios';
 
 //import movie posters

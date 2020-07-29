@@ -1,6 +1,6 @@
 import React from 'react';
 import {Header} from '../header/header';
-import './director-view.scss';
+import './director-view.css';
 
 import { connect } from 'react-redux';
 

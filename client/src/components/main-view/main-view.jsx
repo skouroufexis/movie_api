@@ -1,4 +1,4 @@
-import './main-view.scss';
+import './main-view.css';
 import React from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";

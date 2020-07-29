@@ -1,5 +1,5 @@
 import React from 'react';
-import './movie-card.scss';
+import './movie-card.css';
 
 import  { Redirect } from 'react-router-dom'
 import axios from 'axios'; 

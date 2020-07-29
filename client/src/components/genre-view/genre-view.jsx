@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Header} from '../header/header';
 import axios from 'axios';
-import './genre-view.scss';
+import './genre-view.css';
 
 import { connect } from 'react-redux';
 import {movies, visibilityFilter,selectedMovie} from '../../reducers/reducers';

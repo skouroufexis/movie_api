@@ -1,5 +1,5 @@
 import React from 'react';
-import './date.scss';
+import './date.css';
 
 
 //Date modal for capturing date inputs
