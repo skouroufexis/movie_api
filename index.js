@@ -63,18 +63,6 @@ app.get('/login',function(request,response){
 })
 
 
-
-// app.get('/index', function(request,response){
-    
-//     response.sendFile(__dirname+'/index.html');
-    
-// });
-
-
-
-
-
-
 //retrieve all movies
 app.get('/movies',passport.authenticate('jwt', {session: false}), function(request,response){
     
