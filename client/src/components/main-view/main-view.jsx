@@ -25,7 +25,7 @@ import Genre from '../genre-view/genre-view';
 import {Profile} from '../profile-vew/profile-view';
 import Account from '../profile-vew/account_info';
 import Mymovies from '../profile-vew/mymovies';
-import {Notfound} from '../errors/notfound';
+
 
 
 
@@ -46,8 +46,7 @@ let MainView = function(props){
             <div>
               <Switch>
               <Route exact path='/' component={LoginView} />
-              <Route exact path='/register' component={RegistrationView} />
-              <Route path='/' component={Notfound} /> 
+              <Route exact path='/register' component={RegistrationView} /> 
               </Switch>
             </div>
           </Router>
