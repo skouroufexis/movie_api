@@ -58,9 +58,7 @@ app.get("/", (req, res) => {
 //     }
 // )
 
-app.get('/login',function(request,response){
-    response.end();
-})
+
 
 
 //retrieve all movies
