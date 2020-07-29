@@ -47,7 +47,7 @@ mongoose.connect(process.env.connectURI,{ useNewUrlParser: true, useUnifiedTopol
 
 require('./auth.js')(app); 
 
-app.get("/client/*", (req, res) => {
+app.get("/client/", (req, res) => {
     
     res.sendFile(__dirname + '/client/dist/index.html');
   });
