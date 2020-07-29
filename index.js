@@ -2,7 +2,7 @@ const path = require("path");
 const express = require('express');
     const app=express();
     app.use(express.static('public'));
-    app.use("/client", express.static(path.join(__dirname, "client", "dist")));
+    app.use("/client", express.static(__dirname + "/client/dist"));
 
 
     
@@ -56,7 +56,7 @@ app.get('/' , function(request,response){
 
 app.get("/client/*", (req, res) => {
     
-    res.sendFile(__dirname + '/client/src/index.html');
+    res.sendFile(__dirname + '/client/dist/index.html');
   });
 
 
