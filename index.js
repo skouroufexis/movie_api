@@ -54,9 +54,9 @@ app.get('/' , function(request,response){
     }
 )
 
-app.get("/client/*", (req, res) => {
+app.get("/client/", (request, response) => {
     
-    res.sendFile(__dirname + '/client/dist/index.html');
+    response.send(__dirname + '/client/dist/index.html');
     console.log('a');
   });
 
