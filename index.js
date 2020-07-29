@@ -50,14 +50,13 @@ require('./auth.js')(app);
 
 //routes
 app.get('/' , function(request,response){
-    response.sendFile(__dirname+'/client/dist/index.html');
+    response.sendFile(__dirname+'/public/documentation.html');
     }
 )
 
-app.get("/client/", (request, response) => {
+app.get("/client/*", (req, res) => {
     
-    response.send('test');
-    console.log('a');
+    res.sendFile(__dirname + '/client/dist/index.html');
   });
 
 
