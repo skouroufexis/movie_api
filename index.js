@@ -48,13 +48,13 @@ mongoose.connect(process.env.connectURI,{ useNewUrlParser: true, useUnifiedTopol
 require('./auth.js')(app); 
 
 
-//routes
-app.get('/' , function(request,response){
-    response.sendFile(__dirname+'/public/documentation.html');
-    }
-)
+// //routes
+// app.get('/' , function(request,response){
+//     response.sendFile(__dirname+'/public/documentation.html');
+//     }
+// )
 
-app.get("/client/*", (req, res) => {
+app.get("/", (req, res) => {
     
     res.sendFile(__dirname + '/client/src/index.html');
   });
