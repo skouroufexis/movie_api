@@ -181,7 +181,7 @@ let MovieView = function (props) {
 
     )
     function goback(){
-      window.location.replace('https://stavflix.herokuapp.com/client');
+      window.location.replace('https://stavflix.herokuapp.com/client/');
     }  
 
 

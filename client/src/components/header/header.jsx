@@ -53,7 +53,7 @@ var Header = function(props){
     )
 
     function mainMenu(){
-        window.location.replace("https://stavflix.herokuapp.com/client");
+        window.location.replace("https://stavflix.herokuapp.com/client/");
     }    
 
     function openProfile(){
@@ -62,7 +62,7 @@ var Header = function(props){
 
     function logout(){
         localStorage.clear();
-        window.location.replace("https://stavflix.herokuapp.com/client");
+        window.location.replace("https://stavflix.herokuapp.com/client/");
     }
     function toggleMenu(){
         var state = document.getElementById('menu');

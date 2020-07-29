@@ -28,7 +28,7 @@ var Profile = function(props){
                     <div className='col-12 icon_text'>Account information</div>
                 </div>
                 <div className='col-10 div_button'> <button className='col-8' onClick={()=>{
-                    redirect('https://stavflix.herokuapp.com/client');
+                    redirect('https://stavflix.herokuapp.com/client/');
                 }}>Exit</button></div>
             </div>
         </div>

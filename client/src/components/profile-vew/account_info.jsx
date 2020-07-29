@@ -165,7 +165,7 @@ let Account=function(props){
                 alert(response.data);
                 console.log(response);
                 localStorage.clear();
-                redirect('https://stavflix.herokuapp.com/client');
+                redirect('https://stavflix.herokuapp.com/client/');
             })
             .catch(function(response){
                 alert(response.data);
