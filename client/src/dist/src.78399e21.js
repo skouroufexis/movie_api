@@ -54378,16 +54378,16 @@ var Header = function Header(props) {
   }, "logout")));
 
   function mainMenu() {
-    window.location.replace("http://localhost:1234/");
+    window.location.replace("https://stavflix.herokuapp.com/client/");
   }
 
   function openProfile() {
-    window.location.replace("http://localhost:1234/users/profile");
+    window.location.replace("https://stavflix.herokuapp.com/client/profile");
   }
 
   function logout() {
     localStorage.clear();
-    window.location.replace("http://localhost:1234/");
+    window.location.replace("https://stavflix.herokuapp.com/client/");
   }
 
   function toggleMenu() {
@@ -54496,7 +54496,7 @@ function LoginView(props) {
       localStorage.setItem('token', data.token); //main view will take this and add user to Store
 
       localStorage.setItem('user', JSON.stringify(data.user));
-      window.location.replace("http://localhost:1234/ ");
+      window.location.replace("https://stavflix.herokuapp.com/client/ ");
     }).catch(function (e) {
       console.log(e);
       alert('invalid credentials');
@@ -54511,7 +54511,7 @@ function LoginView(props) {
   }
 
   function openregister() {
-    window.location.replace("http://localhost:1234/register ");
+    window.location.replace("https://stavflix.herokuapp.com/client/register ");
   }
 
   return _react.default.createElement(_reactBootstrap.Form, {
@@ -54676,14 +54676,14 @@ function RegistrationView(props) {
     }).then(function (response) {
       console.log(response);
       alert('Account successfully created');
-      window.location.replace('http://localhost:1234/client');
+      window.location.replace('https://stavflix.herokuapp.com/client/');
     }).catch(function (response) {
       console.log(response);
     });
   }
 
   function openlogin() {
-    window.location.replace("http://localhost:1234/ ");
+    window.location.replace("https://stavflix.herokuapp.com/client/ ");
   }
 
   return _react.default.createElement(_reactBootstrap.Form, null, _react.default.createElement(_reactBootstrap.Container, {
@@ -74210,7 +74210,7 @@ var MovieCard = function MovieCard(props) {
   }, "open"));
 
   function openMovie() {
-    var path = 'http://localhost:1234/movies/' + movie._id; //open movie_view 
+    var path = 'https://stavflix.herokuapp.com/client/movies/' + movie._id; //open movie_view 
 
     window.location.replace(path);
     localStorage.setItem('selected', movie._id);
@@ -74558,7 +74558,7 @@ var MovieView = function MovieView(props) {
   }, "Exit")))));
 
   function goback() {
-    window.location.replace('http://localhost:1234/');
+    window.location.replace('https://stavflix.herokuapp.com/client/');
   } //add or remove movie from favourites
 
 
@@ -74606,11 +74606,11 @@ function redir(movie, n) {
 
   if (n == '1') //go to 'director' view
     {
-      path = 'http://localhost:1234/movies/directors/' + movie.director.name;
+      path = 'https://stavflix.herokuapp.com/client/movies/directors/' + movie.director.name;
       window.location.replace(path);
     } else //go to genre view
     {
-      path = 'http://localhost:1234/movies/genres/' + movie.genre.name;
+      path = 'https://stavflix.herokuapp.com/client/movies/genres/' + movie.genre.name;
       window.location.replace(path);
     }
 }
@@ -74756,7 +74756,7 @@ var Director = function Director(props) {
   function back() {
     //get movie id
     var id = localStorage.getItem('selected');
-    var path = 'http://localhost:1234/movies/' + id;
+    var path = 'https://stavflix.herokuapp.com/client/movies/' + id;
     window.location.replace(path);
   }
 
@@ -74764,7 +74764,7 @@ var Director = function Director(props) {
     //set new selected movie in localStorage
     localStorage.setItem('selected', path); //redirect to the new selected movie
 
-    path = 'http://localhost:1234/movies/' + path;
+    path = 'https://stavflix.herokuapp.com/client/movies/' + path;
     window.location.replace(path);
   }
 };
@@ -74896,7 +74896,7 @@ var Genre = function Genre(props) {
   function back() {
     //get movie id
     var id = localStorage.getItem('selected');
-    var path = 'http://localhost:1234/movies/' + id;
+    var path = 'https://stavflix.herokuapp.com/client/movies/' + id;
     window.location.replace(path);
   }
 
@@ -74935,7 +74935,7 @@ var Genre = function Genre(props) {
     //set new selected movie in localStorage
     localStorage.setItem('selected', path); //redirect to the new selected movie
 
-    path = 'http://localhost:1234/movies/' + path;
+    path = 'https://stavflix.herokuapp.com/client/movies/' + path;
     window.location.replace(path);
   }
 };
@@ -74980,7 +74980,7 @@ var Profile = function Profile(props) {
   }, _react.default.createElement("div", {
     className: "col-10 menu_option   button",
     onClick: function onClick() {
-      redirect('http://localhost:1234/users/movies');
+      redirect('https://stavflix.herokuapp.com/client/users/movies');
     }
   }, _react.default.createElement("i", {
     "class": "fas fa-film col-12 icon"
@@ -74989,7 +74989,7 @@ var Profile = function Profile(props) {
   }, "My movies")), _react.default.createElement("div", {
     className: "col-10 menu_option button",
     onClick: function onClick() {
-      redirect('http://localhost:1234/users/account');
+      redirect('https://stavflix.herokuapp.com/client/users/account');
     }
   }, _react.default.createElement("i", {
     "class": "fas fa-info col-12 icon"
@@ -75000,7 +75000,7 @@ var Profile = function Profile(props) {
   }, " ", _react.default.createElement("button", {
     className: "col-8",
     onClick: function onClick() {
-      redirect('http://localhost:1234/');
+      redirect('https://stavflix.herokuapp.com/client/');
     }
   }, "Exit")))));
 
@@ -102864,7 +102864,7 @@ var Account = function Account(props) {
   }, _react.default.createElement("button", {
     className: "col-8 button_back",
     onClick: function onClick() {
-      redirect('http://localhost:1234/users/profile');
+      redirect('https://stavflix.herokuapp.com/client/users/profile');
     }
   }, "back"))); //function to handle redirects            
 
@@ -102885,7 +102885,7 @@ var Account = function Account(props) {
         alert(response.data);
         console.log(response);
         localStorage.clear();
-        redirect('http://localhost:1234/');
+        redirect('https://stavflix.herokuapp.com/client/');
       }).catch(function (response) {
         alert(response.data);
         console.log(response);
@@ -103167,7 +103167,7 @@ var Mymovies = function Mymovies(props) {
   }, _react.default.createElement("button", {
     id: "mymovies_back",
     onClick: function onClick() {
-      redirect('http://localhost:1234/users/profile/');
+      redirect('https://stavflix.herokuapp.com/client/users/profile/');
     }
   }, "back"))));
 
@@ -103254,7 +103254,7 @@ var Mymovies = function Mymovies(props) {
 
   function redirect(movie, id) {
     localStorage.setItem('selected', JSON.stringify(movie));
-    var path = 'http://localhost:1234/movies/' + id;
+    var path = 'https://stavflix.herokuapp.com/client/movies/' + id;
     window.location.replace(path);
   } //remove movie from favourites
 
@@ -103322,50 +103322,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Mymovies);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./mymovies.scss":"components/profile-vew/mymovies.scss","axios":"../node_modules/axios/index.js","../../../../public/images/5ea9f0f2d5fcc5119a040af1.jpg":"../../public/images/5ea9f0f2d5fcc5119a040af1.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af2.jpg":"../../public/images/5ea9f19cd5fcc5119a040af2.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af3.jpg":"../../public/images/5ea9f19cd5fcc5119a040af3.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af4.jpg":"../../public/images/5ea9f19cd5fcc5119a040af4.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af5.jpg":"../../public/images/5ea9f19cd5fcc5119a040af5.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af6.jpg":"../../public/images/5ea9f19cd5fcc5119a040af6.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af7.jpg":"../../public/images/5ea9f19cd5fcc5119a040af7.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af8.jpg":"../../public/images/5ea9f19cd5fcc5119a040af8.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af9.jpg":"../../public/images/5ea9f19cd5fcc5119a040af9.jpg","../../../../public/images/5ea9f19cd5fcc5119a040afa.jpg":"../../public/images/5ea9f19cd5fcc5119a040afa.jpg","react-redux":"../node_modules/react-redux/es/index.js","../../actions/actions":"actions/actions.js","../../reducers/reducers":"reducers/reducers.js"}],"components/errors/notfound.scss":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/errors/notfound.jsx":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Notfound = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _reactRouterDom = require("react-router-dom");
-
-require("./notfound.scss");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Notfound = function Notfound() {
-  return _react.default.createElement("main", {
-    className: "notfoundmain row"
-  }, _react.default.createElement("div", {
-    className: "notfoundcontainer container"
-  }, _react.default.createElement("div", {
-    className: "notfoundrow row"
-  }, _react.default.createElement("div", {
-    className: "col-12"
-  }, _react.default.createElement("h1", null, "404"), _react.default.createElement("h3", null, "Page Not Found"))), _react.default.createElement("div", {
-    className: "notfoundrow row"
-  }, _react.default.createElement("div", {
-    className: "col-12"
-  }, _react.default.createElement("button", {
-    className: "col-3 error_button",
-    onClick: function onClick() {
-      window.location.replace('http://localhost:1234/');
-    }
-  }, "back")))));
-};
-
-exports.Notfound = Notfound;
-},{"react":"../node_modules/react/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","./notfound.scss":"components/errors/notfound.scss"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./mymovies.scss":"components/profile-vew/mymovies.scss","axios":"../node_modules/axios/index.js","../../../../public/images/5ea9f0f2d5fcc5119a040af1.jpg":"../../public/images/5ea9f0f2d5fcc5119a040af1.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af2.jpg":"../../public/images/5ea9f19cd5fcc5119a040af2.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af3.jpg":"../../public/images/5ea9f19cd5fcc5119a040af3.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af4.jpg":"../../public/images/5ea9f19cd5fcc5119a040af4.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af5.jpg":"../../public/images/5ea9f19cd5fcc5119a040af5.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af6.jpg":"../../public/images/5ea9f19cd5fcc5119a040af6.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af7.jpg":"../../public/images/5ea9f19cd5fcc5119a040af7.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af8.jpg":"../../public/images/5ea9f19cd5fcc5119a040af8.jpg","../../../../public/images/5ea9f19cd5fcc5119a040af9.jpg":"../../public/images/5ea9f19cd5fcc5119a040af9.jpg","../../../../public/images/5ea9f19cd5fcc5119a040afa.jpg":"../../public/images/5ea9f19cd5fcc5119a040afa.jpg","react-redux":"../node_modules/react-redux/es/index.js","../../actions/actions":"actions/actions.js","../../reducers/reducers":"reducers/reducers.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -103411,8 +103368,6 @@ var _account_info = _interopRequireDefault(require("../profile-vew/account_info"
 
 var _mymovies = _interopRequireDefault(require("../profile-vew/mymovies"));
 
-var _notfound = require("../errors/notfound");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // REDUX
@@ -103421,17 +103376,16 @@ var MainView = function MainView(props) {
 
   if (!token) //user not logged in
     {
-      return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", null, _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
+      return _react.default.createElement(_reactRouterDom.BrowserRouter, {
+        basename: "/client"
+      }, _react.default.createElement("div", null, _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
-        path: "/",
+        path: "/client/",
         component: _loginView.default
       }), _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
-        path: "/register",
+        path: "/client/register",
         component: _registration.RegistrationView
-      }), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/",
-        component: _notfound.Notfound
       }))));
     } else //user is logged in
     {
@@ -103443,9 +103397,11 @@ var MainView = function MainView(props) {
 
       if (props.movies == "") {
         getMovies(token);
-        return _react.default.createElement("div", null, _react.default.createElement(_header.default, null), _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", null, _react.default.createElement(_reactRouterDom.Route, {
+        return _react.default.createElement("div", null, _react.default.createElement(_header.default, null), _react.default.createElement(_reactRouterDom.BrowserRouter, {
+          basename: "/client"
+        }, _react.default.createElement("div", null, _react.default.createElement(_reactRouterDom.Route, {
           exact: true,
-          path: "/",
+          path: "/client/",
           render: function render() {
             return _react.default.createElement("div", {
               className: "container"
@@ -103460,30 +103416,30 @@ var MainView = function MainView(props) {
             basename: "/client"
           }, _react.default.createElement("div", null, _react.default.createElement(_reactRouterDom.Route, {
             exact: true,
-            path: "/"
+            path: "/client/"
           }, _react.default.createElement(_visibilityFilterInput.default, null), _react.default.createElement(_moviesList.default, null)), _react.default.createElement(_reactRouterDom.Route, {
             exact: true,
-            path: "/movies/:id",
+            path: "/client/movies/:id",
             component: _movieView.default
           }), _react.default.createElement(_reactRouterDom.Route, {
             exact: true,
-            path: "/users/profile",
+            path: "/client/users/profile",
             component: _profileView.Profile
           }), _react.default.createElement(_reactRouterDom.Route, {
             exact: true,
-            path: "/users/account",
+            path: "/client/users/account",
             component: _account_info.default
           }), _react.default.createElement(_reactRouterDom.Route, {
             exact: true,
-            path: "/users/movies",
+            path: "/client/users/movies",
             component: _mymovies.default
           }), _react.default.createElement(_reactRouterDom.Route, {
             exact: true,
-            path: "/movies/directors/:name/",
+            path: "/client/movies/directors/:name/",
             component: _directorView.default
           }), _react.default.createElement(_reactRouterDom.Route, {
             exact: true,
-            path: "/movies/genres/:name/",
+            path: "/client/movies/genres/:name/",
             component: _genreView.default
           }))));
         }
@@ -103531,7 +103487,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MainView);
 
 exports.default = _default;
-},{"./main-view.scss":"components/main-view/main-view.scss","react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"../node_modules/react-redux/es/index.js","../../actions/actions":"actions/actions.js","../../reducers/reducers":"reducers/reducers.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","../header/header":"components/header/header.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../registration-view/registration.view":"components/registration-view/registration.view.jsx","../visibility-filter-input/visibility-filter-input":"components/visibility-filter-input/visibility-filter-input.jsx","../movies-list/movies-list":"components/movies-list/movies-list.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../director-view/director-view":"components/director-view/director-view.jsx","../genre-view/genre-view":"components/genre-view/genre-view.jsx","../profile-vew/profile-view":"components/profile-vew/profile-view.jsx","../profile-vew/account_info":"components/profile-vew/account_info.jsx","../profile-vew/mymovies":"components/profile-vew/mymovies.jsx","../errors/notfound":"components/errors/notfound.jsx"}],"../../node_modules/safe-buffer/index.js":[function(require,module,exports) {
+},{"./main-view.scss":"components/main-view/main-view.scss","react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"../node_modules/react-redux/es/index.js","../../actions/actions":"actions/actions.js","../../reducers/reducers":"reducers/reducers.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","../header/header":"components/header/header.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../registration-view/registration.view":"components/registration-view/registration.view.jsx","../visibility-filter-input/visibility-filter-input":"components/visibility-filter-input/visibility-filter-input.jsx","../movies-list/movies-list":"components/movies-list/movies-list.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../director-view/director-view":"components/director-view/director-view.jsx","../genre-view/genre-view":"components/genre-view/genre-view.jsx","../profile-vew/profile-view":"components/profile-vew/profile-view.jsx","../profile-vew/account_info":"components/profile-vew/account_info.jsx","../profile-vew/mymovies":"components/profile-vew/mymovies.jsx"}],"../../node_modules/safe-buffer/index.js":[function(require,module,exports) {
 
 /* eslint-disable node/no-deprecated-api */
 var buffer = require('buffer')
@@ -104465,7 +104421,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59135" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53977" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
