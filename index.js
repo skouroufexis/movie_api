@@ -1,4 +1,4 @@
-const path = require("path");
+// const path = require("path");
 const express = require('express');
     const app=express();
     app.use(express.static('public'));
@@ -49,7 +49,7 @@ require('./auth.js')(app);
 
 app.get("/client/*", (req, res) => {
     
-    res.sendFile(__dirname + 'client/dist/index.html');
+    res.sendFile(__dirname + '/client/dist/index.html');
   });
 
 //routes
