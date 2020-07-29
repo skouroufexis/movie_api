@@ -41,13 +41,13 @@ let MainView = function(props){
     {
        return(
          
-          <Router>
+          <Router basename="/client">
             
             <div>
               <Switch>
-              <Route exact path='/s' component={LoginView} />
-              <Route exact path='client/register' component={RegistrationView} />
-              <Route path='client/' component={Notfound} /> 
+              <Route exact path='/' component={LoginView} />
+              <Route exact path='/register' component={RegistrationView} />
+              <Route path='/' component={Notfound} /> 
               </Switch>
             </div>
           </Router>
@@ -77,9 +77,9 @@ let MainView = function(props){
             
               <Header />
               
-              <Router basename='/client'>
+              <Router basename="/client">
                 <div>
-                <Route exact path='client/' render={function(){
+                <Route exact path='/' render={function(){
                   
                   return (<div className='container'>
                             <div className='row'> loading</div>
@@ -108,7 +108,7 @@ let MainView = function(props){
 
                  <Router basename="/client">
                    <div>
-                   <Route exact path='/client/' >
+                   <Route exact path='/' >
                      
                      {/* FILTER BAR */}
                       <Visibility />
@@ -116,15 +116,15 @@ let MainView = function(props){
                      <MoviesList />
                     </Route>
 
-                    <Route exact path='client/movies/:id' component={MovieView} />
-                    <Route exact path='client/users/profile' component={Profile} />
-                    <Route exact path='client/users/account' component={Account} />
+                    <Route exact path='/movies/:id' component={MovieView} />
+                    <Route exact path='/users/profile' component={Profile} />
+                    <Route exact path='/users/account' component={Account} />
 
-                    <Route exact path='client/users/movies' component={Mymovies}/>
+                    <Route exact path='/users/movies' component={Mymovies}/>
 
-                    <Route exact path='client/movies/directors/:name/' component={Director}/>
+                    <Route exact path='/movies/directors/:name/' component={Director}/>
 
-                    <Route exact path='client/movies/genres/:name/' component={Genre}/>
+                    <Route exact path='/movies/genres/:name/' component={Genre}/>
                       
                    
             </div>
