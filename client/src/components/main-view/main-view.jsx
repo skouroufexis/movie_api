@@ -108,7 +108,7 @@ let MainView = function(props){
 
                  <Router basename="/client">
                    <div>
-                   <Route exact path='/client' >
+                   <Route exact path='/client/' >
                      
                      {/* FILTER BAR */}
                       <Visibility />
