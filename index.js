@@ -49,7 +49,7 @@ require('./auth.js')(app);
 
 app.get("/client/", (req, res) => {
     
-    res.sendFile(__dirname + '/client/dist/index.html');
+    res.sendFile(__dirname + '/client/src/index.html');
   });
 
 //routes
