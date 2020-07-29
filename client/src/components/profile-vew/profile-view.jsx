@@ -1,6 +1,6 @@
 import React from 'react';
 // import {Header} from '../header/header';
-import './profile-view.css';
+import './profile-view.scss';
 
 var Profile = function(props){
     // const [ username, setUsername ] = useState('');

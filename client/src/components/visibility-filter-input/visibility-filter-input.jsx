@@ -1,6 +1,6 @@
 
 import React from 'react';
-import './visibility-filter-input.css'
+import './visibility-filter-input.scss'
 
 
 // REDUX

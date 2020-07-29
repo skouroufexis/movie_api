@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import axios from 'axios';
-import './movie-view.css';
+import './movie-view.scss';
 
 import {Container, Row, Col} from 'react-bootstrap';
 

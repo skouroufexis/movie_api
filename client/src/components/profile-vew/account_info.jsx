@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react';
 import axios from 'axios';
-import './account_info.css';
+import './account_info.scss';
 
 import {Date} from '../general/date';
 import { json } from 'body-parser';

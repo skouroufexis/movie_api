@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import {setUser}from '../../actions/actions';
 import {selectedUser} from '../../reducers/reducers';
 
-import './login-view.css';
+import './login-view.scss';
 
 function LoginView(props) {
 
