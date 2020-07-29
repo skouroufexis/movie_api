@@ -21,7 +21,7 @@ let Notfound=function(){
                 <div className='col-12'>
 
                         <button className='col-3 error_button' onClick={function(){
-                            window.location.replace('http://localhost:1234/')
+                            window.location.replace('https://stavflix.herokuapp.com/')
                         }}>back</button>
 
                 </div>

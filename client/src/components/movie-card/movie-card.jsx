@@ -57,7 +57,7 @@ let MovieCard = function (props){
 
 
     function openMovie(){
-      let path = 'http://localhost:1234/movies/'+movie._id;
+      let path = 'https://stavflix.herokuapp.com/movies/'+movie._id;
       //open movie_view 
       window.location.replace(path);
 

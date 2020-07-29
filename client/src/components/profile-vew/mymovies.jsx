@@ -83,7 +83,7 @@ var Mymovies=function(props){
              <div className='row'>
                  <div className='col'>
                      <button id='mymovies_back' onClick={()=>{
-                    redirect('http://localhost:1234/users/profile/');
+                    redirect('https://stavflix.herokuapp.com/users/profile/');
                 }}>back</button>
                  </div>
             </div>   
@@ -173,7 +173,7 @@ var Mymovies=function(props){
     function redirect(movie,id){
      
     localStorage.setItem('selected',JSON.stringify (movie));        
-    let path ='http://localhost:1234/movies/'+id;  
+    let path ='https://stavflix.herokuapp.com/movies/'+id;  
     window.location.replace(path);
     }
 

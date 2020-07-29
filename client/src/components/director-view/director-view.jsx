@@ -120,7 +120,7 @@ let Director = function(props){
     function back(){
         //get movie id
         let id=localStorage.getItem('selected');
-        let path ='http://localhost:1234/movies/'+id;
+        let path ='https://stavflix.herokuapp.com/movies/'+id;
         window.location.replace(path);
     }
 
@@ -132,7 +132,7 @@ let Director = function(props){
 
         //redirect to the new selected movie
         
-         path ='http://localhost:1234/movies/'+path;
+         path ='https://stavflix.herokuapp.com/movies/'+path;
          window.location.replace(path);
     }
 

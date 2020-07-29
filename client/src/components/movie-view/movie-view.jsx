@@ -181,7 +181,7 @@ let MovieView = function (props) {
 
     )
     function goback(){
-      window.location.replace('http://localhost:1234/');
+      window.location.replace('https://stavflix.herokuapp.com/');
     }  
 
 
@@ -244,13 +244,13 @@ let MovieView = function (props) {
 
     if(n=='1')//go to 'director' view
       {
-        path = 'http://localhost:1234/movies/directors/'+movie.director.name;
+        path = 'https://stavflix.herokuapp.com/movies/directors/'+movie.director.name;
         window.location.replace(path);
       }
 
     else //go to genre view
       {
-        path = 'http://localhost:1234/movies/genres/'+movie.genre.name;
+        path = 'https://stavflix.herokuapp.com/movies/genres/'+movie.genre.name;
         window.location.replace(path);
       }
 
