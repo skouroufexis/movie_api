@@ -41,7 +41,7 @@ let MainView = function(props){
     {
        return(
          
-          <Router basename="/client">
+          <Router>
             
             <div>
               <Switch>
@@ -76,7 +76,7 @@ let MainView = function(props){
             
               <Header />
               
-              <Router basename="/client">
+              <Router>
                 <div>
                 <Route exact path='/client/' render={function(){
                   
@@ -105,7 +105,7 @@ let MainView = function(props){
               <div>
                  <Header />   
 
-                 <Router basename="/client">
+                 <Router>
                    <div>
                    <Route exact path='/client/' >
                      
