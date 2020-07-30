@@ -81,9 +81,9 @@ var Mymovies=function(props){
 
 
              <div className='row'>
-                 <div className='col'>
-                     <button id='mymovies_back' onClick={()=>{
-                    window.location.replace('https://stavflix.herokuapp.com/users/profile/');     
+                 <div className='col-12'>
+                     <button className='col-8' id='mymovies_back' onClick={()=>{
+                    window.location.replace('https://stavflix.herokuapp.com/client/users/profile/');     
                     
                 }}>back</button>
                  </div>
