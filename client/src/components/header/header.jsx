@@ -57,7 +57,7 @@ var Header = function(props){
     }    
 
     function openProfile(){
-        window.location.replace("https://stavflix.herokuapp.com/client/profile");
+        window.location.replace("https://stavflix.herokuapp.com/client/users/profile");
     }
 
     function logout(){
