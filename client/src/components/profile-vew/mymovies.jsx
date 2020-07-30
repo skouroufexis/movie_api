@@ -83,7 +83,8 @@ var Mymovies=function(props){
              <div className='row'>
                  <div className='col'>
                      <button id='mymovies_back' onClick={()=>{
-                    redirect('https://stavflix.herokuapp.com/client/users/profile/');
+                    window.location.replace('https://stavflix.herokuapp.com/users/profile/');     
+                    
                 }}>back</button>
                  </div>
             </div>   
@@ -148,7 +149,7 @@ var Mymovies=function(props){
                                             <img className='mymovies_img' src={favsPosters[c]}></img> */}
                                         </div>
                                         
-                                        <div className='col-12 col-md-8 mymovies_title button' onClick={()=>{redirect(titles[n],titles[n]._id)}}>
+                                        <div className='col-12 col-md-8 mymovies_title button' onClick={()=>{redirect(titles[n]._id)}}>
                                             {titles[c].title}
                                         </div>
                                     </div>
@@ -170,10 +171,10 @@ var Mymovies=function(props){
     }
 
     // redirect to selected movie
-    function redirect(movie,id){
+    function redirect(id){
      
-    localStorage.setItem(id);        
-    let path ='https://stavflix.herokuapp.com/client/movies/'+id;  
+    localStorage.setItem('selected',id);        
+    let path ='https://stavflix.herokuapp.com/movies/'+id;  
     window.location.replace(path);
     }
 
