@@ -40,7 +40,7 @@ function LoginView(props) {
             
             localStorage.setItem('user', JSON.stringify(data.user));
         
-            window.location.replace("https://stavflix.herokuapp.com/ ");
+            window.location.replace("https://stavflix.herokuapp.com/client/ ");
             
             })
            .catch(e => {
@@ -59,7 +59,7 @@ function LoginView(props) {
     }
     
     function openregister(){
-        window.location.replace("https://stavflix.herokuapp.com/register ");
+        window.location.replace("https://stavflix.herokuapp.com/client/register ");
     }
 
     return(
