@@ -174,7 +174,7 @@ var Mymovies=function(props){
     function redirect(id){
      
     localStorage.setItem('selected',id);        
-    let path ='https://stavflix.herokuapp.com/movies/'+id;  
+    let path ='https://stavflix.herokuapp.com/client/movies/'+id;  
     window.location.replace(path);
     }
 
