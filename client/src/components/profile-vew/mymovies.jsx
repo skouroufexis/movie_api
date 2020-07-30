@@ -172,7 +172,7 @@ var Mymovies=function(props){
     // redirect to selected movie
     function redirect(movie,id){
      
-    localStorage.setItem('selected',JSON.stringify (movie));        
+    localStorage.setItem(id);        
     let path ='https://stavflix.herokuapp.com/client/movies/'+id;  
     window.location.replace(path);
     }
