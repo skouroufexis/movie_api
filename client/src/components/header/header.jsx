@@ -1,5 +1,5 @@
 import React from 'react';
-import './header.css';
+import './header.scss';
 
 // REDUX
 import { connect } from 'react-redux';
@@ -53,16 +53,16 @@ var Header = function(props){
     )
 
     function mainMenu(){
-        window.location.replace("https://stavflix.herokuapp.com/client/");
+        window.location.replace("https://stavflix.herokuapp.com/");
     }    
 
     function openProfile(){
-        window.location.replace("https://stavflix.herokuapp.com/client/profile");
+        window.location.replace("https://stavflix.herokuapp.com/profile");
     }
 
     function logout(){
         localStorage.clear();
-        window.location.replace("https://stavflix.herokuapp.com/client/");
+        window.location.replace("https://stavflix.herokuapp.com/");
     }
     function toggleMenu(){
         var state = document.getElementById('menu');

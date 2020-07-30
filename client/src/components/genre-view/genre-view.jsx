@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Header} from '../header/header';
 import axios from 'axios';
-import './genre-view.css';
+import './genre-view.scss';
 
 import { connect } from 'react-redux';
 import {movies, visibilityFilter,selectedMovie} from '../../reducers/reducers';
@@ -90,7 +90,7 @@ function back(){
     //get movie id
     let id=localStorage.getItem('selected');
     
-    let path ='https://stavflix.herokuapp.com/client/movies/'+id;
+    let path ='https://stavflix.herokuapp.com/movies/'+id;
     window.location.replace(path);
 }
 
@@ -134,7 +134,7 @@ function redirect(path){
 
     //redirect to the new selected movie
     
-     path ='https://stavflix.herokuapp.com/client/movies/'+path;
+     path ='https://stavflix.herokuapp.com/movies/'+path;
      window.location.replace(path);
 }
 

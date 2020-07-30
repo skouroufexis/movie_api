@@ -1,8 +1,8 @@
-// const path = require("path");
+const path = require("path");
 const express = require('express');
     const app=express();
     app.use(express.static('public'));
-    // app.use("/client", express.static(__dirname + "/client/dist"));
+    app.use("/client", express.static(path.join(__dirname, "client", "dist")));
 
 
     
@@ -48,13 +48,13 @@ mongoose.connect(process.env.connectURI,{ useNewUrlParser: true, useUnifiedTopol
 require('./auth.js')(app); 
 
 
-// //routes
-// app.get('/' , function(request,response){
-//     response.sendFile(__dirname+'/public/documentation.html');
-//     }
-// )
+//routes
+app.get('/' , function(request,response){
+    response.sendFile(__dirname+'/public/documentation.html');
+    }
+)
 
-app.get("/", (req, res) => {
+app.get("/client/*", (req, res) => {
     
     res.sendFile(__dirname + '/client/src/index.html');
   });

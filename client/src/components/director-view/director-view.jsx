@@ -1,6 +1,6 @@
 import React from 'react';
 import {Header} from '../header/header';
-import './director-view.css';
+import './director-view.scss';
 
 import { connect } from 'react-redux';
 
@@ -120,7 +120,7 @@ let Director = function(props){
     function back(){
         //get movie id
         let id=localStorage.getItem('selected');
-        let path ='https://stavflix.herokuapp.com/client/movies/'+id;
+        let path ='https://stavflix.herokuapp.com/movies/'+id;
         window.location.replace(path);
     }
 
@@ -132,7 +132,7 @@ let Director = function(props){
 
         //redirect to the new selected movie
         
-         path ='https://stavflix.herokuapp.com/client/movies/'+path;
+         path ='https://stavflix.herokuapp.com/movies/'+path;
          window.location.replace(path);
     }
 
