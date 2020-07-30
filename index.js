@@ -3,7 +3,7 @@ const express = require('express');
     const app=express();
     app.use(express.static('public'));
     // app.use("/client", express.static(path.join(__dirname, "client", "dist")));
-
+    app.use(express.static(path.join(__dirname, "client","src", "dist")));
 
     
 
