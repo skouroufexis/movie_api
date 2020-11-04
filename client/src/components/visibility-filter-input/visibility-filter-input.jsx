@@ -9,7 +9,12 @@ import {setMovies,setFilter,setSelected,setUser}from '../../actions/actions';
 import {movies, visibilityFilter,selectedMovie,selectedUser} from '../../reducers/reducers';
 
 
-
+/**
+ * @function Visibility
+ * @param {object} props 
+ * @returns textbox for typing movie title (movies to be filtered by title) <br>
+ * filters movies by title
+ */
 let Visibility=function(props){
 
     return (
@@ -21,13 +26,16 @@ let Visibility=function(props){
     )
 
 
-
+    /**
+     * filters movies by user generated search string
+     * @function filterMovies() {
+       
+     }
+     */  
     function filterMovies(){
         
         let filterText=document.getElementById('input_filter').value;
         props.filter(filterText);
-        
-        
       }
 }
 

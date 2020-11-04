@@ -4,9 +4,18 @@ import axios from 'axios';
 
 import './registration-view.scss';
 
+/**
+ *  <b>endpoint:</b> /register
+ * @function RegistrationView
+ * @param {object} props 
+ * @returns screen for user registration
+ */
 function RegistrationView(props) {
-    
 
+    /**
+     * registers new user
+     * @function register
+     */
     function register(){
         //capture credentials and add new user
         let email=document.getElementById('email').value;
@@ -25,11 +34,12 @@ function RegistrationView(props) {
               .catch(function(response){
                   console.log(response);
               })     
-                   
-        
-        
     }
 
+    /**
+     * redirects to the login screen
+     * @function openlogin
+     */
     function openlogin(){
         window.location.replace("https://stavflix.herokuapp.com/client/ ");
     }

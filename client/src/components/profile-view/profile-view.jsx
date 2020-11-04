@@ -2,9 +2,15 @@ import React from 'react';
 // import {Header} from '../header/header';
 import './profile-view.scss';
 
+
+
+/**
+ * <b>endpoint:</b> /users/profile
+ * @param {object} props 
+ * @returns the screen with further navigation options for the user (personal information or favourite movies)
+ */
 var Profile = function(props){
-    // const [ username, setUsername ] = useState('');
-    // const [ password, setPassword ] = useState('');
+
     return(
         <div>
 
@@ -37,10 +43,6 @@ var Profile = function(props){
    function redirect(path){
         window.location.replace(path);
     }    
-
-    
-
-
 }
 
 export {Profile};

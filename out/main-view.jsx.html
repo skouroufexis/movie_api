@@ -1,4 +1,32 @@
-import './main-view.scss';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: main-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: main-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import './main-view.scss';
 import React, { Component } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
@@ -30,7 +58,7 @@ import Mymovies from '../profile-vew/mymovies';
 
 
 /**
- *  <b>endpoint:</b> /
+ *  &lt;b>endpoint:&lt;/b> /
  * @function MainView
  * @param {object} props 
  * @returns {Component} Main View
@@ -46,15 +74,15 @@ let MainView = function(props){
     {
        return(
          
-          <Router basename='/client'>
+          &lt;Router basename='/client'>
             
-            <div>
-              <Switch>
-              <Route exact path='/' component={LoginView} />
-              <Route exact path='/register' component={RegistrationView} /> 
-              </Switch>
-            </div>
-          </Router>
+            &lt;div>
+              &lt;Switch>
+              &lt;Route exact path='/' component={LoginView} />
+              &lt;Route exact path='/register' component={RegistrationView} /> 
+              &lt;/Switch>
+            &lt;/div>
+          &lt;/Router>
        ) 
    }
 
@@ -77,23 +105,23 @@ let MainView = function(props){
             getMovies(token);
             return(
 
-              <div>
+              &lt;div>
             
-              <Header />
+              &lt;Header />
               
-              <Router basename='/client'>
-                <div>
-                <Route exact path='/' render={function(){
+              &lt;Router basename='/client'>
+                &lt;div>
+                &lt;Route exact path='/' render={function(){
                   
-                  return (<div className='container'>
-                            <div className='row'> loading</div>
-                          </div>
+                  return (&lt;div className='container'>
+                            &lt;div className='row'> loading&lt;/div>
+                          &lt;/div>
                          )
                 }} />
                   
-                </div>
-              </Router>
-              </div>
+                &lt;/div>
+              &lt;/Router>
+              &lt;/div>
 
               )
           }
@@ -107,36 +135,36 @@ let MainView = function(props){
             
             return(
 
-              <div>
-                 <Header />   
+              &lt;div>
+                 &lt;Header />   
 
-                 <Router basename='/client'>
-                   <div>
-                   <Route exact path='/' >
+                 &lt;Router basename='/client'>
+                   &lt;div>
+                   &lt;Route exact path='/' >
                      
                      {/* FILTER BAR */}
-                      <Visibility />
+                      &lt;Visibility />
 
-                     <MoviesList />
-                    </Route>
+                     &lt;MoviesList />
+                    &lt;/Route>
 
-                    <Route exact path='/movies/:id' component={MovieView} />
-                    <Route exact path='/users/profile' component={Profile} />
-                    <Route exact path='/users/account' component={Account} />
+                    &lt;Route exact path='/movies/:id' component={MovieView} />
+                    &lt;Route exact path='/users/profile' component={Profile} />
+                    &lt;Route exact path='/users/account' component={Account} />
 
-                    <Route exact path='/users/movies' component={Mymovies}/>
+                    &lt;Route exact path='/users/movies' component={Mymovies}/>
 
-                    <Route exact path='/movies/directors/:name/' component={Director}/>
+                    &lt;Route exact path='/movies/directors/:name/' component={Director}/>
 
-                    <Route exact path='/movies/genres/:name/' component={Genre}/>
+                    &lt;Route exact path='/movies/genres/:name/' component={Genre}/>
                       
                    
-            </div>
-          </Router>
+            &lt;/div>
+          &lt;/Router>
 
 
 
-              </div>
+              &lt;/div>
 
 
 
@@ -185,4 +213,26 @@ const mapDispatchToProps=function(dispatch){
    
  }
 
- export default connect(mapStateToProps,mapDispatchToProps)(MainView);    
+ export default connect(mapStateToProps,mapDispatchToProps)(MainView);    </code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#getMovies">getMovies</a></li><li><a href="global.html#MainView">MainView</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Wed Nov 04 2020 14:05:15 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

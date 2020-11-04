@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{Component, useState} from 'react';
 import axios from 'axios';
 import {Header} from '../header/header';
 
@@ -11,11 +11,14 @@ import {selectedUser} from '../../reducers/reducers';
 
 import './login-view.scss';
 
+/** 
+ * <b>endpoint:</b> / (when user is not logged in)
+ * @function LoginView
+ * @param {object} props 
+ * @returns {Component} LoginView
+ */
+
 function LoginView(props) {
-
-     
-    // let onlogin = props.onlogin;
-
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
 
@@ -49,6 +52,10 @@ function LoginView(props) {
            });        
     }
 
+    /**
+     * captures user's credentials
+     * @function captureCredentials
+     */
     function captureCredentials(){
         var usernameInput=document.getElementById('login_username').value;
         var passwordInput=document.getElementById('login_password').value;
@@ -57,7 +64,12 @@ function LoginView(props) {
         setPassword(passwordInput);
 
     }
-    
+
+    /**
+     * opens registration view [RegistrationView component]
+     * @function openregister
+     * @returns {Component} RegistrationView
+     */
     function openregister(){
         window.location.replace("https://stavflix.herokuapp.com/client/register ");
     }

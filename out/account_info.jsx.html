@@ -1,4 +1,32 @@
-import React,{useEffect,useState} from 'react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: account_info.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: account_info.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React,{useEffect,useState} from 'react';
 import axios from 'axios';
 import './account_info.scss';
 
@@ -10,6 +38,12 @@ import { connect } from 'react-redux';
 import {setMovies,setFilter,setSelected,setUser}from '../../actions/actions';
 import {movies, visibilityFilter,selectedMovie,selectedUser} from '../../reducers/reducers';
 
+/**
+ *  &lt;b>endpoint:&lt;/b> /users/account
+ * @function Account
+ * @param {object} props 
+ * @returns personal information of the user
+ */
 let Account=function(props){
 
     const [updatedUser, updateUser] = useState('');
@@ -76,71 +110,71 @@ let Account=function(props){
     
     
     return(
-        <div>
+        &lt;div>
 
-            <div id='date'>
-                <div id='dateContainer'>
+            &lt;div id='date'>
+                &lt;div id='dateContainer'>
                     
-                    <Date
+                    &lt;Date
                     modal={()=>{closeDate()}}
                     />    
 
-                </div>
+                &lt;/div>
                 
-            </div>      
+            &lt;/div>      
             
-            <div className='row'>
-                <div className='col col-12'><h1>Account Information</h1></div>
-            </div>
+            &lt;div className='row'>
+                &lt;div className='col col-12'>&lt;h1>Account Information&lt;/h1>&lt;/div>
+            &lt;/div>
 
-            <div className='row'>
-                    <button className='col-12 col-md-3 button_edit' onClick={enableEdit}><i class="far fa-edit"></i> edit</button>
-                    <button className='col-12 col-md-3 button_unregister' onClick={unregister} ><i class="fas fa-user-slash"></i>delete account</button>
+            &lt;div className='row'>
+                    &lt;button className='col-12 col-md-3 button_edit' onClick={enableEdit}>&lt;i class="far fa-edit">&lt;/i> edit&lt;/button>
+                    &lt;button className='col-12 col-md-3 button_unregister' onClick={unregister} >&lt;i class="fas fa-user-slash">&lt;/i>delete account&lt;/button>
 
-            </div>
-            {/* <i class="fas fa-user-slash"></i> */}
-            <div className='row'>
+            &lt;/div>
+            {/* &lt;i class="fas fa-user-slash">&lt;/i> */}
+            &lt;div className='row'>
                 
-                    <form method='post' className='col-10'>
+                    &lt;form method='post' className='col-10'>
 
-                    <label>Username</label>
-                    <input type='text' disabled id='account_username' className='field'>
-                    </input>
+                    &lt;label>Username&lt;/label>
+                    &lt;input type='text' disabled id='account_username' className='field'>
+                    &lt;/input>
 
-                    <label>Email</label>
-                    <input type='text' disabled id='account_email' className='field'>
+                    &lt;label>Email&lt;/label>
+                    &lt;input type='text' disabled id='account_email' className='field'>
 
-                    </input>
+                    &lt;/input>
 
-                    <label>Date of Birth</label>
-                    <input type='text' disabled id='account_birthday' className='field' onFocus={openDate}>
+                    &lt;label>Date of Birth&lt;/label>
+                    &lt;input type='text' disabled id='account_birthday' className='field' onFocus={openDate}>
                         
-                    </input>
+                    &lt;/input>
 
-                    <label>Password</label>
-                    <input type='password' disabled id='account_password' className='field' onFocus={password}
+                    &lt;label>Password&lt;/label>
+                    &lt;input type='password' disabled id='account_password' className='field' onFocus={password}
                     
                     >
 
-                    </input>
+                    &lt;/input>
 
                     
-                    </form>
+                    &lt;/form>
 
-            </div>
+            &lt;/div>
 
-            <div className='row'>                
+            &lt;div className='row'>                
                 
-                <button className='col-3' id='button_cancel' onClick={cancelChanges}>cancel</button>
-                <button className='col-3' id='button_update' onClick={update}>save changes</button>
-            </div>
+                &lt;button className='col-3' id='button_cancel' onClick={cancelChanges}>cancel&lt;/button>
+                &lt;button className='col-3' id='button_update' onClick={update}>save changes&lt;/button>
+            &lt;/div>
 
-            <div className='row'>
-                <button className='col-8 button_back' onClick={()=>{
+            &lt;div className='row'>
+                &lt;button className='col-8 button_back' onClick={()=>{
                     redirect('https://stavflix.herokuapp.com/client/users/profile');
-                }}>back</button>
-            </div>
-        </div>
+                }}>back&lt;/button>
+            &lt;/div>
+        &lt;/div>
         
     
     )
@@ -148,12 +182,23 @@ let Account=function(props){
              
     
 
-
+    /**
+     * redirects the user to a given path
+     * @function redirect
+     * @param {string} path 
+     */
     //function to handle redirects            
     function redirect(path){
         window.location.replace(path);
     }    
     
+
+    /**
+     * deletes user account&lt;br>
+     * redirects to login screen
+     * @function unregister
+     * 
+     */
     //function to delete user account
     function unregister(){
      var unregister =  confirm('Are you sure you want to delete your account?');
@@ -182,6 +227,10 @@ let Account=function(props){
 
 
     //function to enable edits on the form
+    /**
+     * enables user to edit the form with his/her personal information
+     * @function enableEdit
+     */
     function enableEdit(){
         //display 'cancel' and 'update' buttons
         document.getElementById('button_update').style.display='block';
@@ -190,7 +239,7 @@ let Account=function(props){
         let inputs = document.getElementsByClassName('field');
         let x;
 
-        for(x=0;x<inputs.length;x++){
+        for(x=0;x&lt;inputs.length;x++){
             inputs[x].disabled=false;
         }
 
@@ -198,6 +247,10 @@ let Account=function(props){
         // inputs[0].style.backgroundColor='rgba(32, 178, 170,0.3)';
     }  
 
+    /**
+     * enables user to add a new password
+     * @function password
+     */
     function password(){
     var newPassword= window.prompt('please type a new password');
     var passwordField=document.getElementById('account_password');
@@ -210,6 +263,10 @@ let Account=function(props){
     }
 
     //function to open the date modal
+    /**
+     * opens the date modal
+     * @function openDate
+     */
     function openDate(){
         var item=document.getElementById('date');
         item.style.display='block'
@@ -220,6 +277,11 @@ let Account=function(props){
     }
 
     //function to close the date modal
+    /**
+     * closes the date modal &lt;br>
+     * updates the birthdate field if a new date was inserted
+     * @function closeDate
+     */
     function closeDate(){
 
         var item=document.getElementById('date');
@@ -237,7 +299,7 @@ let Account=function(props){
         let newmonth=localStorage.getItem('newmonth');
         let newyear=localStorage.getItem('newyear');
 
-        if(newday!=null && newmonth!=null && newyear!=null)
+        if(newday!=null &amp;&amp; newmonth!=null &amp;&amp; newyear!=null)
             {
                 document.getElementById('account_birthday').value=newday+'-'+newmonth+'-'+newyear;
                 //re-build the selected date in the format required by the database
@@ -253,9 +315,12 @@ let Account=function(props){
     }
 
     //function to restore the previous input element's value
+    /**
+     * cancels any changes made as long as changes were not saved
+     * @function cancelChanges
+     */
     function cancelChanges(){
 
-        
         //restore previous values
         let inputs = document.getElementsByClassName('field');
         
@@ -266,7 +331,7 @@ let Account=function(props){
         //disable input fields
 
         let x;
-        for(x=0;x<inputs.length;x++){
+        for(x=0;x&lt;inputs.length;x++){
             inputs[x].disabled=true;
             
         }
@@ -278,9 +343,12 @@ let Account=function(props){
     }
 
 
+    /**
+     * updates user information
+     * @function update
+     */
     function update(){
 
-        
         //get new field values 
         let username=document.getElementById('account_username').value;
         let email=document.getElementById('account_email').value;
@@ -355,4 +423,26 @@ const mapStateToProps = function(state) {
   
     
   
-   export default connect(mapStateToProps,mapDispatchToProps)(Account);    
+   export default connect(mapStateToProps,mapDispatchToProps)(Account);    </code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Account">Account</a></li><li><a href="global.html#cancelChanges">cancelChanges</a></li><li><a href="global.html#closeDate">closeDate</a></li><li><a href="global.html#enableEdit">enableEdit</a></li><li><a href="global.html#openDate">openDate</a></li><li><a href="global.html#password">password</a></li><li><a href="global.html#redirect">redirect</a></li><li><a href="global.html#unregister">unregister</a></li><li><a href="global.html#update">update</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Wed Nov 04 2020 14:26:11 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

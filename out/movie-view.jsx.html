@@ -1,4 +1,32 @@
-import React,{useState, useEffect} from 'react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: movie-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: movie-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React,{useState, useEffect} from 'react';
 import axios from 'axios';
 import './movie-view.scss';
 
@@ -27,34 +55,34 @@ var posters=[poster1,poster2,poster3,poster4,poster5,poster6,poster7,poster8,pos
 
 
 /**
- * returns detailed information for a specific movie<br>
- * <b>endpoint:</b>/movies/:id
+ * returns detailed information for a specific movie&lt;br>
+ * &lt;b>endpoint:&lt;/b>/movies/:id
  * @function MovieView
  * @param {object} props 
  */
 let MovieView = function (props) {
       //icon templates for when movie is in favourites or is not in favourites  
       let favourite=( 
-        <div className='col-12'>
-          <button className='col-12' id='button_favourites_on' onClick={()=>{handleFavourites(2)}}>
-            <i class="fas fa-heart favourites_icon"></i>
-          </button>
-          <p className='col-12 p_favourites'>Remove from favourites</p>
-        </div>
+        &lt;div className='col-12'>
+          &lt;button className='col-12' id='button_favourites_on' onClick={()=>{handleFavourites(2)}}>
+            &lt;i class="fas fa-heart favourites_icon">&lt;/i>
+          &lt;/button>
+          &lt;p className='col-12 p_favourites'>Remove from favourites&lt;/p>
+        &lt;/div>
       )
 
 
 
       let notFavourite= ( 
-      <div className='col-12'>
-        <button className='col-12' id='button_favourites_off' onClick={()=>{handleFavourites(1)}}>
-          <i class="far fa-heart favourites_icon"></i>
-        </button>
-        <p className='col-12 p_favourites'>Add to favourites</p>
-      </div>
+      &lt;div className='col-12'>
+        &lt;button className='col-12' id='button_favourites_off' onClick={()=>{handleFavourites(1)}}>
+          &lt;i class="far fa-heart favourites_icon">&lt;/i>
+        &lt;/button>
+        &lt;p className='col-12 p_favourites'>Add to favourites&lt;/p>
+      &lt;/div>
       );
 
-      // USE STATE & USE EFFECT
+      // USE STATE &amp; USE EFFECT
       const [isFavourite, setFavourite] = useState(null);
 
       useEffect(function(){
@@ -66,7 +94,7 @@ let MovieView = function (props) {
         let path ='https://stavflix.herokuapp.com/users/'+user._id;  
 
     
-        // retrieve user info from database & control whether movie id is 
+        // retrieve user info from database &amp; control whether movie id is 
         // included in user's favourites
         axios.get(path,{headers: { Authorization: `Bearer ${token}`}}
             )
@@ -100,7 +128,7 @@ let MovieView = function (props) {
       let c;
       let featured;
 
-      for(c=0;c<movies.length;c++)
+      for(c=0;c&lt;movies.length;c++)
         {
           if(movies[c]._id==movie_id)
             {
@@ -119,57 +147,57 @@ let MovieView = function (props) {
       var poster= posters.find(findPoster);
 
    return(
-      <div id='wrapper'>
-        <Container className='movieViewContainer'>
-          <Row id='movie_row'>
-              <Col md="6" id='test'>
-                <img src={poster}></img>
+      &lt;div id='wrapper'>
+        &lt;Container className='movieViewContainer'>
+          &lt;Row id='movie_row'>
+              &lt;Col md="6" id='test'>
+                &lt;img src={poster}>&lt;/img>
 
-                <Row>
-                  <Col md='12'>
-                    <div id='divFavourite'>
+                &lt;Row>
+                  &lt;Col md='12'>
+                    &lt;div id='divFavourite'>
                       {isFavourite}
-                    </div>
-                 </Col>
-              </Row>
-              </Col>
-              <Col md='6' sm='12'>
-                <Row id='other_info_row'>
-                  <div id='movie_description_container'>
-                  <Col md='12'><h1 className='movie_view_h1'>{movie.title}</h1></Col>
-                  <Col md='12'><p className='synopsis'>{movie.description}</p></Col>
-                  </div>
+                    &lt;/div>
+                 &lt;/Col>
+              &lt;/Row>
+              &lt;/Col>
+              &lt;Col md='6' sm='12'>
+                &lt;Row id='other_info_row'>
+                  &lt;div id='movie_description_container'>
+                  &lt;Col md='12'>&lt;h1 className='movie_view_h1'>{movie.title}&lt;/h1>&lt;/Col>
+                  &lt;Col md='12'>&lt;p className='synopsis'>{movie.description}&lt;/p>&lt;/Col>
+                  &lt;/div>
                   {/* other info */}
-                  <div id='other_info_container'>
-                  <Col md='12' className='otherInfo'><b><h6>Director</h6></b></Col>
-                  <Col md='12' className='otherInfo'>
-                    <p className='button' id='director' onClick={()=>{redir(movie,1)}} >{movie.director.name}</p>
-                  </Col>
+                  &lt;div id='other_info_container'>
+                  &lt;Col md='12' className='otherInfo'>&lt;b>&lt;h6>Director&lt;/h6>&lt;/b>&lt;/Col>
+                  &lt;Col md='12' className='otherInfo'>
+                    &lt;p className='button' id='director' onClick={()=>{redir(movie,1)}} >{movie.director.name}&lt;/p>
+                  &lt;/Col>
                                                             
-                  <Col md='12' className='otherInfo'><b><h6>Genre</h6></b></Col>
-                  <Col md='12' className='otherInfo'><p className='button' id='genre' onClick={()=>{redir(movie,2)}} >{movie.genre.name}</p></Col>
+                  &lt;Col md='12' className='otherInfo'>&lt;b>&lt;h6>Genre&lt;/h6>&lt;/b>&lt;/Col>
+                  &lt;Col md='12' className='otherInfo'>&lt;p className='button' id='genre' onClick={()=>{redir(movie,2)}} >{movie.genre.name}&lt;/p>&lt;/Col>
 
-                  <Col md='12' className='otherInfo'><b><h6>Featured</h6></b></Col>
-                  <Col md='12' className='otherInfo'><p>{featured}</p></Col>
-                  </div>
-                </Row>
+                  &lt;Col md='12' className='otherInfo'>&lt;b>&lt;h6>Featured&lt;/h6>&lt;/b>&lt;/Col>
+                  &lt;Col md='12' className='otherInfo'>&lt;p>{featured}&lt;/p>&lt;/Col>
+                  &lt;/div>
+                &lt;/Row>
                     
-              </Col>
-        </Row>
-         </Container>
+              &lt;/Col>
+        &lt;/Row>
+         &lt;/Container>
 
-         <Container>
-            <Row  id="back_row">
-              <Col md="6">
+         &lt;Container>
+            &lt;Row  id="back_row">
+              &lt;Col md="6">
               
-              </Col>
-              <Col md="6">
-              <button className='col-12' onClick={goback}>Exit</button>
-              </Col>
-            </Row>
-         </Container>
+              &lt;/Col>
+              &lt;Col md="6">
+              &lt;button className='col-12' onClick={goback}>Exit&lt;/button>
+              &lt;/Col>
+            &lt;/Row>
+         &lt;/Container>
 
-      </div>
+      &lt;/div>
 
     )
 
@@ -236,7 +264,7 @@ let MovieView = function (props) {
 /**
  * redirects to previous screen 
  * @param {object} movie 
- * @param {number} n number indicating whether redirect will be to director-view <br>
+ * @param {number} n number indicating whether redirect will be to director-view &lt;br>
  *                    or to genre-view
  */
   //redirect to 'director' or 'genre' view
@@ -283,4 +311,26 @@ const mapDispatchToProps=function(dispatch){
 export default connect(mapStateToProps,mapDispatchToProps)(MovieView);    
 
 
- 
+ </code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#goback">goback</a></li><li><a href="global.html#handleFavourites">handleFavourites</a></li><li><a href="global.html#MovieView">MovieView</a></li><li><a href="global.html#redir">redir</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Wed Nov 04 2020 14:06:11 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

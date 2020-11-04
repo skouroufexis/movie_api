@@ -1,4 +1,32 @@
-import React, {Component, useState} from 'react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: genre-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: genre-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, {Component, useState} from 'react';
 import {Header} from '../header/header';
 import axios from 'axios';
 import './genre-view.scss';
@@ -8,12 +36,12 @@ import {movies, visibilityFilter,selectedMovie} from '../../reducers/reducers';
 import {setMovies,setFilter,setSelected}from '../../actions/actions';
 
 /**
- * <b>endpoint:</b> /movies/genres/:name
+ * &lt;b>endpoint:&lt;/b> /movies/genres/:name
  * @function Genre
  * @param {object} props 
  * @param {string} props.name the genre name
  * @param {string} props.description the genre description
- * @returns {Component} <Genre />
+ * @returns {Component} &lt;Genre />
  */
 let Genre = function(props){
 
@@ -28,7 +56,7 @@ let Genre = function(props){
     let movies=props.movies;
     let c;
 
-    for(c=0;c<movies.length;c++)
+    for(c=0;c&lt;movies.length;c++)
       {
         if(movies[c].genre.name==genre)
           {
@@ -58,34 +86,34 @@ let Genre = function(props){
 
     return(
 
-        <div className='container genre_main' >
-            <div className='container genre_container'>
-                <div className='row genre_row genre_name'>
-                    <div className='col col-12 genre_col'><h1>{name}</h1></div>
-                    </div>
-                    <p className='col-12 genre_p'>{description}</p>
+        &lt;div className='container genre_main' >
+            &lt;div className='container genre_container'>
+                &lt;div className='row genre_row genre_name'>
+                    &lt;div className='col col-12 genre_col'>&lt;h1>{name}&lt;/h1>&lt;/div>
+                    &lt;/div>
+                    &lt;p className='col-12 genre_p'>{description}&lt;/p>
 
-                <div className='row genre_row'>
-                    <div className='col col-12 genre_col'>
-                        <h5>Movies of the same genre</h5>
-                    </div>
-                </div>
+                &lt;div className='row genre_row'>
+                    &lt;div className='col col-12 genre_col'>
+                        &lt;h5>Movies of the same genre&lt;/h5>
+                    &lt;/div>
+                &lt;/div>
 
-                <div className='row genre_row'>
+                &lt;div className='row genre_row'>
                     {findMovies()}
-                </div>
+                &lt;/div>
 
-                <div className='row genre_row'>
+                &lt;div className='row genre_row'>
                     
-                <div className='col-5'></div>
-                    <button className='col-5 genre_back' onClick={()=>back()}>Back</button> 
+                &lt;div className='col-5'>&lt;/div>
+                    &lt;button className='col-5 genre_back' onClick={()=>back()}>Back&lt;/button> 
                     
                     
-                </div>
+                &lt;/div>
 
 
-            </div>
-        </div>
+            &lt;/div>
+        &lt;/div>
 
     )
 /**
@@ -113,7 +141,7 @@ function findMovies(){
     let titles=[];
     let movs=[]; //movies to return
 
-    for(c=0;c<movies.length;c++)
+    for(c=0;c&lt;movies.length;c++)
         {
             
             if (movies[c].genre.name==genre_name)
@@ -126,14 +154,14 @@ function findMovies(){
         
 
 
-        for(c=0;c<titles.length;c++)
+        for(c=0;c&lt;titles.length;c++)
         {
             let n =c;
-            movs[c]=<div className='col-12 director_col link button' onClick={()=>{redirect(titles[n]._id)}} >{titles[c].title}</div>
+            movs[c]=&lt;div className='col-12 director_col link button' onClick={()=>{redirect(titles[n]._id)}} >{titles[c].title}&lt;/div>
             
         }    
 
-        return <div className='col-12 director_col'>{movs}</div> ;
+        return &lt;div className='col-12 director_col'>{movs}&lt;/div> ;
 
 }
 
@@ -165,4 +193,26 @@ const mapStateToProps = function(state) {
   }
   
   
-  export default connect(mapStateToProps)(Genre);    
+  export default connect(mapStateToProps)(Genre);    </code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#back">back</a></li><li><a href="global.html#findMovies">findMovies</a></li><li><a href="global.html#Genre">Genre</a></li><li><a href="global.html#redirect">redirect</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Wed Nov 04 2020 14:56:16 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

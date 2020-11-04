@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './date.scss';
 
 
 //Date modal for capturing date inputs
-
+/**
+ * 
+ * @param {object} props 
+ * @param {function} props.modal closeDate() function that closes the date modal
+ * @returns {Component} <Date />
+ */
 var Date = function(props){
     let closedate=props.modal;
     return(

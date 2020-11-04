@@ -13,17 +13,13 @@ import MainView from './components/main-view/main-view';
 import { format } from 'morgan';
 import {Mymovies} from './components/profile-vew/mymovies';
 import {Date} from './components/general/date';
-
-
-
-// localStorage.clear();
+/**
+ * @constant
+ * @type {function}
+ */
 const store = createStore(moviesApp);
 
-
-
-
 var container = document.getElementById('root');
-
 
 ReactDOM.render(
   

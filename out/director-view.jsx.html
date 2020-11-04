@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: director-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: director-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import {Header} from '../header/header';
+import './director-view.scss';
+
+import { connect } from 'react-redux';
+
+import {movies, visibilityFilter,selectedMovie, moviesApp} from '../../reducers/reducers';
+
+/**
+ * creates the [Director] component &lt;br>
+ * &lt;b>endpoint:&lt;/b> /movies/directors/:name
+ * @param {object} props 
+ * @param {object} props.movies the movies in the database
+ * @param {string} props.name the director's name
+ * @param {string} props.birth the director's birthday
+ * @param {string} props.bio the director's biography
+ * @returns information about the director (personal information and associated movie titles)
+ */
+let Director = function(props){
+
+     //get director name
+     let director= props.match.params.name;
+     let movies=props.movies;
+     let c;
+
+     for(c=0;c&lt;movies.length;c++)
+       {
+         if(movies[c].director.name==director)
+           {
+             director=movies[c].director;
+           }
+       }
+
+     let name=director.name;
+     let birth=director.birth;
+         birth=birth.split('-');
+            let year=birth[0];
+            let month = birth[1];
+            let day = birth[2].split('T');
+                 day=day[0];
+        birth=day+'-'+month+'-'+year;
+        
+        let bio=director.bio;    
+
+    return(
+        &lt;div className='container director_main' >
+            &lt;div className='container director_container'>
+                &lt;div className='row director_row director_name'>
+                    &lt;div className='col col-12 director_col'>&lt;h1>{name}&lt;/h1>&lt;/div>
+                &lt;/div>
+
+                &lt;div className='row director_row'>
+                    &lt;div className='col col-12 director_col'>
+                        &lt;h5>Biography&lt;/h5>
+                            &lt;p>{bio}&lt;/p>
+                    &lt;/div>
+                &lt;/div>
+
+
+                &lt;div className='row director_row'>
+                    &lt;div className='col col-12 director_col'>
+                        &lt;h5>Date of birth&lt;/h5>
+                            &lt;p>{birth}&lt;/p>
+                    &lt;/div>
+                &lt;/div>
+
+                &lt;div className='row director_row'>
+                    &lt;div className='col col-12 director_col'>
+                        &lt;h5>Movies&lt;/h5>
+                    &lt;/div>
+                &lt;/div>
+
+                &lt;div className='row director_row'>
+                    {findMovies()}
+                &lt;/div>
+
+                &lt;div className='row director_row'>
+                    
+                &lt;div className='col-5'>&lt;/div>
+                    &lt;button className='col-5 director_back' onClick={()=>back()}>Back&lt;/button> 
+                &lt;/div>
+
+
+            &lt;/div>
+        &lt;/div>
+    )
+
+        /**
+         * finds all movies associated with the selected director
+         * @function findMovies
+         * @returns {object} an object with all the movies associated with the director
+         * 
+         */
+    function findMovies(){
+        let c;
+        let movies=props.movies;
+        let titles=[];
+        
+        let movs=[]; //movies to return
+        for(c=0;c&lt;movies.length;c++)
+            {
+                if (movies[c].director.name==name)
+                    {
+                        titles.push(movies[c]);       
+                    }
+            }    
+            for(c=0;c&lt;titles.length;c++)
+            {
+                let n =c;
+                movs[c]=&lt;div className='col-12 director_col link button' onClick={()=>{redirect(titles[n]._id)}} >{titles[c].title}&lt;/div>
+                console.log(titles[c].title);
+            }    
+
+            return &lt;div className='col-12 director_col'>{movs}&lt;/div> ;
+
+    }
+
+
+
+    /**
+     * returns to previous screen 
+     * @function back
+     */
+    function back(){
+        //get movie id
+        let id=localStorage.getItem('selected');
+        let path ='https://stavflix.herokuapp.com/client/movies/'+id;
+        window.location.replace(path);
+    }
+
+    /**
+     * redirects to a new movie view
+     * @function redirect
+     * @param {string} path the movie path
+     */
+    function redirect(path){
+        
+        //set new selected movie in localStorage
+        localStorage.setItem('selected',path);
+
+        //redirect to the new selected movie
+        
+         path ='https://stavflix.herokuapp.com/client/movies/'+path;
+         window.location.replace(path);
+    }
+}
+
+/**
+     * maps the State to the components props
+     * @function mapStateToProps
+     * @param {object} state 
+     * @returns {object} 
+     */
+
+const mapStateToProps = function(state) {
+    return { movies: state.movies,
+             visibilityFilter:state.visibilityFilter,
+             selectedMovie:state.selectedMovie
+            }
+  }
+  export default connect(mapStateToProps)(Director);    </code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#back">back</a></li><li><a href="global.html#Director">Director</a></li><li><a href="global.html#findMovies">findMovies</a></li><li><a href="global.html#mapStateToProps">mapStateToProps</a></li><li><a href="global.html#redirect">redirect</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Wed Nov 04 2020 14:54:33 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

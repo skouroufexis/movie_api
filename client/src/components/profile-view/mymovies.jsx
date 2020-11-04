@@ -18,16 +18,15 @@ import { connect } from 'react-redux';
 import {setMovies,setFilter,setSelected,setUser}from '../../actions/actions';
 import {movies, visibilityFilter,selectedMovie,selectedUser} from '../../reducers/reducers';
 
-
-
 const posters=[poster1,poster2,poster3,poster4,poster5,poster6,poster7,poster8,poster9,poster10];
 
-
-
-
-
+/**
+ * <b>endpoint:</b> /users/movies
+ * @function Mymovies
+ * @param {object} props 
+ * @returns screen with user's favourite movies
+ */
 var Mymovies=function(props){
-
 
     let[myFavourites,setFavourites]=useState('No favourite movies found');
    
@@ -93,7 +92,10 @@ var Mymovies=function(props){
         </div>
     )
 
-
+    /**
+     * retrieves movies marked as favourites
+     * @function fetchFavourites
+     */
     function fetchFavourites(){
 
         if(myFavourites!='No favourite movies found')
@@ -117,26 +119,6 @@ var Mymovies=function(props){
                     }
             }
 
-
-        // for(c=0;c<myFavourites.length;c++)
-        // {
-        //     for(c2=0;c2<(posters.length);c2++)
-        //         {
-                    
-
-        //             //images names include the movie_id. Here
-        //             //the '.jpg' and '/' part of the names are removed
-        //             //so that they can be compared to match with the movie_id
-        //             let post=posters[c2].split('.');
-        //             let post2= post[0].split('/');
-                        
-        //             if(post2[1]==myFavourites[c])
-        //                 {
-        //                     favsPosters[c]=posters[c2];
-        //                 }
-        //         }
-        // }
-        
         for(c=0;c<titles.length;c++)
             {
             let n =c;
@@ -171,6 +153,11 @@ var Mymovies=function(props){
     }
 
     // redirect to selected movie
+    /**
+     * redirects user to another selected movie
+     * @function redirect
+     * @param {string} id the movie id 
+     */
     function redirect(id){
      
     localStorage.setItem('selected',id);        
@@ -179,6 +166,11 @@ var Mymovies=function(props){
     }
 
     //remove movie from favourites
+    /**
+     * removes selected movie from user favourites
+     * @function removeFavourite
+     * @param {string} movie_id the movie id
+     */
     function removeFavourite(movie_id){
 
     let path ='https://stavflix.herokuapp.com/users/'+user._id+'/favourites/'+movie_id;   
@@ -210,10 +202,6 @@ var Mymovies=function(props){
         .catch(function (error) {
             console.log(error);  
             });
-
-
-        
-
 
     })
     .catch(function (error) {
