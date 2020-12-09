@@ -87,7 +87,7 @@ function RegistrationView(props) {
                     <Col md='2' sm='auto'></Col>
                     
                     <Col md='2' sm='auto'></Col>
-                    <Col md='8' sm='12'><input type='text' id='birthday'></input> </Col>
+                    <Col md='8' sm='12'><input type='text' id='birthday' placeholder='dd-mm-yyyy'></input> </Col>
                     <Col md='2' sm='auto'></Col>
                 </Row>
 
