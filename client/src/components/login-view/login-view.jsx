@@ -89,7 +89,7 @@ function LoginView(props) {
                         <Col md='2' sm='auto'></Col>
 
                         <Col md='2' sm='auto'></Col>
-                        <Col md='8' sm='12'><input id='login_username' onChange={captureCredentials} type='text' placeholder='dd-mm-yyyy'></input> </Col>
+                        <Col md='8' sm='12'><input id='login_username' onChange={captureCredentials} type='text'></input> </Col>
                         <Col md='2' sm='auto'></Col>
                     </Row>
 
