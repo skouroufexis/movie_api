@@ -33,10 +33,11 @@ var Header = function(props){
             <div className='row'>
 
                 <div className='col col-10 button' onClick={mainMenu}>
-                    <h3>Myflix</h3>
+                    <h3>MyFlix</h3>
                 </div>
 
                 <div className='col col-1'>
+                    
     <i className="fas fa-user button" onClick={toggleMenu}></i>{' '+username}
                 </div>
 

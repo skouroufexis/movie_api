@@ -12,6 +12,10 @@ const bodyparser = require('body-parser');
 //passport
 const passport = require('passport');
 
+
+let dotenv = require('dotenv');
+dotenv.config();
+
 //mongoose & models
 const mongoose = require('mongoose');
 const models = require('./models.js');
@@ -344,3 +348,5 @@ const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0',function()  {
     console.log('Listening on Port ' + port);
    });
+
+
